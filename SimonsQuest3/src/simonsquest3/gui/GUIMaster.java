@@ -28,19 +28,22 @@ import java.util.logging.Logger;
 public class GUIMaster implements KeyboardListener {
 
     static float xonscreen = 0;
+    static int storepointer = 0; 
     public static GUIGroup town = new GUIGroup(new Vector2f());
     public static GUIItem simon = new GUITexture(Texture.get(Resource.getTexturePath("/gui/simon.png")), new Vector2f(-0.6f, -1f), new Vector2f(0.25f, 0.75f));
     public static GUIItem simonstatue = new GUITexture(Texture.get(Resource.getTexturePath("/gui/blackmarket.png")), new Vector2f(0, -0.4f), new Vector2f(0.55f, 0.75f));
     public static GUIItem storeland = new GUITexture(Texture.get(Resource.getTexturePath("/gui/storeland.png")), new Vector2f(0.8f, -0.4f), new Vector2f(1f, 0.75f));
     public static GUIGroup store = new GUIGroup(new Vector2f());
+     public static GUIGroup menustore = new GUIGroup(new Vector2f());
     public static GUIItem vendor = new GUITexture(Texture.get(Resource.getTexturePath("/gui/boss.png")), new Vector2f(0.1f, -0.75f), new Vector2f(0.85f, 1.6f));
     public static GUIItem vendor2 = new GUITexture(Texture.get(Resource.getTexturePath("/gui/jedi.png")), new Vector2f(0.1f, -1f), new Vector2f(0.75f, 1.5f));
     public static GUIItem vendorback = new GUITexture(Texture.get(Resource.getTexturePath("/gui/storecounter.jpg")), new Vector2f(-1f, -1f), new Vector2f(2f, 2f));
     public static GUIItem townback = new GUITexture(Texture.get(Resource.getTexturePath("/gui/townbackground.png")), new Vector2f(-1, -1), new Vector2f(2, 2));
     public static GUIItem counter = new GUITexture(Texture.get(Resource.getTexturePath("/gui/counter.png")), new Vector2f(0f, -1), new Vector2f(1, 1));
+    public static GUIItem pointer = new GUITexture(Texture.get(Resource.getTexturePath("/gui/pointer.png")), new Vector2f(-1f, 0.65f), new Vector2f(0.15f, 0.15f));
     public static GGFont font = new GGFont("C:/res/test.png", "C:/res/test.fnt");
     public static GUIText text = new GUIText(new Text("Black Market",new Vector2f(), 4f, 1f, false), font, new Vector2f(0.9f,0));
-
+    public static GUIText text1 = new GUIText(new Text("Money:" + 0,new Vector2f(), 2f, 1f, false), font, new Vector2f(0,-0.1f));
     public static boolean instore = false;
 
     public static void init() {
@@ -59,7 +62,15 @@ public class GUIMaster implements KeyboardListener {
         storeland.setLayer(-1.1f);
         store.addItem("title", text);
         store.addItem("counter", counter);
+        store.addItem("pointer", pointer);
         store.enabled = false;
+        float offset = -0.2f;
+        for(String i :StoreStuff.pricesstore.keySet()){
+            menustore.addItem(i, new GUIText(new Text(i.substring(0, 1).toUpperCase() + i.substring(1)+": "+StoreStuff.pricesstore.get(i),new Vector2f(), 2f, 1f, false), font, new Vector2f(0.2f,offset)));
+            offset-=0.1f;
+        }
+        store.addItem("magic", menustore);
+        store.addItem("money", text1);
 
     }
 
@@ -98,6 +109,29 @@ public class GUIMaster implements KeyboardListener {
             xonscreen += 0.04f;
             town.getItem("simons").setPositionOffset(new Vector2f(xonscreen, -0.4f));
             town.getItem("store").setPositionOffset(new Vector2f(0.8f + xonscreen, -0.4f));
+        }
+        if (KeyboardController.isKeyPressed(Key.KEY_UP)) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GUIMaster.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            storepointer--;
+            if(storepointer < 0){
+                storepointer =0;
+            }
+            store.getItem("pointer").setPositionOffset(new Vector2f(-1,0.65f - (storepointer * 0.1f)));
+            
+        }
+        if (KeyboardController.isKeyPressed(Key.KEY_DOWN)) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GUIMaster.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           storepointer++;
+           store.getItem("pointer").setPositionOffset(new Vector2f(-1,0.65f - (storepointer * 0.1f)));
+           
         }
         if (KeyboardController.isKeyPressed(Key.KEY_ENTER)) {
             int townie = checkPosition();
