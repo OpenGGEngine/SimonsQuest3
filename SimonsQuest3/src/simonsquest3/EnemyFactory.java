@@ -15,7 +15,7 @@ import com.opengg.core.model.ModelLoader;
 public class EnemyFactory {
     
     public static Enemy generateEnemy(String name, String fileName) {
-        Enemy ret = new Enemy(name, ModelLoader.loadModel(fileName), 0);
+        Enemy ret = new Enemy(name, ModelLoader.loadModel(fileName),0,100,100);
         switch (name) {
             case "beaver":
                 ret.health = 0;

@@ -67,7 +67,7 @@ public class WorldCreator {
         WorldEngine.getCurrent().attach(simon);
         
         for(int i = 0; i < enemySpawnCount; i++){
-            EnemySpawner spawner = new EnemySpawner(new Enemy("stormtrooper", ModelLoader.loadModel(Resource.getModelPath("stormtrooper")), 10));
+            EnemySpawner spawner = new EnemySpawner(EnemyFactory.generateEnemy("stormtrooper",Resource.getModelPath("stormtrooper")));
             WorldEngine.getCurrent().attach(spawner);
             boolean validPos = false;
             do{

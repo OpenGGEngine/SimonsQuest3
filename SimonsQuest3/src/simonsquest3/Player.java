@@ -7,6 +7,7 @@ package simonsquest3;
 
 import com.opengg.core.math.FastMath;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -14,15 +15,11 @@ import java.util.HashMap;
  */
 public class Player extends GeneralEntity{
     public HashMap<Item, Integer> items;
-    public double attackBuff;
-    public double defenseBuff;
     public int money;
     
     public Player(double health) {
-        super(health);
+        super(health,100,100);
         items = new HashMap<>();
-        attackBuff = 100;
-        defenseBuff = 100;
         money = 0;
     }
     
@@ -31,11 +28,6 @@ public class Player extends GeneralEntity{
             items.put(item, 1);
         else
             items.put(item, items.get(item) + 1);
-    }
-    
-    @Override
-    public void damage(double amount) {
-        health = FastMath.clamp(health - amount/(defenseBuff/100), 0, maxHealth);
     }
     
     @Override
@@ -52,7 +44,15 @@ public class Player extends GeneralEntity{
     }
     
     public Weapon waitForChoice() {
-        return null;
+        Weapon ret = null;
+        Map<Effect,Double> effects = new HashMap<>();
+        //wait
+        for(Map.Entry<Effect,Double> effect: effects.entrySet()) {
+            useEffect(effect.getKey(), effect.getValue());
+        }
+        if (ret != null)
+            ret.statusEffects.put(Effect.DAMAGE, ret.statusEffects.get(Effect.DAMAGE) * (attackBuff/100));
+        return ret;
     }
 }
 

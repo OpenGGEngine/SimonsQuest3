@@ -18,11 +18,15 @@ public abstract class GeneralEntity {
     public double health;
     public double maxHealth;
     public List<Weapon> attacks;
+    public double attackBuff;
+    public double defenseBuff;
     
-    protected GeneralEntity(double health, Weapon... attacks) {
+    protected GeneralEntity(double health,double attack, double defense, Weapon... attacks) {
         this.health = health;
         this.maxHealth = health;
         this.attacks = new ArrayList<>();
+        this.attackBuff = attack;
+        this.defenseBuff = defense;
         this.attacks.addAll(Arrays.asList(attacks));
     }
     
@@ -39,7 +43,7 @@ public abstract class GeneralEntity {
     }
     
     public void damage(double amount) {
-        health = FastMath.clamp(health - amount, 0, maxHealth);
+        health = FastMath.clamp(health - amount/(defenseBuff/100), 0, maxHealth);
     }
     
     public void restoreHealth(double amount) {

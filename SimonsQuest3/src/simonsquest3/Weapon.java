@@ -35,14 +35,14 @@ public class Weapon implements Cloneable{
         HashMap<Effect, Double> effects = new HashMap<>();
         if (durability == -1) {
             effects.putAll(statusEffects);
-            effects.put(Effect.ATTACK, attackPower);
+            effects.put(Effect.DAMAGE, attackPower);
             return effects;
         }
         else if  (durability == 0 || amount > durability)
             return effects;
         durability -= amount;
         effects.putAll(statusEffects);
-        effects.put(Effect.ATTACK, attackPower);
+        effects.put(Effect.DAMAGE, attackPower);
         return effects;
     }
     
