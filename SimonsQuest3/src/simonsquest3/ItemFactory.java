@@ -10,7 +10,7 @@ package simonsquest3;
  * @author Ethan Mak
  */
 public class ItemFactory {
-    public static Item getItem(String name) {
+    public static Item generateItem(String name) {
        Item ret = new Item(name);
        switch (name) {
            case "flashbang":
