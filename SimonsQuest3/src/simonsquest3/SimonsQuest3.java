@@ -44,8 +44,8 @@ public class SimonsQuest3 extends GGApplication{
     public void setup() {
         
         WorldCreator.create();
-        m = new GUIMaster();
-        GUIMaster.init();
+        //m = new GUIMaster();
+        //GUIMaster.init();
         Soundtrack overworldday = new Soundtrack();
         overworldday.addSong(Resource.getSoundPath("windgarden.ogg"));
         overworldday.addSong(Resource.getSoundPath("floaterland.ogg"));
@@ -71,7 +71,7 @@ public class SimonsQuest3 extends GGApplication{
 
     @Override
     public void update() {
-       GUIMaster.update();
+       //GUIMaster.update();
     }
     
 }

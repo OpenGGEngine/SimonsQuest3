@@ -15,7 +15,6 @@ import com.opengg.core.world.Action;
 import com.opengg.core.world.ActionType;
 import com.opengg.core.world.Actionable;
 import com.opengg.core.world.collision.AABB;
-import com.opengg.core.world.collision.BoundingBox;
 import com.opengg.core.world.collision.CylinderCollider;
 import com.opengg.core.world.components.CameraComponent;
 import com.opengg.core.world.components.Component;

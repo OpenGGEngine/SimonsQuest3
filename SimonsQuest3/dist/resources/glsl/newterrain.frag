@@ -92,7 +92,7 @@ vec4 getTex(sampler2D tname){
 
 void main() {  
 	vec4 blendMapColor = getTex(Ka);
-    vec2 tiledMapEditor = textureCoord * 40;
+    vec2 tiledMapEditor = textureCoord * 120;
     vec4 wcolor = texture(Kd, vec3(tiledMapEditor,0));
     vec4 wcolorr = texture(Kd, vec3(tiledMapEditor,1));
     vec4 wcolorg = texture(Kd, vec3(tiledMapEditor,2));

@@ -1,8 +1,6 @@
 package simonsquest3;
 
-import com.opengg.core.model.ModelLoader;
-import com.opengg.core.world.components.Component;
-import com.opengg.core.world.components.ModelRenderComponent;
+import com.opengg.core.model.Model;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,17 +12,17 @@ import com.opengg.core.world.components.ModelRenderComponent;
  *
  * @author Ethan Mak
  */
-public class Enemy extends Component{
+public class Enemy{
     String name;
-    ModelRenderComponent model;
+    Model model;
     Weapon[] attacks;
     double health;
     
-    public Enemy(String name, String fileName) {
+    public Enemy(String name, Model model) {
         health = 0;
         attacks = new Weapon[4];
         this.name = name;
-        model = new ModelRenderComponent(ModelLoader.loadModel(fileName));
+        this.model = model;
     }
     
     public void setAttack(Weapon attack, int place) {
@@ -36,5 +34,10 @@ public class Enemy extends Component{
     
     public Weapon attack(double enemyHealth) {
         return null;
+    }
+    
+    public Enemy cloneEnemy(){
+        Enemy enemy = new Enemy(name, model);
+        return enemy;
     }
 }

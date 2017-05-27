@@ -1,18 +1,25 @@
-[Sat May 27 12:16:59 EDT 2017] INFO (OpenGG): Loading native libraries...
-[Sat May 27 12:16:59 EDT 2017] INFO (OpenGG): LWJGL has been loaded
-[Sat May 27 12:16:59 EDT 2017] INFO (OpenGG): OpenGG initializing, running on Windows 10, amd64
-[Sat May 27 12:17:00 EDT 2017] INFO (OpenGG): Window generation successful, using OpenGL context version 4.1
-[Sat May 27 12:17:01 EDT 2017] INFO (ShaderController): Default shaders loaded and validated
-[Sat May 27 12:17:01 EDT 2017] INFO (ModelLoader): Loading model at E:\Users\Javier\Documents\NetBeansProjects\SimonsQuest3\SimonsQuest3\dist\resources\models\default\default.bmf...
-[Sat May 27 12:17:01 EDT 2017] WARNING (ModelLoader): Failed to load model at E:\Users\Javier\Documents\NetBeansProjects\SimonsQuest3\SimonsQuest3\dist\resources\models\default\default.bmf, using default model instead
-[Sat May 27 12:17:01 EDT 2017] INFO (OpenGG): Render engine initialized
-[Sat May 27 12:17:01 EDT 2017] INFO (OpenGG): Audio controller initialized
-[Sat May 27 12:17:01 EDT 2017] INFO (OpenGG): Application setup beginning
-[Sat May 27 12:17:01 EDT 2017] ERROR (OpenGG): Uncaught exception: null
-[Sat May 27 12:17:01 EDT 2017] INFO (OpenGG): Render engine has finalized
-[Sat May 27 12:17:01 EDT 2017] INFO (OpenGG): Audio controller has been finalized
-[Sat May 27 12:17:01 EDT 2017] INFO (OpenGG): Thread Manager has closed all remaining threads
-[Sat May 27 12:17:01 EDT 2017] INFO (OpenGG): OpenGG has closed gracefully, application can now be ended
+[Sat May 27 15:31:08 EDT 2017] INFO (OpenGG): Loading native libraries...
+[Sat May 27 15:31:08 EDT 2017] INFO (OpenGG): LWJGL has been loaded
+[Sat May 27 15:31:08 EDT 2017] INFO (OpenGG): OpenGG initializing, running on Windows 10, amd64
+[Sat May 27 15:31:09 EDT 2017] INFO (OpenGG): Window generation successful, using OpenGL context version 4.1
+[Sat May 27 15:31:09 EDT 2017] INFO (ShaderController): Default shaders loaded and validated
+[Sat May 27 15:31:09 EDT 2017] INFO (ModelLoader): Loading model at E:\Users\Javier\Documents\NetBeansProjects\SimonsQuest3\SimonsQuest3\dist\resources\models\default\default.bmf...
+[Sat May 27 15:31:09 EDT 2017] WARNING (ModelLoader): Failed to load model at E:\Users\Javier\Documents\NetBeansProjects\SimonsQuest3\SimonsQuest3\dist\resources\models\default\default.bmf, using default model instead
+[Sat May 27 15:31:09 EDT 2017] INFO (OpenGG): Render engine initialized
+[Sat May 27 15:31:09 EDT 2017] INFO (OpenGG): Audio controller initialized
+[Sat May 27 15:31:09 EDT 2017] INFO (OpenGG): Application setup beginning
+[Sat May 27 15:31:10 EDT 2017] INFO (ModelLoader): Loading model at E:\Users\Javier\Documents\NetBeansProjects\SimonsQuest3\SimonsQuest3\dist\resources\models\simon\simon.bmf...
+[Sat May 27 15:31:10 EDT 2017] INFO (ModelLoader): Done Parsing E:\Users\Javier\Documents\NetBeansProjects\SimonsQuest3\SimonsQuest3\dist\resources\models\simon\simon.bmf, got simon
+[Sat May 27 15:31:10 EDT 2017] INFO (ModelLoader): Loading model at E:\Users\Javier\Documents\NetBeansProjects\SimonsQuest3\SimonsQuest3\dist\resources\models\stormtrooper\stormtrooper.bmf...
+[Sat May 27 15:31:10 EDT 2017] INFO (ModelLoader): Done Parsing E:\Users\Javier\Documents\NetBeansProjects\SimonsQuest3\SimonsQuest3\dist\resources\models\stormtrooper\stormtrooper.bmf, got stormtrooper
+[Sat May 27 15:31:10 EDT 2017] INFO (Model): Drawable for simon has been requested, loading textures...
+[Sat May 27 15:31:10 EDT 2017] INFO (Model): Drawable for stormtrooper has been requested, loading textures...
+[Sat May 27 15:31:11 EDT 2017] INFO (OpenGG): Application setup complete
+[Sat May 27 15:31:11 EDT 2017] ERROR (OpenGG): Uncaught exception: Divide by 0
+[Sat May 27 15:31:11 EDT 2017] INFO (OpenGG): Render engine has finalized
+[Sat May 27 15:31:11 EDT 2017] INFO (OpenGG): Audio controller has been finalized
+[Sat May 27 15:31:11 EDT 2017] INFO (OpenGG): Thread Manager has closed all remaining threads
+[Sat May 27 15:31:11 EDT 2017] INFO (OpenGG): OpenGG has closed gracefully, application can now be ended
 OpenGG Engine Version: 0.0.1a1
 
 System Information
@@ -27,7 +34,7 @@ JVM Name: Java HotSpot(TM) 64-Bit Server VM
 JVM Vendor: Oracle Corporation
 Maximum Runtime Memory: 3801088000
 Used Runtime Memory: 257425408
-Free Runtime Memory: 253390632
+Free Runtime Memory: 253398808
 JVM CPU Availability: 12
 
 Engine Information
