@@ -31,14 +31,15 @@ public class GUIMaster implements KeyboardListener {
     public static GUIGroup town = new GUIGroup(new Vector2f());
     public static GUIItem simon = new GUITexture(Texture.get(Resource.getTexturePath("/gui/simon.png")), new Vector2f(-0.6f, -1f), new Vector2f(0.25f, 0.75f));
     public static GUIItem simonstatue = new GUITexture(Texture.get(Resource.getTexturePath("/gui/blackmarket.png")), new Vector2f(0, -0.4f), new Vector2f(0.55f, 0.75f));
+    public static GUIItem storeland = new GUITexture(Texture.get(Resource.getTexturePath("/gui/storeland.png")), new Vector2f(0.8f, -0.4f), new Vector2f(1f, 0.75f));
     public static GUIGroup store = new GUIGroup(new Vector2f());
     public static GUIItem vendor = new GUITexture(Texture.get(Resource.getTexturePath("/gui/boss.png")), new Vector2f(0.1f, -0.75f), new Vector2f(0.85f, 1.6f));
-    public static GUIItem vendor2 = new GUITexture(Texture.get(Resource.getTexturePath("/gui/jedi.png")), new Vector2f(0.1f, -0.75f), new Vector2f(0.85f, 1.6f));
+    public static GUIItem vendor2 = new GUITexture(Texture.get(Resource.getTexturePath("/gui/jedi.png")), new Vector2f(0.1f, -1f), new Vector2f(0.75f, 1.5f));
     public static GUIItem vendorback = new GUITexture(Texture.get(Resource.getTexturePath("/gui/storecounter.jpg")), new Vector2f(-1f, -1f), new Vector2f(2f, 2f));
     public static GUIItem townback = new GUITexture(Texture.get(Resource.getTexturePath("/gui/townbackground.png")), new Vector2f(-1, -1), new Vector2f(2, 2));
     public static GUIItem counter = new GUITexture(Texture.get(Resource.getTexturePath("/gui/counter.png")), new Vector2f(0f, -1), new Vector2f(1, 1));
     public static GGFont font = new GGFont("C:/res/test.png", "C:/res/test.fnt");
-    public static GUIText text = new GUIText(new Text("Black Market"), font, new Vector2f());
+    public static GUIText text = new GUIText(new Text("Black Market",new Vector2f(), 4f, 1f, false), font, new Vector2f(0.9f,0));
 
     public static boolean instore = false;
 
@@ -53,6 +54,9 @@ public class GUIMaster implements KeyboardListener {
         store.addItem("vendor", vendor);
         town.getItem("townbackground").setLayer(-1.1f);
         town.getItem("simons").setLayer(-1.1f);
+       
+        town.addItem("store", storeland);
+        storeland.setLayer(-1.1f);
         store.addItem("title", text);
         store.addItem("counter", counter);
         store.enabled = false;
@@ -71,7 +75,14 @@ public class GUIMaster implements KeyboardListener {
 
     public static int checkPosition() {
         if (xonscreen < -0.5 && xonscreen > -1.05) {
+            text.setText("Black Market");
+            store.addItem("vendor", vendor);
             return 1;
+        }
+        if (xonscreen < -1.31 && xonscreen > -2.3) {
+            text.setText("Traveling Salesman");
+            store.addItem("vendor", vendor2);
+            return 2;
         }
         return -1;
     }
@@ -79,12 +90,14 @@ public class GUIMaster implements KeyboardListener {
     public static void update() {
         System.out.println(xonscreen);
         if (KeyboardController.isKeyPressed(Key.KEY_RIGHT)) {
-            xonscreen -= 0.01f;
+            xonscreen -= 0.04f;
             town.getItem("simons").setPositionOffset(new Vector2f(xonscreen, -0.4f));
+            town.getItem("store").setPositionOffset(new Vector2f(0.8f + xonscreen, -0.4f));
         }
         if (KeyboardController.isKeyPressed(Key.KEY_LEFT)) {
-            xonscreen += 0.01f;
+            xonscreen += 0.04f;
             town.getItem("simons").setPositionOffset(new Vector2f(xonscreen, -0.4f));
+            town.getItem("store").setPositionOffset(new Vector2f(0.8f + xonscreen, -0.4f));
         }
         if (KeyboardController.isKeyPressed(Key.KEY_ENTER)) {
             int townie = checkPosition();
@@ -95,11 +108,12 @@ public class GUIMaster implements KeyboardListener {
                     Logger.getLogger(GUIMaster.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (!instore) {
-
+                    simon.enabled = false;
                     town.addItem("townbackground", vendorback);
                     store.enabled = true;
                     instore = true;
                 } else {
+                    simon.enabled = true;
                     town.addItem("townbackground", townback);
                     store.enabled = false;
                     instore = false;
