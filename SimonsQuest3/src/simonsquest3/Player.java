@@ -16,12 +16,14 @@ public class Player extends GeneralEntity{
     public HashMap<Item, Integer> items;
     public double attackBuff;
     public double defenseBuff;
+    public int money;
     
     public Player(double health) {
         super(health);
         items = new HashMap<>();
         attackBuff = 100;
         defenseBuff = 100;
+        money = 0;
     }
     
     public void addItem(Item item) {
@@ -49,5 +51,8 @@ public class Player extends GeneralEntity{
         }
     }
     
+    public Weapon waitForChoice() {
+        return null;
+    }
 }
 
