@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author Ethan Mak
  */
-public class Weapon {
+public class Weapon implements Cloneable{
     int mpCost;
     double attackPower;
     Map<Effect, Double> statusEffects;
@@ -48,5 +48,12 @@ public class Weapon {
     
     public void addEffect(Effect effect, double quant) {
         statusEffects.put(effect, quant);
+    }
+    
+    @Override
+    public Weapon clone() {
+        Weapon ret = new Weapon(name,mpCost,attackPower,durability);
+        ret.statusEffects.putAll(statusEffects);
+        return ret;
     }
 }

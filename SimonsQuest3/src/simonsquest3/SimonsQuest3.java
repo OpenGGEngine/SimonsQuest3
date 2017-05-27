@@ -49,6 +49,8 @@ public class SimonsQuest3 extends GGApplication{
         Soundtrack overworldday = new Soundtrack();
         overworldday.addSong(Resource.getSoundPath("windgarden.ogg"));
         overworldday.addSong(Resource.getSoundPath("floaterland.ogg"));
+        overworldday.addSong(Resource.getSoundPath("intogalaxy.ogg"));
+        overworldday.shuffle();
         SoundtrackHandler.setSoundtrack(overworldday);
         
         BindController.addBind(ControlType.KEYBOARD, "forward", KEY_W);
@@ -65,7 +67,7 @@ public class SimonsQuest3 extends GGApplication{
 
     @Override
     public void render() {
-        ShaderController.setPerspective(90, OpenGG.window.getRatio(), 0.2f, 3000f);
+        ShaderController.setPerspective(90, OpenGG.window.getRatio(), 1f, 10000f);
         RenderEngine.draw();
     }
 

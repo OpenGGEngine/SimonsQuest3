@@ -12,7 +12,7 @@ import com.opengg.core.model.Model;
  *
  * @author Ethan Mak
  */
-public class Enemy extends GeneralEntity{
+public class Enemy extends GeneralEntity implements Cloneable{
     String name;
     Model model;
     
@@ -30,8 +30,12 @@ public class Enemy extends GeneralEntity{
         return null;
     }
     
-    public Enemy cloneEnemy(){
-        Enemy enemy = new Enemy(name, model,health, (Weapon[]) this.attacks.toArray());
+    @Override
+    public Enemy clone(){
+        Enemy enemy = new Enemy(name, model,health);
+        for (Weapon attack : attacks) {
+            enemy.addAttack(attack.clone());
+        }
         return enemy;
     }
 }

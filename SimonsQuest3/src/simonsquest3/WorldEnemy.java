@@ -5,6 +5,7 @@
  */
 package simonsquest3;
 
+import com.opengg.core.math.Quaternionf;
 import com.opengg.core.math.Vector3f;
 import com.opengg.core.world.collision.AABB;
 import com.opengg.core.world.collision.CylinderCollider;
@@ -18,6 +19,7 @@ import com.opengg.core.world.components.physics.PhysicsComponent;
  * @author Javier
  */
 public class WorldEnemy extends Component{
+    public final static float viewdist = 100f;
     ModelRenderComponent model;
     PhysicsComponent physics;
     Enemy stats;
@@ -32,10 +34,18 @@ public class WorldEnemy extends Component{
         physics.frictionCoefficient = 0.8f;
         
         this.attach(model);
-        //this.attach(physics);
+        this.attach(physics);
     }
     
-    public void update(){
-        System.out.println(this.pos);
+    @Override
+    public void update(float delta){
+        if(WorldCreator.simon.getPosition().subtract(getPosition()).length() > viewdist)
+            return;
+        Vector3f movedirection = WorldCreator.simon.getPosition().subtract(getPosition());
+        movedirection.y = 0.01f;
+        movedirection.normalizeThis();
+        setRotationOffset(new Quaternionf(movedirection));
+        System.out.println(rot);
+        this.pos = this.pos.addThis(movedirection.multiplyThis(4).multiplyThis(delta));
     }
 }

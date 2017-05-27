@@ -8,6 +8,7 @@ package simonsquest3;
 import com.opengg.core.engine.RenderEngine;
 import com.opengg.core.engine.Resource;
 import com.opengg.core.engine.WorldEngine;
+import com.opengg.core.math.FastMath;
 import com.opengg.core.math.Vector3f;
 import com.opengg.core.model.ModelLoader;
 import com.opengg.core.render.shader.Program;
@@ -28,7 +29,9 @@ import com.opengg.core.world.generators.DiamondSquare;
  * @author Javier
  */
 public class WorldCreator {
+    static int enemySpawnCount = 120;
     static TerrainComponent world;
+    static SimonComponent simon;
     public static void create(){
         ShaderController.loadShader("newterrainfrag", Resource.getShaderPath("newterrain.frag"), Program.FRAGMENT);
         ShaderController.use("mainvert", "newterrainfrag");
@@ -47,10 +50,10 @@ public class WorldCreator {
         world.enableRendering();
         world.enableCollider(); 
         
-        WaterComponent water = new WaterComponent(Texture.get(Resource.getTexturePath("water.png")), 1f, 100f);
+        WaterComponent water = new WaterComponent(Texture.get(Resource.getTexturePath("water.png")), 1f, 300f);
         WorldEngine.getCurrent().attach(water);
-        water.setPositionOffset(new Vector3f(0,180,0));
-        WorldEngine.getCurrent().setFloor(180);
+        water.setPositionOffset(new Vector3f(0,200,0));
+        WorldEngine.getCurrent().setFloor(200);
         
         FreeFlyComponent freefly = new FreeFlyComponent();
         //freefly.use();
@@ -59,15 +62,24 @@ public class WorldCreator {
         SunComponent sun = new SunComponent(Texture.get(Resource.getTexturePath("default.png")), 0, 0.1f);
         WorldEngine.getCurrent().attach(sun);
         
-        SimonComponent simon = new SimonComponent();
+        simon = new SimonComponent();
         simon.use();
         WorldEngine.getCurrent().attach(simon);
         
-        EnemySpawner spawner = new EnemySpawner(new Enemy("stormtrooper", ModelLoader.loadModel(Resource.getModelPath("stormtrooper")),10));
-        WorldEngine.getCurrent().attach(spawner);
-        spawner.spawnEnemy(10);
+        for(int i = 0; i < enemySpawnCount; i++){
+            EnemySpawner spawner = new EnemySpawner(new Enemy("stormtrooper", ModelLoader.loadModel(Resource.getModelPath("stormtrooper")), 10));
+            WorldEngine.getCurrent().attach(spawner);
+            boolean validPos = false;
+            do{
+                spawner.setPositionOffset(new Vector3f(FastMath.random(9000)-4500, 0, FastMath.random(9000)-4500));
+                if(world.getHeightAt(spawner.getPosition()) > 250)
+                    validPos = true;
+            }while(!validPos);            
+            spawner.spawnEnemy(5);
+        }
         
-        RenderEngine.setSkybox(new Skybox(Cubemap.get(Resource.getTexturePath("skybox\\bluecloud")), 1500f));
+        
+        RenderEngine.setSkybox(new Skybox(Cubemap.get(Resource.getTexturePath("skybox\\bluecloud")), 4500f));
         WorldEngine.useWorld(WorldEngine.getCurrent());
     }
 }
