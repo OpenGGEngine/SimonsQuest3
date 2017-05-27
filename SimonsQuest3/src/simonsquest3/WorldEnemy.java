@@ -20,7 +20,9 @@ import com.opengg.core.world.components.physics.PhysicsComponent;
 public class WorldEnemy extends Component{
     ModelRenderComponent model;
     PhysicsComponent physics;
+    Enemy stats;
     public WorldEnemy(Enemy enemy){
+        stats = enemy;
         model = new ModelRenderComponent(enemy.model);
         physics = new PhysicsComponent();
         physics.addCollider(new CollisionComponent(new AABB(new Vector3f(),10,6,10), new CylinderCollider(1,2)));
