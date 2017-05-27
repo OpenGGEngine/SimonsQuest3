@@ -5,6 +5,7 @@
  */
 package simonsquest3;
 
+import com.opengg.core.math.FastMath;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,11 +16,33 @@ import java.util.List;
  */
 public abstract class GeneralEntity {
     public double health;
+    public double maxHealth;
     public List<Weapon> attacks;
     
     protected GeneralEntity(double health, Weapon... attacks) {
         this.health = health;
+        this.maxHealth = health;
         this.attacks = new ArrayList<>();
         this.attacks.addAll(Arrays.asList(attacks));
+    }
+    
+    public void addAttack(Weapon attack) {
+        this.attacks.add(attack);
+    }
+    
+    public void useEffect(Effect effect, double quant) {
+        switch (effect) {
+            case HEALTH:
+                restoreHealth(quant);
+                break;
+        }
+    }
+    
+    public void damage(double amount) {
+        health = FastMath.clamp(health - amount, 0, maxHealth);
+    }
+    
+    public void restoreHealth(double amount) {
+        health = FastMath.clamp(health + amount, 0, maxHealth);
     }
 }   

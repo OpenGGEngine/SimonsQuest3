@@ -22,10 +22,6 @@ public class Enemy extends GeneralEntity implements Cloneable{
         this.model = model;
     }
     
-    public void addAttack(Weapon attack) {
-        this.attacks.add(attack);
-    }
-    
     public Weapon attack(double enemyHealth) {
         return null;
     }
