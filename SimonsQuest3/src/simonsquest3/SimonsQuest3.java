@@ -5,10 +5,13 @@
  */
 package simonsquest3;
 
+import com.opengg.core.audio.Soundtrack;
+import com.opengg.core.audio.SoundtrackHandler;
 import com.opengg.core.engine.BindController;
 import com.opengg.core.engine.GGApplication;
 import com.opengg.core.engine.OpenGG;
 import com.opengg.core.engine.RenderEngine;
+import com.opengg.core.engine.Resource;
 import com.opengg.core.io.ControlType;
 import static com.opengg.core.io.input.keyboard.Key.*;
 import com.opengg.core.render.shader.ShaderController;
@@ -41,19 +44,21 @@ public class SimonsQuest3 extends GGApplication{
         
         WorldCreator.create();
         
+        Soundtrack overworldday = new Soundtrack();
+        overworldday.addSong(Resource.getSoundPath("windgarden.ogg"));
+        overworldday.addSong(Resource.getSoundPath("floaterland.ogg"));
+        SoundtrackHandler.setSoundtrack(overworldday);
+        
         BindController.addBind(ControlType.KEYBOARD, "forward", KEY_W);
         BindController.addBind(ControlType.KEYBOARD, "backward", KEY_S);
         BindController.addBind(ControlType.KEYBOARD, "left", KEY_A);
         BindController.addBind(ControlType.KEYBOARD, "right", KEY_D);
         BindController.addBind(ControlType.KEYBOARD, "up", KEY_SPACE);
         BindController.addBind(ControlType.KEYBOARD, "down", KEY_LEFT_SHIFT);
-        BindController.addBind(ControlType.KEYBOARD, "lookright", KEY_Q);
-        BindController.addBind(ControlType.KEYBOARD, "lookleft", KEY_E);
-        BindController.addBind(ControlType.KEYBOARD, "lookup", KEY_R);
-        BindController.addBind(ControlType.KEYBOARD, "lookdown", KEY_F);
-        BindController.addBind(ControlType.KEYBOARD, "fire", KEY_L);
-        BindController.addBind(ControlType.KEYBOARD, "aim", KEY_K);
-        BindController.addBind(ControlType.KEYBOARD, "freeze", KEY_O);
+        BindController.addBind(ControlType.KEYBOARD, "lookright", KEY_RIGHT);
+        BindController.addBind(ControlType.KEYBOARD, "lookleft", KEY_LEFT);
+        BindController.addBind(ControlType.KEYBOARD, "lookup", KEY_UP);
+        BindController.addBind(ControlType.KEYBOARD, "lookdown", KEY_DOWN);
     }
 
     @Override
