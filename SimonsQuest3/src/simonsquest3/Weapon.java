@@ -31,13 +31,19 @@ public class Weapon {
         this(name, 0, 0, 0);
     }
     
-    private double use(double amount) {
-        if (durability == -1)
-            return attackPower;
-        else if  (durability == 0)
-            return -1;
+    private Map<Effect, Double> use(double amount) {
+        HashMap<Effect, Double> effects = new HashMap<>();
+        if (durability == -1) {
+            effects.putAll(statusEffects);
+            effects.put(Effect.ATTACK, attackPower);
+            return effects;
+        }
+        else if  (durability == 0 || amount > durability)
+            return effects;
         durability -= amount;
-        return attackPower;
+        effects.putAll(statusEffects);
+        effects.put(Effect.ATTACK, attackPower);
+        return effects;
     }
     
     public void addEffect(Effect effect, double quant) {

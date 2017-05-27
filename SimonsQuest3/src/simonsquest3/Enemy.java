@@ -12,24 +12,18 @@ import com.opengg.core.model.Model;
  *
  * @author Ethan Mak
  */
-public class Enemy{
+public class Enemy extends GeneralEntity{
     String name;
     Model model;
-    Weapon[] attacks;
-    double health;
     
-    public Enemy(String name, Model model) {
-        health = 0;
-        attacks = new Weapon[4];
+    public Enemy(String name, Model model, double health, Weapon... attacks) {
+        super(health, attacks);
         this.name = name;
         this.model = model;
     }
     
-    public void setAttack(Weapon attack, int place) {
-        if (place > 3 || place < 0) {
-            return;
-        }
-        attacks[place] = attack;
+    public void addAttack(Weapon attack) {
+        this.attacks.add(attack);
     }
     
     public Weapon attack(double enemyHealth) {
@@ -37,7 +31,7 @@ public class Enemy{
     }
     
     public Enemy cloneEnemy(){
-        Enemy enemy = new Enemy(name, model);
+        Enemy enemy = new Enemy(name, model,health, (Weapon[]) this.attacks.toArray());
         return enemy;
     }
 }

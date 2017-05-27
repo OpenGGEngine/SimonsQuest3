@@ -51,9 +51,22 @@ public class WeaponFactory {
     
     public static Weapon generateMeme(String name) {
         Weapon ret = new Weapon(name);
-        ret.durability = 0;
+        ret.durability = -1;
         switch (name) {
             
+        }
+        return ret;
+    }
+    
+    public static Weapon generateAttack(String name) {
+        Weapon ret = new Weapon(name);
+        ret.mpCost = 0;
+        ret.durability = -1;
+        switch (name) {
+            case "bite":
+                ret.name = "Bite";
+                ret.attackPower = 10;
+                break;
         }
         return ret;
     }
