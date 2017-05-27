@@ -10,7 +10,7 @@ package simonsquest3;
  * @author Ethan Mak
  */
 public enum Effect {
-    CLEAR("clear"), ATTACK("attack"), DEFENSE("defense"), HEALTH("health"), ESCAPE("escape"), DAMAGE("damage");
+    CLEAR("clear"), ATTACK("attack"), DEFENSE("defense"), HEALTH("health"), ESCAPE("escape"), DAMAGE("damage"), CHANGE_MP("mp");
     
     String name;
     private Effect(String name) {

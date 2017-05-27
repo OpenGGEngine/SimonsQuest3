@@ -39,6 +39,12 @@ public abstract class GeneralEntity {
             case HEALTH:
                 restoreHealth(quant);
                 break;
+            case ATTACK:
+                attackBuff += quant;
+                break;
+            case DEFENSE:
+                defenseBuff += quant;
+                break;
         }
     }
     

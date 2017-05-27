@@ -16,11 +16,15 @@ import java.util.Map;
 public class Player extends GeneralEntity{
     public HashMap<Item, Integer> items;
     public int money;
+    public int mana;
+    public int maxMana;
     
-    public Player(double health) {
+    public Player(double health,int mana) {
         super(health,100,100);
         items = new HashMap<>();
         money = 0;
+        this.mana = mana;
+        maxMana = mana;
     }
     
     public void addItem(Item item) {
@@ -33,14 +37,15 @@ public class Player extends GeneralEntity{
     @Override
     public void useEffect(Effect effect, double quant) {
         super.useEffect(effect, quant);
-        switch(effect) {
-            case ATTACK:
-                attackBuff += quant;
-                break;
-            case DEFENSE:
-                defenseBuff += quant;
+        switch (effect) {
+            case CHANGE_MP:
+                changeMana((int)quant);
                 break;
         }
+    }
+    
+    public void changeMana(int amount) {
+        mana = FastMath.clamp(mana, 0, maxMana);
     }
     
     public Weapon waitForChoice() {

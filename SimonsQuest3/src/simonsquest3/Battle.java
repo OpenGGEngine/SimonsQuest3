@@ -8,6 +8,7 @@ package simonsquest3;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -31,5 +32,25 @@ public class Battle {
         this.enemies.addAll(Arrays.asList(enemies));
     }
     
-    
+    public Weapon battleTurn() {
+        Weapon used;
+        switch (turn) {
+            case 0:
+                used = player.waitForChoice();
+                break;
+            default:
+                used = enemies.get(turn-1).attack(player.health);
+                break;
+        }
+        if (used == null)
+            return used;
+        Map<Effect, Double> effects = used.use(turn == 0? 0 : 1, (turn == 0));
+        if (turn > 0) {
+            for (Map.Entry<Effect,Double> attack: effects.entrySet())
+                enemies.get(turn-1).useEffect(attack.getKey(),attack.getValue());
+            player.damage(effects.get(Effect.DAMAGE));
+        }
+        updatePlayer();
+        return used;
+    }
 }

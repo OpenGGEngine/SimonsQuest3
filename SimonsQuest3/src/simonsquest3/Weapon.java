@@ -31,11 +31,17 @@ public class Weapon implements Cloneable{
         this(name, 0, 0, 0);
     }
     
-    private Map<Effect, Double> use(double amount) {
+    public Map<Effect, Double> use(double amount) {
+        return use(amount, false);
+    }
+    
+    public Map<Effect, Double> use(double amount, boolean skip) {
         HashMap<Effect, Double> effects = new HashMap<>();
         if (durability == -1) {
             effects.putAll(statusEffects);
             effects.put(Effect.DAMAGE, attackPower);
+            if (!skip)
+                effects.put(Effect.CHANGE_MP, (double)-mpCost);
             return effects;
         }
         else if  (durability == 0 || amount > durability)
