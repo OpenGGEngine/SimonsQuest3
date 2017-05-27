@@ -18,13 +18,14 @@ import com.opengg.core.render.shader.ShaderController;
 import com.opengg.core.render.window.WindowInfo;
 import com.opengg.core.render.window.WindowOptions;
 import static com.opengg.core.render.window.WindowOptions.GLFW;
+import simonsquest3.gui.GUIMaster;
 
 /**
  *
  * @author Javier
  */
 public class SimonsQuest3 extends GGApplication{
-
+    GUIMaster m;
     /**
      * @param args the command line arguments
      */
@@ -43,7 +44,8 @@ public class SimonsQuest3 extends GGApplication{
     public void setup() {
         
         WorldCreator.create();
-        
+        m = new GUIMaster();
+        GUIMaster.init();
         Soundtrack overworldday = new Soundtrack();
         overworldday.addSong(Resource.getSoundPath("windgarden.ogg"));
         overworldday.addSong(Resource.getSoundPath("floaterland.ogg"));
@@ -69,7 +71,7 @@ public class SimonsQuest3 extends GGApplication{
 
     @Override
     public void update() {
-       
+       GUIMaster.update();
     }
     
 }
