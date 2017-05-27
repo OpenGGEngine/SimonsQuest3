@@ -15,9 +15,6 @@ import com.opengg.core.io.input.keyboard.KeyboardController;
 import com.opengg.core.io.input.keyboard.KeyboardListener;
 import com.opengg.core.math.Vector2f;
 import com.opengg.core.render.texture.Texture;
-import com.opengg.core.world.Action;
-import com.opengg.core.world.Actionable;
-import javafx.scene.input.KeyCode;
 
 /**
  *
