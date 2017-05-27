@@ -34,7 +34,7 @@ public class GUIMaster implements KeyboardListener {
     public static GUIItem storeland = new GUITexture(Texture.get(Resource.getTexturePath("/gui/storeland.png")), new Vector2f(0.8f, -0.4f), new Vector2f(1f, 0.75f));
     public static GUIGroup store = new GUIGroup(new Vector2f());
     public static GUIItem vendor = new GUITexture(Texture.get(Resource.getTexturePath("/gui/boss.png")), new Vector2f(0.1f, -0.75f), new Vector2f(0.85f, 1.6f));
-    public static GUIItem vendor2 = new GUITexture(Texture.get(Resource.getTexturePath("/gui/jedi.png")), new Vector2f(0.1f, -0.45f), new Vector2f(0.75f, 1.5f));
+    public static GUIItem vendor2 = new GUITexture(Texture.get(Resource.getTexturePath("/gui/jedi.png")), new Vector2f(0.1f, -1f), new Vector2f(0.75f, 1.5f));
     public static GUIItem vendorback = new GUITexture(Texture.get(Resource.getTexturePath("/gui/storecounter.jpg")), new Vector2f(-1f, -1f), new Vector2f(2f, 2f));
     public static GUIItem townback = new GUITexture(Texture.get(Resource.getTexturePath("/gui/townbackground.png")), new Vector2f(-1, -1), new Vector2f(2, 2));
     public static GUIItem counter = new GUITexture(Texture.get(Resource.getTexturePath("/gui/counter.png")), new Vector2f(0f, -1), new Vector2f(1, 1));
