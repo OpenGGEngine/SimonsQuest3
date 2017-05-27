@@ -14,7 +14,7 @@ import com.opengg.core.model.ModelLoader;
  * @author Ethan Mak
  */
 public class EnemyFactory {
-    
+    static int enemycount = 6;
     public static Enemy generateEnemy(String name) {
         Enemy ret = new Enemy(name,0,100,100);
         switch (name) {
@@ -24,6 +24,13 @@ public class EnemyFactory {
                 ret.addAttack(WeaponFactory.generateAttack("bite"));
  
                 ret.setModel(ModelLoader.loadModel(Resource.getModelPath("beaver")));
+                break;
+            case "justinbeaver":
+                ret.health = 0;
+                ret.name = "Justin Beaver";
+                ret.addAttack(WeaponFactory.generateAttack("bite"));
+ 
+                ret.setModel(ModelLoader.loadModel(Resource.getModelPath("justinbeaver")));
                 break;
             case "ct":
                 ret.health = 0;
