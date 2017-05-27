@@ -8,6 +8,8 @@ package simonsquest3;
 import com.opengg.core.engine.GGApplication;
 import com.opengg.core.engine.OpenGG;
 import com.opengg.core.render.window.WindowInfo;
+import com.opengg.core.render.window.WindowOptions;
+import static com.opengg.core.render.window.WindowOptions.GLFW;
 
 /**
  *
@@ -19,12 +21,20 @@ public class SimonsQuest3 extends GGApplication{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        OpenGG.initialize(new SimonsQuest3(), new WindowInfo());
+        WindowInfo w = new WindowInfo();
+        w.displaymode = WindowOptions.WINDOWED;
+        w.width = 1920;
+        w.height = 1080;
+        w.resizable = true;
+        w.type = GLFW;
+        w.vsync = true;
+        OpenGG.initialize(new SimonsQuest3(), w);
     }
 
     @Override
     public void setup() {
         
+        WorldCreator.create();
     }
 
     @Override
