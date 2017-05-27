@@ -14,6 +14,7 @@ import com.opengg.core.model.ModelLoader;
 import com.opengg.core.world.Action;
 import com.opengg.core.world.ActionType;
 import com.opengg.core.world.Actionable;
+import com.opengg.core.world.collision.AABB;
 import com.opengg.core.world.collision.BoundingBox;
 import com.opengg.core.world.collision.CylinderCollider;
 import com.opengg.core.world.components.CameraComponent;
@@ -49,7 +50,7 @@ public class SimonComponent extends Component implements Actionable{
         head.setAbsoluteOffset(true);
         controller = new UserControlComponent();
         playerphysics = new PhysicsComponent();
-        playerphysics.addCollider(new CollisionComponent(new BoundingBox(new Vector3f(),10,6,10), new CylinderCollider(1,2)));
+        playerphysics.addCollider(new CollisionComponent(new AABB(new Vector3f(),10,6,10), new CylinderCollider(1,2)));
         playerphysics.setAbsoluteOffset(true);
         playerphysics.mass = 60f;
         playerphysics.bounciness = 0;
