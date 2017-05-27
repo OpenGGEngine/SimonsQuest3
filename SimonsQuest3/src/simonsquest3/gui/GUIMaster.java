@@ -21,16 +21,28 @@ import com.opengg.core.render.texture.Texture;
  * @author Warren
  */
 public class GUIMaster implements KeyboardListener{
-    static float xonscreen = -1;
+    static float xonscreen = 0;
     public static GUIGroup town = new GUIGroup(new Vector2f());
     public static GUIItem simon = new GUITexture(Texture.get(Resource.getTexturePath("/gui/simon.png")),new Vector2f(-1,-1f),new Vector2f(0.25f,0.75f));
     public static GUIItem simonstatue = new GUITexture(Texture.get(Resource.getTexturePath("/gui/simon.png")),new Vector2f(0,-0.4f),new Vector2f(0.25f,0.75f));
+    public static GUIGroup store = new GUIGroup(new Vector2f());
+    public static GUIItem vendor = new GUITexture(Texture.get(Resource.getTexturePath("/gui/boss.png")),new Vector2f(-1,-1f),new Vector2f(0.5f,0.75f));
+    public static GUIItem vendorback = new GUITexture(Texture.get(Resource.getTexturePath("/gui/storecounter.jpg")),new Vector2f(-1,-1f),new Vector2f(1f,1f));
+    
+    
+    
+    
     public static void init(){
       GUI.root.addItem("town", town);
-      
+      GUI.root.addItem("store", store);
       town.addItem("townbackground", new GUITexture(Texture.get(Resource.getTexturePath("/gui/townbackground.png")),new Vector2f(-1,-1),new Vector2f(2,2)));
       town.addItem("simons", simonstatue);
       town.addItem("simon", simon);
+      store.setLayer(1.5f);
+      store.addItem("vendor", vendor);
+      town.getItem("townbackground").setLayer(-1.1f);
+      town.getItem("simons").setLayer(-1.1f);
+      store.addItem("vendorc", vendorback);
       
     }
 
@@ -52,11 +64,11 @@ public class GUIMaster implements KeyboardListener{
         
         if(KeyboardController.isKeyPressed(Key.KEY_RIGHT)){
             xonscreen+=0.01f;
-            town.getItem("simon").setPositionOffset(new Vector2f(xonscreen,-1f));
+            town.getItem("simons").setPositionOffset(new Vector2f(xonscreen,-0.4f));
         }
         if(KeyboardController.isKeyPressed(Key.KEY_LEFT)){
             xonscreen-=0.01f;
-            town.getItem("simon").setPositionOffset(new Vector2f(xonscreen,-1f));
+            town.getItem("simons").setPositionOffset(new Vector2f(xonscreen,-0.4f));
         }
     }
 
