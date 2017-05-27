@@ -16,10 +16,13 @@ public class Enemy extends GeneralEntity implements Cloneable{
     String name;
     Model model;
     
-    public Enemy(String name, Model model, double health,double attack, double defense, Weapon... attacks) {
+    public Enemy(String name, double health,double attack, double defense, Weapon... attacks) {
         super(health,attack,defense,attacks);
         this.name = name;
-        this.model = model;
+    }
+    
+    public void setModel(Model m){
+        this.model = m;
     }
     
     public Weapon attack(double enemyHealth) {
@@ -31,7 +34,8 @@ public class Enemy extends GeneralEntity implements Cloneable{
     
     @Override
     public Enemy clone(){
-        Enemy enemy = new Enemy(name, model,attackBuff,defenseBuff,health);
+        Enemy enemy = new Enemy(name, attackBuff,defenseBuff,health);
+        enemy.setModel(model);
         for (Weapon attack : attacks) {
             enemy.addAttack(attack.clone());
         }

@@ -1,5 +1,6 @@
 package simonsquest3;
 
+import com.opengg.core.engine.Resource;
 import com.opengg.core.model.ModelLoader;
 
 /*
@@ -14,54 +15,41 @@ import com.opengg.core.model.ModelLoader;
  */
 public class EnemyFactory {
     
-    public static Enemy generateEnemy(String name, String fileName) {
-        Enemy ret = new Enemy(name, ModelLoader.loadModel(fileName),0,100,100);
+    public static Enemy generateEnemy(String name) {
+        Enemy ret = new Enemy(name,0,100,100);
         switch (name) {
             case "beaver":
                 ret.health = 0;
                 ret.name = "Beaver";
                 ret.addAttack(WeaponFactory.generateAttack("bite"));
-                ret.addAttack(null);
-                ret.addAttack(null);
-                ret.addAttack(null);
+ 
+                ret.setModel(ModelLoader.loadModel(Resource.getModelPath("beaver")));
                 break;
             case "ct":
                 ret.health = 0;
                 ret.name = "Counter Terrorist";
-                ret.addAttack(null);
-                ret.addAttack(null);
-                ret.addAttack(null);
-                ret.addAttack(null);
+
+                ret.setModel(ModelLoader.loadModel(Resource.getModelPath("ct")));
                 break;
             case "halo":
                 ret.health = 0;
                 ret.name = "Master Chief";
-                ret.addAttack(null);
-                ret.addAttack(null);
-                ret.addAttack(null);
-                ret.addAttack(null);
+ 
+                ret.setModel(ModelLoader.loadModel(Resource.getModelPath("halo")));
                 break;
             case "imposter":
                 ret.health = 0;
                 ret.name = "Maya the Imposter";
-                ret.addAttack(null);
-                ret.addAttack(null);
-                ret.addAttack(null);
-                ret.addAttack(null);
+
+                ret.setModel(ModelLoader.loadModel(Resource.getModelPath("Maya")));
                 break;
             case "stormtrooper":
                 ret.health = 0;
                 ret.name = "Stormtrooper";
-                ret.addAttack(null);
-                ret.addAttack(null);
-                ret.addAttack(null);
-                ret.addAttack(null);
+  
+                ret.setModel(ModelLoader.loadModel(Resource.getModelPath("stormtrooper")));
                 break;
         }
         return ret;
-    }
-    
-    public static WorldEnemy generateWorldEnemy(String name, String fileName) {
-        return new WorldEnemy(EnemyFactory.generateEnemy(name, fileName));
     }
 }

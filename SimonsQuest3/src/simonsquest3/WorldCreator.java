@@ -9,19 +9,25 @@ import com.opengg.core.engine.RenderEngine;
 import com.opengg.core.engine.Resource;
 import com.opengg.core.engine.WorldEngine;
 import com.opengg.core.math.FastMath;
+import com.opengg.core.math.Quaternionf;
 import com.opengg.core.math.Vector3f;
 import com.opengg.core.model.ModelLoader;
+import com.opengg.core.render.light.Light;
 import com.opengg.core.render.shader.Program;
 import com.opengg.core.render.shader.ShaderController;
 import com.opengg.core.render.texture.ArrayTexture;
 import com.opengg.core.render.texture.Cubemap;
 import com.opengg.core.render.texture.Texture;
+import com.opengg.core.world.Camera;
 import com.opengg.core.world.Skybox;
 import com.opengg.core.world.Terrain;
 import com.opengg.core.world.components.FreeFlyComponent;
+import com.opengg.core.world.components.LightComponent;
+import com.opengg.core.world.components.ModelRenderComponent;
 import com.opengg.core.world.components.SunComponent;
 import com.opengg.core.world.components.TerrainComponent;
 import com.opengg.core.world.components.WaterComponent;
+import com.opengg.core.world.components.WorldObject;
 import com.opengg.core.world.generators.DiamondSquare;
 
 /**
@@ -29,9 +35,10 @@ import com.opengg.core.world.generators.DiamondSquare;
  * @author Javier
  */
 public class WorldCreator {
-    static int enemySpawnCount = 120;
+    static int enemySpawnCount = 20;
     static TerrainComponent world;
     static SimonComponent simon;
+    static Camera arenaCam;
     public static void create(){
         ShaderController.loadShader("newterrainfrag", Resource.getShaderPath("newterrain.frag"), Program.FRAGMENT);
         ShaderController.use("mainvert", "newterrainfrag");
@@ -55,10 +62,6 @@ public class WorldCreator {
         water.setPositionOffset(new Vector3f(0,200,0));
         WorldEngine.getCurrent().setFloor(200);
         
-        FreeFlyComponent freefly = new FreeFlyComponent();
-        //freefly.use();
-        WorldEngine.getCurrent().attach(freefly);
-        
         SunComponent sun = new SunComponent(Texture.get(Resource.getTexturePath("default.png")), 0, 0.1f);
         WorldEngine.getCurrent().attach(sun);
         
@@ -66,20 +69,42 @@ public class WorldCreator {
         simon.use();
         WorldEngine.getCurrent().attach(simon);
         
+        WorldObject arena = new WorldObject();
+        arena.attach(new ModelRenderComponent(ModelLoader.loadModel(Resource.getModelPath("arena"))));
+        arena.setPositionOffset(new Vector3f(0,4000,-3000));
+        WorldEngine.getCurrent().attach(arena);
+        
+        LightComponent warlight = new LightComponent(new Light(new Vector3f(0,4100,-3000), new Vector3f(1), 300,0));
+        warlight.use();
+        WorldEngine.getCurrent().attach(warlight);
+        
+        arenaCam = new Camera();
+        arenaCam.setPos(new Vector3f(0,-4300,2500));
+        arenaCam.setRot(new Quaternionf(new Vector3f(10,0,0)));
+        
         for(int i = 0; i < enemySpawnCount; i++){
-            EnemySpawner spawner = new EnemySpawner(EnemyFactory.generateEnemy("stormtrooper",Resource.getModelPath("stormtrooper")));
+            EnemySpawner spawner = new EnemySpawner(EnemyFactory.generateEnemy("stormtrooper"));
             WorldEngine.getCurrent().attach(spawner);
             boolean validPos = false;
             do{
-                spawner.setPositionOffset(new Vector3f(FastMath.random(9000)-4500, 0, FastMath.random(9000)-4500));
+                spawner.setPositionOffset(new Vector3f(FastMath.random(9000)-4500, -300, FastMath.random(9000)-4500));
                 if(world.getHeightAt(spawner.getPosition()) > 250)
                     validPos = true;
             }while(!validPos);            
-            spawner.spawnEnemy(5);
-        }
-        
-        
+            spawner.spawnEnemy(3);
+        }       
         RenderEngine.setSkybox(new Skybox(Cubemap.get(Resource.getTexturePath("skybox\\bluecloud")), 4500f));
         WorldEngine.useWorld(WorldEngine.getCurrent());
     }
+    
+    public void enableBattle(){
+        WorldEngine.getCurrent().setEnabled(false);
+        RenderEngine.useCamera(arenaCam);
+    }
+    
+    public void disableBattle(){
+        WorldEngine.getCurrent().setEnabled(true);
+        simon.use();
+    }
 }
+

@@ -104,11 +104,11 @@ void main() {
 		tcolor = wcolor;
 	else if(blend < 0.3f)
 		tcolor = mix(wcolor, wcolorr, (blend - 0.2f) * 10f);
-	else if(blend < 0.6f)
+	else if(blend < 0.5f)
 		tcolor = wcolorr;
 	else if(blend < 0.6f)
 		tcolor = mix(wcolorr, wcolorg, (blend - 0.5f) * 10f);
-	else if(blend < 0.5f)
+	else if(blend < 0.7f)
 		tcolor = wcolorg;
 	else if(blend < 0.8f)
 		tcolor = mix(wcolorg, wcolorb, (blend - 0.7f) * 10f);
