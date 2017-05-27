@@ -21,7 +21,6 @@ import com.opengg.core.render.texture.Texture;
 import com.opengg.core.world.Camera;
 import com.opengg.core.world.Skybox;
 import com.opengg.core.world.Terrain;
-import com.opengg.core.world.components.FreeFlyComponent;
 import com.opengg.core.world.components.LightComponent;
 import com.opengg.core.world.components.ModelRenderComponent;
 import com.opengg.core.world.components.SunComponent;
@@ -35,7 +34,7 @@ import com.opengg.core.world.generators.DiamondSquare;
  * @author Javier
  */
 public class WorldCreator {
-    static int enemySpawnCount = 20;
+    static int enemySpawnCount = 120;
     static TerrainComponent world;
     static SimonComponent simon;
     static Camera arenaCam;
@@ -70,20 +69,29 @@ public class WorldCreator {
         WorldEngine.getCurrent().attach(simon);
         
         WorldObject arena = new WorldObject();
-        arena.attach(new ModelRenderComponent(ModelLoader.loadModel(Resource.getModelPath("arena"))));
         arena.setPositionOffset(new Vector3f(0,4000,-3000));
+        ModelRenderComponent arenamodel = new ModelRenderComponent(ModelLoader.loadModel(Resource.getModelPath("arena")));
+        arenamodel.setScale(new Vector3f(0.015f));
+        arena.attach(arenamodel);
+        ModelRenderComponent playerview = new ModelRenderComponent(ModelLoader.loadModel(Resource.getModelPath("ct")));
+        playerview.setPositionOffset(new Vector3f(-1.3f,0,0));
+        playerview.setRotationOffset(new Quaternionf(new Vector3f(0,70,0)));
+        arena.attach(playerview);
         WorldEngine.getCurrent().attach(arena);
         
-        LightComponent warlight = new LightComponent(new Light(new Vector3f(0,4100,-3000), new Vector3f(1), 300,0));
+        LightComponent warlight = new LightComponent(new Light(new Vector3f(0,4020,-3000), new Vector3f(1), 300,0));
         warlight.use();
         WorldEngine.getCurrent().attach(warlight);
         
         arenaCam = new Camera();
-        arenaCam.setPos(new Vector3f(0,-4300,2500));
+        arenaCam.setPos(new Vector3f(0,-4002,2995));
         arenaCam.setRot(new Quaternionf(new Vector3f(10,0,0)));
+        RenderEngine.useCamera(arenaCam);
         
         for(int i = 0; i < enemySpawnCount; i++){
             EnemySpawner spawner = new EnemySpawner(EnemyFactory.generateEnemy("stormtrooper"));
+            if(enemySpawnCount / EnemyFactory.enemycount == 0)
+                spawner = new EnemySpawner(EnemyFactory.generateEnemy("stormtrooper"));
             WorldEngine.getCurrent().attach(spawner);
             boolean validPos = false;
             do{
