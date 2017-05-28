@@ -7,6 +7,7 @@ package simonsquest3;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  *
@@ -17,18 +18,22 @@ public class Weapon implements Cloneable{
     double attackPower;
     Map<Effect, Double> statusEffects;
     double durability;
+    int accuracy;
     String name;
+    Random rand;
     
-    public Weapon(String name, int mpCost, double attackPower, double durability) {
+    public Weapon(String name, int mpCost, double attackPower, double durability, int accuracy) {
         this.name = name;
         this.mpCost = mpCost;
         this.attackPower = attackPower;
         this.durability = durability;
+        this.accuracy = accuracy;
         statusEffects = new HashMap<>();
+        rand = new Random();
     }
     
     public Weapon(String name) {
-        this(name, 0, 0, 0);
+        this(name, 0, 0, 0, 0);
     }
     
     public Map<Effect, Double> use(double amount) {
@@ -47,6 +52,10 @@ public class Weapon implements Cloneable{
         else if  (durability == 0 || amount > durability)
             return effects;
         durability -= amount;
+        if (rand.nextInt() % 100 < accuracy) {
+            effects.put(Effect.MISSED, (double)-1);
+            return effects;
+        }
         effects.putAll(statusEffects);
         effects.put(Effect.DAMAGE, attackPower);
         return effects;
@@ -58,7 +67,7 @@ public class Weapon implements Cloneable{
     
     @Override
     public Weapon clone() {
-        Weapon ret = new Weapon(name,mpCost,attackPower,durability);
+        Weapon ret = new Weapon(name,mpCost,attackPower,durability,accuracy);
         ret.statusEffects.putAll(statusEffects);
         return ret;
     }

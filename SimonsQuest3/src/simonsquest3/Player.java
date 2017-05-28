@@ -20,7 +20,7 @@ public class Player extends GeneralEntity{
     public int maxMana;
     
     public Player(double health,int mana) {
-        super(health,100,100);
+        super(health,100,100,80);
         items = new HashMap<>();
         money = 0;
         this.mana = mana;
@@ -52,11 +52,21 @@ public class Player extends GeneralEntity{
         Weapon ret = null;
         Map<Effect,Double> effects = new HashMap<>();
         //wait
+        if (ret != null)
+            if(isHit())
+                effects = ret.use(1);
+            else 
+                return null;
+        
+        if (effects.get(Effect.MISSED) == -1)
+            return null;
         for(Map.Entry<Effect,Double> effect: effects.entrySet()) {
             useEffect(effect.getKey(), effect.getValue());
         }
-        if (ret != null)
+        if (ret != null) {
+            ret = ret.clone();
             ret.statusEffects.put(Effect.DAMAGE, ret.statusEffects.get(Effect.DAMAGE) * (attackBuff/100));
+        }
         return ret;
     }
 }

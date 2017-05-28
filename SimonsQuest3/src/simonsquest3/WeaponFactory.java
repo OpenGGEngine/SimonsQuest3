@@ -20,30 +20,54 @@ public class WeaponFactory {
                 ret.name = "Airhorn";
                 break;
             case "glock":
-                ret.attackPower = 0;
-                ret.durability = 0;
+                ret.attackPower = 5;
+                ret.durability = 20;
                 ret.name = "Glock";
                 break;
             case "awp":
-                ret.attackPower = 0;
-                ret.durability = 0;
+                ret.attackPower = 50;
+                ret.durability = 4;
                 ret.name = "AWP";
                 break;
             case "negev":
-                ret.attackPower = 0;
-                ret.durability = 0;
+                ret.attackPower = 10;
+                ret.durability = 35;
                 ret.name = "Negev";
                 break;
             case "smokinggun":
                 ret.attackPower = 0;
                 ret.durability = 0;
-                ret.mpCost = 0;
                 ret.name = "Smoking Gun";
                 break;
             case "vape":
                 ret.attackPower = 0;
                 ret.durability = 0;
                 ret.name = "Vape";
+                break;
+            case "ak":
+                ret.attackPower = 0;
+                ret.durability = 0;
+                ret.name = "AK-47";
+                break;
+            case "dsword":
+                ret.attackPower = 0;
+                ret.durability = 0;
+                ret.name = "Diamond Sword";
+                break;
+            case "halogun":
+                ret.attackPower = 0;
+                ret.durability = 0;
+                ret.name = "Halo Gun";
+                break;
+            case "m4":
+                ret.attackPower = 0;
+                ret.durability = 0;
+                ret.name = "M4A4";
+                break;
+            case "smithwesson":
+                ret.attackPower = 0;
+                ret.durability = 0;
+                ret.name = "Smith Wesson";
                 break;
         }
         return ret;

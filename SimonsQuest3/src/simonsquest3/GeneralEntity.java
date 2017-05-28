@@ -9,6 +9,7 @@ import com.opengg.core.math.FastMath;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -20,14 +21,18 @@ public abstract class GeneralEntity {
     public List<Weapon> attacks;
     public double attackBuff;
     public double defenseBuff;
+    public double accuracy;
+    private Random rand;
     
-    protected GeneralEntity(double health,double attack, double defense, Weapon... attacks) {
+    protected GeneralEntity(double health,double attack,double defense,double accuracy, Weapon... attacks) {
         this.health = health;
         this.maxHealth = health;
         this.attacks = new ArrayList<>();
+        this.accuracy = accuracy;
         this.attackBuff = attack;
         this.defenseBuff = defense;
         this.attacks.addAll(Arrays.asList(attacks));
+        this.rand = new Random();
     }
     
     public void addAttack(Weapon attack) {
@@ -40,16 +45,23 @@ public abstract class GeneralEntity {
                 restoreHealth(quant);
                 break;
             case ATTACK:
-                attackBuff += quant;
+                attackBuff = FastMath.clamp(attackBuff + quant,0,300);
                 break;
             case DEFENSE:
-                defenseBuff += quant;
+                defenseBuff = FastMath.clamp(defenseBuff + quant,0,300);
+                break;
+            case ACCURACY:
+                accuracy = FastMath.clamp(accuracy + quant,0,100);
                 break;
         }
     }
     
     public void damage(double amount) {
         health = FastMath.clamp(health - amount/(defenseBuff/100), 0, maxHealth);
+    }
+    
+    protected boolean isHit() {
+        return rand.nextInt() % 100 < accuracy;
     }
     
     public void restoreHealth(double amount) {
