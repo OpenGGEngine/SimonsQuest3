@@ -11,6 +11,7 @@ import com.opengg.core.engine.WorldEngine;
 import com.opengg.core.math.FastMath;
 import com.opengg.core.math.Quaternionf;
 import com.opengg.core.math.Vector3f;
+import com.opengg.core.model.Model;
 import com.opengg.core.model.ModelLoader;
 import com.opengg.core.render.light.Light;
 import com.opengg.core.render.shader.Program;
@@ -42,6 +43,8 @@ public class WorldCreator {
     static FreeFlyComponent fly;
     static Camera arenaCam;
     static WorldObject arena;
+    static ModelRenderComponent e1, e2, e3;
+    static int day = 0;
     public static void create(){
         ShaderController.loadShader("newterrainfrag", Resource.getShaderPath("newterrain.frag"), Program.FRAGMENT);
         ShaderController.use("mainvert", "newterrainfrag");
@@ -83,6 +86,18 @@ public class WorldCreator {
         playerview.setPositionOffset(new Vector3f(-1.3f,0,0));
         playerview.setRotationOffset(new Quaternionf(new Vector3f(0,70,0)));
         arena.attach(playerview);
+        e1 = new ModelRenderComponent();
+        e1.setPositionOffset(new Vector3f(1f,0,-1));
+        e1.setRotationOffset(new Quaternionf(new Vector3f(0,-70,0)));
+        e2 = new ModelRenderComponent();
+        e2.setPositionOffset(new Vector3f(1.3f,0,0));
+        e2.setRotationOffset(new Quaternionf(new Vector3f(0,-70,0)));
+        e3 = new ModelRenderComponent();
+        e3.setPositionOffset(new Vector3f(2f,0,1));
+        e3.setRotationOffset(new Quaternionf(new Vector3f(0,-70,0)));
+        arena.attach(e1);
+        arena.attach(e2);
+        arena.attach(e3);
         WorldEngine.getCurrent().attach(arena);
         
         LightComponent warlight = new LightComponent(new Light(new Vector3f(0,4020,-3000), new Vector3f(1), 300,0));
@@ -119,6 +134,21 @@ public class WorldCreator {
         }       
         RenderEngine.setSkybox(new Skybox(Cubemap.get(Resource.getTexturePath("skybox\\bluecloud")), 4500f));
         WorldEngine.useWorld(WorldEngine.getCurrent());
+    }
+    
+    public static void addEnemyInRing(Model model, int slot){
+        if(slot == 1)
+            e1.setModel(model);
+        if(slot == 2)
+            e2.setModel(model);
+        if(slot == 3)
+            e3.setModel(model);
+    }
+    
+    public static void clearRingEnemies(){
+        e1.setDrawable(null);
+        e2.setDrawable(null);
+        e3.setDrawable(null);
     }
     
     public static void enableBattle(){
