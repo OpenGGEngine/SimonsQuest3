@@ -22,6 +22,8 @@ public class StoreStuff {
         faker.add("medkit");
         pricesstore.put("mountaindew", 20);
         faker.add("mountaindew");
+        pricesstore.put("honey", 80);
+        faker.add("honey");
         hotel.put("Yes I Want to Stay", 20);
     }
 }

@@ -6,6 +6,7 @@
 package simonsquest3;
 
 import com.opengg.core.math.FastMath;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import simonsquest3.Effect.enumEffect;
@@ -16,6 +17,7 @@ import simonsquest3.Effect.enumEffect;
  */
 public class Player extends GeneralEntity implements Cloneable{
     public HashMap<Item, Integer> items;
+    public ArrayList<Item> wowwee = new ArrayList<>();
     public int money = 100;
     
     public Player(double health,int mana) {
@@ -29,9 +31,21 @@ public class Player extends GeneralEntity implements Cloneable{
     public void addItem(Item item) {
         if(items.get(item) == null){
             items.put(item, 1);
+            wowwee.add(item);
         }else{
             items.put(item, items.get(item) + 1);
         }
+    }
+    public Item reduceItem(int nukes){
+        Item i = wowwee.get(nukes);
+        int d = items.get(i);
+        d--;
+        if(d==0){
+            items.remove(i);
+            wowwee.remove(i);
+            
+        }
+        return i;
     }
     
     public Map.Entry<Attack,Integer> waitForChoice() {

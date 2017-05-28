@@ -54,7 +54,7 @@ public class GUIMaster implements KeyboardListener {
     public static GGFont font = new GGFont("C:/res/test.png", "C:/res/test.fnt");
     public static GUIText text = new GUIText(new Text("Black Market", new Vector2f(), 4f, 1f, false), font, new Vector2f(0.9f, 0));
     public static GUIText text1 = new GUIText(new Text("Money:" + 100, new Vector2f(), 0.25f, 1f, false), font, new Vector2f(0, -0.05f));
-    public static GUIText text2 = new GUIText(new Text( SimonsQuest3.p.health+"/"+ SimonsQuest3.p.maxHealth +"  Money: " + SimonsQuest3.p.money, new Vector2f(), 0.8f, 1.1f, false), font,
+    public static GUIText text2 = new GUIText(new Text( SimonsQuest3.p.health+"/"+ SimonsQuest3.p.maxHealth +"  Money: " + SimonsQuest3.p.money, new Vector2f(), 1.5f, 1.1f, false), font,
             new Vector2f(0.85f, -0.11f));
 
     public static GUIBar mana = new GUIBar(Texture.get(Resource.getTexturePath("/gui/EmptyBar.png")), Texture.get(Resource.getTexturePath("/gui/BlueBar.png")), new Vector2f(-0.7f, 0.6f), new Vector2f(0.5f, 0.1f),100);
