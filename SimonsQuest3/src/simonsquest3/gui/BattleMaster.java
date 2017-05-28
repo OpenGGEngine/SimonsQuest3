@@ -44,6 +44,7 @@ public class BattleMaster {
     public static GUITexture pointer = new GUITexture(Texture.get(Resource.getTexturePath("gui/arrow.png")), new Vector2f(-0.95f, -0.55f), new Vector2f(0.05f, 0.05f));
     public static List<Attack> memeList = new ArrayList<>();
     public static List<Attack> weaponList = new ArrayList<>();
+    public static GUIBar health = new GUIBar(Texture.get(Resource.getTexturePath("/gui/EmptyBar.png")), Texture.get(Resource.getTexturePath("/gui/RedBar.png")), new Vector2f(1.2f, 0.8f), new Vector2f(0.5f, 0.1f),100);
 
     public static void init() {
         GUI.root.addItem("battle", main);
@@ -63,6 +64,7 @@ public class BattleMaster {
         main.addItem("items", items);
         main.addItem("weapons", weapons);
         main.addItem("memes", memes);
+         main.addItem("health", health);
         regenItems();
         regenWeapons();
         regenMemes();
@@ -194,5 +196,7 @@ public class BattleMaster {
             menupointer2 = 0;
             pointer.setPositionOffset(new Vector2f(-0.95f, -0.55f - (menupointer * 0.10f)));
         }
+        health.fullnum = SimonsQuest3.battlec.curbattle.enemies.get(0).maxHealth;
+        health.actualnum = SimonsQuest3.battlec.curbattle.enemies.get(0).health;
     }
 }

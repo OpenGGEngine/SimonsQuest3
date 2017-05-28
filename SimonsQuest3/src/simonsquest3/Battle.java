@@ -19,7 +19,7 @@ import simonsquest3.gui.BattleMaster;
  */
 public class Battle {
     Player player;
-    List<Enemy> enemies;
+    public List<Enemy> enemies;
     List<Enemy> prelimEnemies;
     Player prelimPlayer;
     int turn = 0;
