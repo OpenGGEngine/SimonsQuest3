@@ -46,7 +46,10 @@ public abstract class GeneralEntity {
     public void useEffect(Effect effect) {
         switch (effect.stat) {
             case HEALTH:
-                health = FastMath.clamp(health + effect.quant, 0, maxHealth);
+                if (effect.quant < 0)
+                    damage(effect.quant);
+                else 
+                    health = FastMath.clamp(health + effect.quant, 0, maxHealth);
                 break;
             case ATTACK:
                 attackBuff = FastMath.clamp(attackBuff + effect.quant,0,300);

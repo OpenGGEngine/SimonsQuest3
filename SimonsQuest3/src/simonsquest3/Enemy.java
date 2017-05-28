@@ -50,24 +50,24 @@ public class Enemy extends GeneralEntity implements Cloneable{
             }
         }
         if (healthPercent < 0.10) {
-            attack = maxAttack(enumEffect.HEALTH,-1,attackEnemy);
+            attack = maxAttack(enumEffect.HEALTH,-1,attackEnemy,true);
         }
         else {
             double val = (healthPercent*0.53) + (enemyHealthPercent * 0.27) + (defenseBuff/200 * 0.1) + (attackBuff/200 * 0.1);
             if(val > 0.9) {
-                attack = maxAttack(enumEffect.HEALTH,-1,attackEnemy);
+                attack = maxAttack(enumEffect.HEALTH,-1,attackEnemy,false);
             }
             if (val > 0.8 && attack == null) {
-                attack = maxAttack(enumEffect.ATTACK,1,selfEffects);
+                attack = maxAttack(enumEffect.ATTACK,1,selfEffects,true);
             }
             if (val > 0.7 && attack == null) {
-                attack = maxAttack(enumEffect.DEFENSE,1,selfEffects);
+                attack = maxAttack(enumEffect.DEFENSE,1,selfEffects,true);
             }
             if (val > 0.3 && attack == null) {
-                attack = maxAttack(enumEffect.HEALTH,-1,attackEnemy);
+                attack = maxAttack(enumEffect.HEALTH,-1,attackEnemy,true);
             }
             else if (attack == null) {
-                attack = maxAttack(enumEffect.HEALTH,1,selfEffects);
+                attack = maxAttack(enumEffect.HEALTH,1,selfEffects,true);
             }
         }
         if (attack != null) {
@@ -77,13 +77,20 @@ public class Enemy extends GeneralEntity implements Cloneable{
         return attack;
     }
     
-    private Attack maxAttack(enumEffect ef, int mult, HashMap<enumEffect,List<Attack>> map) {
+    private Attack maxAttack(enumEffect ef, int mult, HashMap<enumEffect,List<Attack>> map,boolean useAcc) {
         double maxDamage = Double.MIN_VALUE;
         Attack attack = null;
         for (Attack a : map.get(enumEffect.HEALTH)) {
-            if (a.attackPower*mult > maxDamage) {
-                maxDamage = a.attackPower;
-                attack = a;
+            if (!useAcc) {
+                if ((a.attackPower*mult) > maxDamage) {
+                    maxDamage = a.attackPower;
+                    attack = a;
+                }
+            } else {
+                if ((a.attackPower*mult)*0.75 + a.accuracy*0.25 > maxDamage) {
+                    maxDamage = a.attackPower;
+                    attack = a;
+                }
             }
         }
         return attack;
