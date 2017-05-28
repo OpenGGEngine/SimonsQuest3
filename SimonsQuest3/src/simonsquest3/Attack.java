@@ -17,15 +17,17 @@ import simonsquest3.Effect.enumEffect;
  * @author Ethan Mak
  */
 public class Attack implements Cloneable{
-    int mpCost;
-    double attackPower;
-    EffectList statusEffects;
-    double durability;
-    int accuracy;
-    String name;
+    public boolean shitty;
+    public int mpCost;
+    public double attackPower;
+    public EffectList statusEffects;
+    public double durability;
+    public int accuracy;
+    public String name;
     Random rand;
     
-    public Attack(String name, int mpCost, double attackPower, double durability, int accuracy) {
+    
+    public Attack(String name, int mpCost, double attackPower, double durability, int accuracy,boolean shitty) {
         this.name = name;
         this.mpCost = mpCost;
         this.attackPower = attackPower;
@@ -33,10 +35,11 @@ public class Attack implements Cloneable{
         this.accuracy = accuracy;
         statusEffects = new EffectList();
         rand = new Random();
+        this.shitty = shitty;
     }
     
-    public Attack(String name) {
-        this(name, 0, 0, 0, 0);
+    public Attack(String name,boolean shite) {
+        this(name, 0, 0, 0, 0,shite);
     }
     
     public EffectList use(double amount) {
@@ -70,7 +73,7 @@ public class Attack implements Cloneable{
     
     @Override
     public Attack clone() {
-        Attack ret = new Attack(name,mpCost,attackPower,durability,accuracy);
+        Attack ret = new Attack(name,mpCost,attackPower,durability,accuracy,this.shitty);
         ret.statusEffects.addAll(statusEffects);
         return ret;
     }
