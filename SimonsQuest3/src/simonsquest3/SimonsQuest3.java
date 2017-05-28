@@ -49,6 +49,7 @@ public class SimonsQuest3 extends GGApplication{
         WorldCreator.create();
         m = new GUIMaster();
         GUIMaster.init();
+        GUIMaster.town.setEnabled(false);
         Soundtrack overworldday = new Soundtrack();
         overworldday.addSong(Resource.getSoundPath("windgarden.ogg"));
         overworldday.addSong(Resource.getSoundPath("floaterland.ogg"));
@@ -58,7 +59,6 @@ public class SimonsQuest3 extends GGApplication{
         p = new Player(100,100);
         
         GGConsole.addListener(new SimonConsole());
-        
         
         BindController.addBind(ControlType.KEYBOARD, "forward", KEY_W);
         BindController.addBind(ControlType.KEYBOARD, "backward", KEY_S);
