@@ -27,8 +27,8 @@ import simonsquest3.gui.GUIMaster;
  */
 public class SimonsQuest3 extends GGApplication{
     GUIMaster m;
-    static Player p;
-    static BattleController battlec;
+    public static Player p;
+    public static BattleController battlec;
     /**
      * @param args the command line arguments
      */

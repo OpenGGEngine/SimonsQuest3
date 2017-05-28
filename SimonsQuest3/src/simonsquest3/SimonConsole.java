@@ -38,6 +38,5 @@ public class SimonConsole implements ConsoleListener{
                 WorldCreator.simon.use();
             }
         }
-    }
-    
+    }   
 }
