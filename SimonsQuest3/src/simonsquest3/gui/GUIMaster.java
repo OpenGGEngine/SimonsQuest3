@@ -29,7 +29,7 @@ import simonsquest3.SimonsQuest3;
  * @author Warren
  */
 public class GUIMaster implements KeyboardListener {
-
+    
     static float xonscreen = 0;
     static int storepointer = 0;
     public static GUIGroup town = new GUIGroup(new Vector2f());
@@ -115,7 +115,9 @@ public class GUIMaster implements KeyboardListener {
     }
 
     public static void update() {
-        System.out.println(xonscreen);
+        if(!town.enabled)
+            return;
+        
         if (KeyboardController.isKeyPressed(Key.KEY_RIGHT)) {
             xonscreen -= 0.04f;
             town.getItem("simons").setPositionOffset(new Vector2f(xonscreen, -0.4f));

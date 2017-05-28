@@ -35,15 +35,16 @@ public class BattleMaster {
     public static GUITexture pointer = new GUITexture(Texture.get(Resource.getTexturePath("gui/arrow.png")),new Vector2f(-0.95f,-0.55f),new Vector2f(0.10f,0.10f));
     public static void init(){
         GUI.root.addItem("battle", main);
-        selection.addItem("Memes",new GUIText(new Text("Memes",new Vector2f(), 1.6f, 1f, false), font, new Vector2f(0.2f,-1.45f)));
-        selection.addItem("Weapons",new GUIText(new Text("Weapons",new Vector2f(), 1.6f, 1f, false), font, new Vector2f(0.2f,-1.55f)));
-        selection.addItem("Items",new GUIText(new Text("Items",new Vector2f(), 1.6f, 1f, false), font, new Vector2f(0.2f,-1.65f)));
-        selection.addItem("Run",new GUIText(new Text("Run",new Vector2f(), 1.6f, 1f, false), font, new Vector2f(0.2f,-1.75f)));
+        selection.addItem("Memes",new GUIText(new Text("Memes",new Vector2f(), 1.3f, 1f, false), font, new Vector2f(0.2f,-1.45f)));
+        selection.addItem("Weapons",new GUIText(new Text("Weapons",new Vector2f(), 1.3f, 1f, false), font, new Vector2f(0.2f,-1.55f)));
+        selection.addItem("Items",new GUIText(new Text("Items",new Vector2f(), 1.3f, 1f, false), font, new Vector2f(0.2f,-1.65f)));
+        selection.addItem("Run",new GUIText(new Text("Run",new Vector2f(), 1.3f, 1f, false), font, new Vector2f(0.2f,-1.75f)));
         
         main.addItem("select", select);
         main.addItem("hacks", mainmenu);
         main.addItem("selecttext", selection);
         pointer.setLayer(0.5f);
+        items.enabled = false;
         main.addItem("pointer", pointer);
         main.addItem("items", items);
         regenItems();
@@ -51,8 +52,9 @@ public class BattleMaster {
     public static void regenItems(){
         int counter = 0;
         for(Item i:SimonsQuest3.p.items.keySet()){
-            items.addItem(i.name, new GUIText(new Text(i.name + ": "+ SimonsQuest3.p.items.get(i),new Vector2f(), 1.6f, 1f, false), font, new Vector2f(0.1f + ((counter%4
-                    )*-0.1f),-1f)));
+            items.addItem(i.name, new GUIText(new Text(i.name + ": "+ SimonsQuest3.p.items.get(i),new Vector2f(), 1f, 1f, false), font, new Vector2f(0.6f + ((counter%4
+                    )*0.35f),-1.45f-(0.2f * (counter/4)))));
+            counter++;
         }
     }
     public static void update(){
@@ -80,12 +82,18 @@ public class BattleMaster {
                      case 1:
                      break;
                          case 2:
-                             
+                             items.enabled = true;
                      break;
                              case 3:
+                                 
                      break;
              }
              }
+         }
+         if (KeyboardController.isKeyPressed(Key.KEY_ESCAPE)) {
+             items.enabled = false;
+             pointer.enabled = true;
+             inmain = true;
          }
     }
 }

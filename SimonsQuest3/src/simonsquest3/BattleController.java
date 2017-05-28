@@ -12,6 +12,7 @@ import com.opengg.core.world.components.triggers.Trigger;
 import com.opengg.core.world.components.triggers.TriggerInfo;
 import com.opengg.core.world.components.triggers.Triggerable;
 import java.util.List;
+import simonsquest3.gui.GUIMaster;
 
 /**
  *
@@ -40,7 +41,11 @@ public class BattleController implements Triggerable{
                     WorldCreator.addEnemyInRing(((WorldEnemy)temp.thiscollider.parent.parent).model.getModel(), 1);
                     WorldCreator.enableBattle();
                 }
-            }  
+            }else if(temp.other.parent instanceof TownComponent){
+                GUIMaster.store.setEnabled(true);
+            }else if(temp.thiscollider.parent instanceof TownComponent){
+                GUIMaster.store.setEnabled(true);
+            }
         }
     }
 

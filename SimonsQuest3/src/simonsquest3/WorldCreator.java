@@ -132,6 +132,24 @@ public class WorldCreator {
             }while(!validPos);            
             spawner.spawnEnemy(3);
         }       
+        
+        for(int i = 0; i < 4; i++){
+            boolean complete = false;
+            Vector3f pos = new Vector3f();
+            do{
+                Vector3f npos = new Vector3f(FastMath.random(WORLDSIZE)-WORLDSIZE/2,0,FastMath.random(WORLDSIZE)-WORLDSIZE/2);
+                Vector3f normal = world.getNormalAt(npos);
+                if(world.getHeightAt(npos) > 250){
+                    System.out.println(normal);
+                    pos = new Vector3f(npos.x, world.getHeightAt(npos), npos.z);
+                    complete = true;
+                }
+                
+            }while(!complete);
+            TownComponent town = new TownComponent(pos);
+            WorldEngine.getCurrent().attach(town);
+        }
+        
         RenderEngine.setSkybox(new Skybox(Cubemap.get(Resource.getTexturePath("skybox\\bluecloud")), 4500f));
         WorldEngine.useWorld(WorldEngine.getCurrent());
     }
