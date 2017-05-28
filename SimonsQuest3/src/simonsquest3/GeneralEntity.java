@@ -18,13 +18,15 @@ import java.util.Random;
 public abstract class GeneralEntity {
     public double health;
     public double maxHealth;
-    public List<Weapon> attacks;
+    public List<Attack> attacks;
     public double attackBuff;
     public double defenseBuff;
     public double accuracy;
+    public int mana;
+    public int maxMana;
     private Random rand;
     
-    protected GeneralEntity(double health,double attack,double defense,double accuracy, Weapon... attacks) {
+    protected GeneralEntity(double health,double attack,double defense,double accuracy,int mana, Attack... attacks) {
         this.health = health;
         this.maxHealth = health;
         this.attacks = new ArrayList<>();
@@ -32,10 +34,12 @@ public abstract class GeneralEntity {
         this.attackBuff = attack;
         this.defenseBuff = defense;
         this.attacks.addAll(Arrays.asList(attacks));
+        this.mana = mana;
+        this.maxMana = mana;
         this.rand = new Random();
     }
     
-    public void addAttack(Weapon attack) {
+    public void addAttack(Attack attack) {
         this.attacks.add(attack);
     }
     
@@ -52,6 +56,9 @@ public abstract class GeneralEntity {
                 break;
             case ACCURACY:
                 accuracy = FastMath.clamp(accuracy + effect.quant,0,100);
+                break;
+            case CHANGE_MP:
+                mana = FastMath.clamp(mana + (int)effect.quant, 0, maxMana);
                 break;
         }
     }

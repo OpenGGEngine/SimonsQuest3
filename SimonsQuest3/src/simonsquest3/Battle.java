@@ -32,12 +32,12 @@ public class Battle {
         this.enemies.addAll(Arrays.asList(enemies));
     }
     
-    public Weapon battleTurn() {
-        Weapon used;
+    public Attack battleTurn() {
+        Attack used;
         int target;
         switch (turn) {
             case 0:
-                Map.Entry<Weapon, Integer> temp = player.waitForChoice();
+                Map.Entry<Attack, Integer> temp = player.waitForChoice();
                 used = temp.getKey();
                 target = temp.getValue();
                 break;

@@ -16,7 +16,7 @@ import simonsquest3.Effect.enumEffect;
  *
  * @author Ethan Mak
  */
-public class Weapon implements Cloneable{
+public class Attack implements Cloneable{
     int mpCost;
     double attackPower;
     EffectList statusEffects;
@@ -25,7 +25,7 @@ public class Weapon implements Cloneable{
     String name;
     Random rand;
     
-    public Weapon(String name, int mpCost, double attackPower, double durability, int accuracy) {
+    public Attack(String name, int mpCost, double attackPower, double durability, int accuracy) {
         this.name = name;
         this.mpCost = mpCost;
         this.attackPower = attackPower;
@@ -35,7 +35,7 @@ public class Weapon implements Cloneable{
         rand = new Random();
     }
     
-    public Weapon(String name) {
+    public Attack(String name) {
         this(name, 0, 0, 0, 0);
     }
     
@@ -69,8 +69,8 @@ public class Weapon implements Cloneable{
     }
     
     @Override
-    public Weapon clone() {
-        Weapon ret = new Weapon(name,mpCost,attackPower,durability,accuracy);
+    public Attack clone() {
+        Attack ret = new Attack(name,mpCost,attackPower,durability,accuracy);
         ret.statusEffects.addAll(statusEffects);
         return ret;
     }
