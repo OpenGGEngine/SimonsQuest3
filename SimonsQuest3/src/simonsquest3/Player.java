@@ -15,14 +15,14 @@ import java.util.Map;
  */
 public class Player extends GeneralEntity{
     public HashMap<Item, Integer> items;
-    public int money;
+    public int money = 100;
     public int mana;
     public int maxMana;
     
     public Player(double health,int mana) {
         super(health,100,100,80);
         items = new HashMap<>();
-        money = 0;
+        money = 100;
         this.mana = mana;
         maxMana = mana;
     }
