@@ -14,7 +14,7 @@ import com.opengg.core.model.ModelLoader;
  * @author Ethan Mak
  */
 public class EnemyFactory {
-    static int enemycount = 6;
+    public static int enemycount = 6;
     public static Enemy generateEnemy(String name) {
         Enemy ret = new Enemy(name,0,100,100,100);
         switch (name) {

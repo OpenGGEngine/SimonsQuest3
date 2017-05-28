@@ -29,10 +29,10 @@ import com.opengg.core.world.components.physics.PhysicsComponent;
  * @author Javier
  */
 public class SimonComponent extends Component implements Actionable{
-    private final PhysicsComponent playerphysics;
-    private final UserControlComponent controller;
-    private final CameraComponent camera;
-    private final ModelRenderComponent player;
+    PhysicsComponent playerphysics;
+    UserControlComponent controller;
+    CameraComponent camera;
+    ModelRenderComponent player;
     
     Vector3f control = new Vector3f();
     Vector3f controlrot = new Vector3f();
@@ -151,7 +151,7 @@ public class SimonComponent extends Component implements Actionable{
     }
     
     public void use(){
-        BindController.addController(controller);
+        BindController.setOnlyController(controller);
         camera.use();
     }
     
