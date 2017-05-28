@@ -5,6 +5,7 @@
  */
 package simonsquest3;
 
+import com.opengg.core.math.FastMath;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -70,7 +71,14 @@ public class Battle {
                 turn++;
             }
         }else{
-            //AI
+            for(Enemy e : enemies){
+                Attack attack = e.attacks.get(FastMath.random(e.attacks.size()-1));
+                for(Effect effe : attack.statusEffects)
+                    if(!effe.useOnOneself)
+                        player.useEffect(effe);
+                player.useEffect(new Effect(enumEffect.HEALTH, -attack.attackPower, false));  
+            }
+            turn++;
         }
     }
     
