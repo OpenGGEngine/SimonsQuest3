@@ -6,6 +6,7 @@
 package simonsquest3.gui;
 
 import com.opengg.core.engine.Resource;
+import com.opengg.core.engine.WorldEngine;
 import com.opengg.core.gui.GUI;
 import com.opengg.core.gui.GUIGroup;
 import com.opengg.core.gui.GUIItem;
@@ -215,6 +216,14 @@ public class GUIMaster implements KeyboardListener {
                 town.addItem("townbackground", townback);
                 store.enabled = false;
                 instore = false;
+            }else{
+                town.enabled = false;
+                WorldEngine.getCurrent().setEnabled(true);
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+             
             }
         }
 

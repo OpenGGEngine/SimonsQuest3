@@ -15,6 +15,8 @@ import com.opengg.core.io.input.keyboard.KeyboardController;
 import com.opengg.core.math.Vector2f;
 import com.opengg.core.render.Text;
 import com.opengg.core.render.texture.Texture;
+import java.util.ArrayList;
+import java.util.List;
 import simonsquest3.Attack;
 import simonsquest3.Item;
 import simonsquest3.SimonsQuest3;
@@ -26,9 +28,10 @@ import static simonsquest3.gui.GUIMaster.font;
  */
 public class BattleMaster {
     public static int menupointer = 0;
+    public static int menupointer2 = 0;
     public static boolean initem = false;
     public static boolean inmain = true;
-     public static GUIGroup main = new GUIGroup(new Vector2f());
+    public static GUIGroup main = new GUIGroup(new Vector2f());
     public static GUIGroup selection = new GUIGroup(new Vector2f());
     public static GUIGroup items = new GUIGroup(new Vector2f());
     public static GUIGroup weapons = new GUIGroup(new Vector2f());
@@ -36,6 +39,9 @@ public class BattleMaster {
     public static GUITexture select = new GUITexture(Texture.get(Resource.getTexturePath("gui/menuselect.png")),new Vector2f(-1,-1),new Vector2f(0.5f,0.60f));
     public static GUITexture mainmenu = new GUITexture(Texture.get(Resource.getTexturePath("gui/bigmenu.png")),new Vector2f(-0.5f,-1),new Vector2f(1.5f,0.60f));
     public static GUITexture pointer = new GUITexture(Texture.get(Resource.getTexturePath("gui/arrow.png")),new Vector2f(-0.95f,-0.55f),new Vector2f(0.10f,0.10f));
+    public static List<Attack> memeList = new ArrayList<>();
+    public static List<Attack> weaponList = new ArrayList<>();
+    
     public static void init(){
         GUI.root.addItem("battle", main);
         selection.addItem("Memes",new GUIText(new Text("Memes",new Vector2f(), 1.3f, 1f, false), font, new Vector2f(0.2f,-1.45f)));
@@ -58,6 +64,7 @@ public class BattleMaster {
         regenWeapons();
         regenMemes();
     }
+    
     public static void regenItems(){
         int counter = 0;
         for(Item i:SimonsQuest3.p.items.keySet()){
@@ -66,6 +73,7 @@ public class BattleMaster {
             counter++;
         }
     }
+    
     public static void regenWeapons(){
         int counter = 0;
         for(Attack i:SimonsQuest3.p.attacks){
@@ -75,9 +83,9 @@ public class BattleMaster {
                     )*0.40f),-1.45f-(0.2f * (counter/4)))));
             counter++;
             }
-        }
-        
+        }     
     }
+    
     public static void regenMemes(){
         int counter = 0;
         for(Attack i:SimonsQuest3.p.attacks){
@@ -87,9 +95,9 @@ public class BattleMaster {
                     )*0.40f),-1.45f-(0.2f * (counter/4)))));
             counter++;
             }
-        }
-        
+        } 
     }
+    
     public static void update(){
          if (KeyboardController.isKeyPressed(Key.KEY_UP)) {
              menupointer--;

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import simonsquest3.Effect.enumEffect;
+import simonsquest3.gui.BattleMaster;
 
 /**
  *
@@ -20,6 +22,7 @@ public class Battle {
     List<Enemy> prelimEnemies;
     Player prelimPlayer;
     int turn = 0;
+    boolean chosen = false;
     
     public Battle(Player player) {
         this.player = player;
@@ -34,36 +37,36 @@ public class Battle {
         this.enemies.addAll(Arrays.asList(enemies));
     }
     
-    public boolean battleTurn() {
-        Attack used;
-        int target;
-        switch (turn) {
-            case 0:
-                Map.Entry<Attack, Integer> temp = player.waitForChoice();
-                used = temp.getKey();
-                target = temp.getValue();
-                break;
-            default:
-                used = enemies.get(turn-1).attack(player.health);
-                target = 0;
-                break;
+    public void update() {
+
+        if(turn % 2 == 0){
+            Attack attack = AttackFactory.generateAttack("dsword");
+            if(!chosen){
+                return;
+            }else{
+                int pointer = BattleMaster.menupointer;
+                if(pointer == 0){
+                    attack = BattleMaster.memeList.get(BattleMaster.menupointer2);
+                }else if(pointer == 1){
+                    attack = BattleMaster.weaponList.get(BattleMaster.menupointer2);
+                }else{
+                    attack = null;
+                }
+                
+                if(attack != null){
+                    for(Effect e : attack.statusEffects) {
+                        if (!e.useOnOneself)
+                            for (Enemy en : enemies)
+                                en.useEffect(e);
+                    }
+                    for (Enemy en : enemies)
+                                en.useEffect(new Effect(enumEffect.HEALTH, -attack.attackPower, false));
+                }
+                turn++;
+            }
+        }else{
+            //AI
         }
-        if (used == null)
-            return false;
-        if (used.name.equals("default"))
-            return true;
-        List<Effect> effects = used.use(turn == 0? 0 : 1, (turn == 0));
-        if (turn > 0) {
-            for (Effect e : effects)
-                if (!e.useOnOneself)
-                    player.useEffect(e);
-        } else {
-            for (Effect e : effects)
-                if (!e.useOnOneself)
-                    enemies.get(target - 1).useEffect(e);
-        }
-        updatePlayer();
-        return false;
     }
     
     public void init() {
@@ -72,23 +75,6 @@ public class Battle {
         for (Enemy e : enemies) {
             prelimEnemies.add(e.clone());
         }
-    }
-    
-    public void run() {
-        init();
-        boolean shouldStop = false;
-        while (true) {
-           shouldStop = shouldStop || player.health <= 0;
-           if (!shouldStop)
-                for (Enemy e : enemies) {
-                    shouldStop = e.health <= 0 && shouldStop;
-                }
-           if (shouldStop)
-               break;
-           if (battleTurn())
-               break;
-        }
-        close();
     }
     
     public void close() {

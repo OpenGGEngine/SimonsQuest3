@@ -19,7 +19,8 @@ import simonsquest3.gui.GUIMaster;
  * @author Javier
  */
 public class BattleController implements Triggerable{
-
+    Battle curbattle;
+    
     @Override
     public void onTrigger(Trigger source, TriggerInfo info) {
         if(source instanceof CollisionComponent){
@@ -31,6 +32,7 @@ public class BattleController implements Triggerable{
                 if(temp.thiscollider.parent.parent instanceof SimonComponent){
                     Battle b = new Battle(SimonsQuest3.p);
                     b.addEnemies(((WorldEnemy)temp.other.parent.parent).stats);
+                    b.init();
                     WorldCreator.addEnemyInRing(((WorldEnemy)temp.other.parent.parent).model.getModel(), 1);
                     WorldCreator.enableBattle();
                 }
@@ -38,6 +40,7 @@ public class BattleController implements Triggerable{
                 if(temp.thiscollider.parent.parent instanceof WorldEnemy){
                     Battle b = new Battle(SimonsQuest3.p);
                     b.addEnemies(((WorldEnemy)temp.thiscollider.parent.parent).stats);
+                    b.init();
                     WorldCreator.addEnemyInRing(((WorldEnemy)temp.thiscollider.parent.parent).model.getModel(), 1);
                     WorldCreator.enableBattle();
                 }
@@ -54,11 +57,13 @@ public class BattleController implements Triggerable{
             if(temp.other.parent instanceof BossLair){
                 Battle b = new Battle(SimonsQuest3.p);
                 b.addEnemies(((BossLair)temp.other.parent).boss);
+                b.init();
                 WorldCreator.addEnemyInRing(((BossLair)temp.other.parent).boss.model, 2);
                 WorldCreator.enableBattle();
             }else if(temp.thiscollider.parent instanceof BossLair){
                 Battle b = new Battle(SimonsQuest3.p);
                 b.addEnemies(((BossLair)temp.thiscollider.parent).boss);
+                b.init();
                 WorldCreator.addEnemyInRing(((BossLair)temp.thiscollider.parent).boss.model, 2);
                 WorldCreator.enableBattle();
             }
@@ -68,5 +73,10 @@ public class BattleController implements Triggerable{
     @Override
     public void onSubscribe(Trigger trigger) {
         
+    }
+    
+    public void update(){
+        if(curbattle != null)
+            curbattle.update();
     }
 }
