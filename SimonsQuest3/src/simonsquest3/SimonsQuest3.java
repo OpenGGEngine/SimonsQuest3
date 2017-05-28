@@ -52,6 +52,7 @@ public class SimonsQuest3 extends GGApplication{
 
     @Override
     public void setup() {
+        p = new Player(100,100);
         battlec = new BattleController();
         WorldCreator.create();
         m = new GUIMaster();
@@ -63,7 +64,7 @@ public class SimonsQuest3 extends GGApplication{
         overworldday.addSong(Resource.getSoundPath("intogalaxy.ogg"));
         overworldday.shuffle();
         SoundtrackHandler.setSoundtrack(overworldday);
-        p = new Player(100,100);
+        
         p.addAttack(AttackFactory.generateWeapon("dsword"));
         p.addAttack(AttackFactory.generateWeapon("awp"));
         p.addItem(ItemFactory.generateItem("mountaindew"));

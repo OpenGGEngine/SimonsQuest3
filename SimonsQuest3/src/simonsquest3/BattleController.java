@@ -57,6 +57,7 @@ public class BattleController implements Triggerable{
             }
             
             if(temp.other.parent instanceof BossLair){
+                if(((BossLair)temp.other.parent).boss.health <= 0){return;};
                 Battle b = new Battle(SimonsQuest3.p);
                 b.addEnemies(((BossLair)temp.other.parent).boss);
                 b.init();
@@ -64,6 +65,7 @@ public class BattleController implements Triggerable{
                 WorldCreator.addEnemyInRing(((BossLair)temp.other.parent).boss.model, 2);
                 WorldCreator.enableBattle();
             }else if(temp.thiscollider.parent instanceof BossLair){
+                if(((BossLair)temp.thiscollider.parent).boss.health <= 0){return;};
                 Battle b = new Battle(SimonsQuest3.p);
                 b.addEnemies(((BossLair)temp.thiscollider.parent).boss);
                 b.init();

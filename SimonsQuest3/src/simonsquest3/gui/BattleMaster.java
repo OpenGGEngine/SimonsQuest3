@@ -44,14 +44,15 @@ public class BattleMaster {
     public static GUITexture pointer = new GUITexture(Texture.get(Resource.getTexturePath("gui/arrow.png")), new Vector2f(-0.95f, -0.55f), new Vector2f(0.05f, 0.05f));
     public static List<Attack> memeList = new ArrayList<>();
     public static List<Attack> weaponList = new ArrayList<>();
+    public static List<Item> itemList = new ArrayList<>();
     public static GUIBar health = new GUIBar(Texture.get(Resource.getTexturePath("/gui/EmptyBar.png")), Texture.get(Resource.getTexturePath("/gui/RedBar.png")), new Vector2f(0.4f, 0.8f), new Vector2f(0.5f, 0.1f),100);
 
     public static void init() {
         GUI.root.addItem("battle", main);
         selection.addItem("Memes", new GUIText(new Text("Memes", new Vector2f(), 1.3f, 1f, false), font, new Vector2f(0.2f, -1.45f)));
         selection.addItem("Weapons", new GUIText(new Text("Weapons", new Vector2f(), 1.3f, 1f, false), font, new Vector2f(0.2f, -1.55f)));
-        selection.addItem("Items", new GUIText(new Text("Items", new Vector2f(), 1.3f, 1f, false), font, new Vector2f(0.2f, -1.65f)));
-        selection.addItem("Run", new GUIText(new Text("Run", new Vector2f(), 1.3f, 1f, false), font, new Vector2f(0.2f, -1.75f)));
+        selection.addItem("Items", new GUIText(new Text("Items", new Vector2f(), 1.3f, 1f, false), font, new Vector2f(0.2f, -1.85f)));
+        selection.addItem("Run", new GUIText(new Text("Run", new Vector2f(), 1.3f, 1f, false), font, new Vector2f(0.2f, -1.95f)));
 
         main.addItem("select", select);
         main.addItem("hacks", mainmenu);
@@ -71,10 +72,12 @@ public class BattleMaster {
     }
 
     public static void regenItems() {
+        itemList.clear();
         int counter = 0;
         for (Item i : SimonsQuest3.p.items.keySet()) {
             items.addItem(i.name, new GUIText(new Text(i.name + ": " + SimonsQuest3.p.items.get(i), new Vector2f(), 1f, 1f, false), font, new Vector2f(0.6f + ((counter % 4) * 0.35f), -1.45f - (0.2f * (counter / 4)))));
             counter++;
+            itemList.add(i);
         }
     }
 

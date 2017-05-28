@@ -50,7 +50,7 @@ public class Battle {
                     attack = BattleMaster.weaponList.get(BattleMaster.menupointer2);
                 }else if(pointer == 2){
                     attack = null;
-                    Item i = SimonsQuest3.p.reduceItem(BattleMaster.menupointer2);
+                    Item i = BattleMaster.itemList.get(BattleMaster.menupointer2);
                     EffectList m = i.effects;
                     for(Effect d:m){
                         SimonsQuest3.p.useEffect(d);

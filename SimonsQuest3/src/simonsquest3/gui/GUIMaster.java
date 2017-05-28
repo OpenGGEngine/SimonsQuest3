@@ -141,9 +141,10 @@ public class GUIMaster implements KeyboardListener {
 
     public static void update() {
         if (!town.enabled) {
+            hud.enabled = true;
             return;
         }
-
+        hud.enabled = false;
         if (KeyboardController.isKeyPressed(Key.KEY_RIGHT)) {
             xonscreen -= 0.04f;
             town.getItem("simons").setPositionOffset(new Vector2f(xonscreen, -0.4f));

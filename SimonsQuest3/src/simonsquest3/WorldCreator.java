@@ -71,7 +71,7 @@ public class WorldCreator {
         
         fly = new FreeFlyComponent();
         
-        SunComponent sun = new SunComponent(Texture.get(Resource.getTexturePath("default.png")), 0, 0.1f);
+        SunComponent sun = new SunComponent(Texture.get(Resource.getTexturePath("default.png")), 0, 0.2f);
         WorldEngine.getCurrent().attach(sun);
         
         simon = new SimonComponent();
