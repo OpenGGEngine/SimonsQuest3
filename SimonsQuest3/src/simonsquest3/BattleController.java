@@ -50,6 +50,18 @@ public class BattleController implements Triggerable{
                 GUIMaster.town.setEnabled(true);
                 WorldEngine.getCurrent().setEnabled(false);
             }
+            
+            if(temp.other.parent instanceof BossLair){
+                Battle b = new Battle(SimonsQuest3.p);
+                b.addEnemies(((BossLair)temp.other.parent).boss);
+                WorldCreator.addEnemyInRing(((BossLair)temp.other.parent).boss.model, 2);
+                WorldCreator.enableBattle();
+            }else if(temp.thiscollider.parent instanceof BossLair){
+                Battle b = new Battle(SimonsQuest3.p);
+                b.addEnemies(((BossLair)temp.thiscollider.parent).boss);
+                WorldCreator.addEnemyInRing(((BossLair)temp.thiscollider.parent).boss.model, 2);
+                WorldCreator.enableBattle();
+            }
         }
     }
 
