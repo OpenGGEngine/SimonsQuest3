@@ -26,7 +26,8 @@ import java.util.logging.Logger;
  * @author Warren
  */
 public class GUIMaster implements KeyboardListener {
-
+    
+    
     static float xonscreen = 0;
     static int storepointer = 0; 
     public static GUIGroup town = new GUIGroup(new Vector2f());
@@ -35,12 +36,14 @@ public class GUIMaster implements KeyboardListener {
     public static GUIItem storeland = new GUITexture(Texture.get(Resource.getTexturePath("/gui/storeland.png")), new Vector2f(0.8f, -0.4f), new Vector2f(1f, 0.75f));
     public static GUIGroup store = new GUIGroup(new Vector2f());
      public static GUIGroup menustore = new GUIGroup(new Vector2f());
+     public static GUIGroup hud = new GUIGroup(new Vector2f());
     public static GUIItem vendor = new GUITexture(Texture.get(Resource.getTexturePath("/gui/boss.png")), new Vector2f(0.1f, -0.75f), new Vector2f(0.85f, 1.6f));
     public static GUIItem vendor2 = new GUITexture(Texture.get(Resource.getTexturePath("/gui/jedi.png")), new Vector2f(0.1f, -1f), new Vector2f(0.75f, 1.5f));
     public static GUIItem vendorback = new GUITexture(Texture.get(Resource.getTexturePath("/gui/storecounter.jpg")), new Vector2f(-1f, -1f), new Vector2f(2f, 2f));
     public static GUIItem townback = new GUITexture(Texture.get(Resource.getTexturePath("/gui/townbackground.png")), new Vector2f(-1, -1), new Vector2f(2, 2));
     public static GUIItem counter = new GUITexture(Texture.get(Resource.getTexturePath("/gui/counter.png")), new Vector2f(0f, -1), new Vector2f(1, 1));
     public static GUIItem pointer = new GUITexture(Texture.get(Resource.getTexturePath("/gui/pointer.png")), new Vector2f(-1f, 0.65f), new Vector2f(0.15f, 0.15f));
+    
     public static GGFont font = new GGFont("C:/res/test.png", "C:/res/test.fnt");
     public static GUIText text = new GUIText(new Text("Black Market",new Vector2f(), 4f, 1f, false), font, new Vector2f(0.9f,0));
     public static GUIText text1 = new GUIText(new Text("Money:" + 0,new Vector2f(), 2f, 1f, false), font, new Vector2f(0,-0.1f));
@@ -49,7 +52,9 @@ public class GUIMaster implements KeyboardListener {
     public static void init() {
         GUI.root.addItem("town", town);
         GUI.root.addItem("store", store);
-
+        GUI.root.addItem("hud", hud);
+        town.enabled = false;
+        
         town.addItem("townbackground", townback);
         town.addItem("simons", simonstatue);
         town.addItem("simon", simon);
@@ -71,6 +76,8 @@ public class GUIMaster implements KeyboardListener {
         }
         store.addItem("magic", menustore);
         store.addItem("money", text1);
+        hud.addItem("health", new GUIBar(Texture.get(Resource.getTexturePath("/gui/EmptyBar.png")),Texture.get(Resource.getTexturePath("/gui/RedBar.png")),
+        new Vector2f(0,0),new Vector2f(0.5f,0.2f)));
 
     }
 
