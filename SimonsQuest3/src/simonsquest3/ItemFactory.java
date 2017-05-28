@@ -5,6 +5,8 @@
  */
 package simonsquest3;
 
+import simonsquest3.Effect.enumEffect;
+
 /**
  *
  * @author Ethan Mak
@@ -15,26 +17,26 @@ public class ItemFactory {
        switch (name) {
            case "flashbang":
                ret.name = "Flashbang";
-               ret.addEffect(Effect.ESCAPE, 0);
+               ret.addEffect(new Effect(enumEffect.ESCAPE, 0, true));
                break;
            case "mountaindew":
                ret.name = "Mountain Dew";
-               ret.addEffect(Effect.ATTACK,1);
-               ret.addEffect(Effect.HEALTH, 1);
+               ret.addEffect(new Effect(enumEffect.ATTACK, 1, true));
+               ret.addEffect(new Effect(enumEffect.HEALTH, 1, true));
                break;
            case "honey":
                ret.name = "Ray liotta's Honey";
-               ret.addEffect(Effect.DEFENSE, 1);
-               ret.addEffect(Effect.HEALTH, 1);
+               ret.addEffect(new Effect(enumEffect.DEFENSE, 1, true));
+               ret.addEffect(new Effect(enumEffect.HEALTH, 1, true));
                break;
            case "medkit":
                ret.name = "Medkit";
-               ret.addEffect(Effect.HEALTH, 1);
+               ret.addEffect(new Effect(enumEffect.HEALTH, 1, true));
                break;
            case "deathsticks":
                ret.name = "Death Sticks";
-               ret.addEffect(Effect.HEALTH, 2);
-               ret.addEffect(Effect.DEFENSE, -1);
+               ret.addEffect(new Effect(enumEffect.ESCAPE, 2, true));
+               ret.addEffect(new Effect(enumEffect.DEFENSE, -1, true));
                break;
        }
        return ret;

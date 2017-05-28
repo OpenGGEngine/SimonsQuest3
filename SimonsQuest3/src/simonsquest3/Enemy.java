@@ -27,8 +27,10 @@ public class Enemy extends GeneralEntity implements Cloneable{
     
     public Weapon attack(double enemyHealth) {
         Weapon attack = null;
-        if (attack != null)
-            attack.statusEffects.put(Effect.DAMAGE, attack.statusEffects.get(Effect.DAMAGE) * (attackBuff/100));
+        if (attack != null) {
+            Effect effect = attack.statusEffects.get(Effect.enumEffect.HEALTH,false);
+            attack.statusEffects.add(effect.setQuant(effect.quant * (attackBuff/100)));
+        }
         return attack;
     }
     

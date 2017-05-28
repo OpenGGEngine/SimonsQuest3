@@ -34,23 +34,35 @@ public class Battle {
     
     public Weapon battleTurn() {
         Weapon used;
+        int target;
         switch (turn) {
             case 0:
-                used = player.waitForChoice();
+                Map.Entry<Weapon, Integer> temp = player.waitForChoice();
+                used = temp.getKey();
+                target = temp.getValue();
                 break;
             default:
                 used = enemies.get(turn-1).attack(player.health);
+                target = 0;
                 break;
         }
         if (used == null)
             return used;
-        Map<Effect, Double> effects = used.use(turn == 0? 0 : 1, (turn == 0));
+        List<Effect> effects = used.use(turn == 0? 0 : 1, (turn == 0));
         if (turn > 0) {
-            for (Map.Entry<Effect,Double> attack: effects.entrySet())
-                enemies.get(turn-1).useEffect(attack.getKey(),attack.getValue());
-            player.damage(effects.get(Effect.DAMAGE));
+            for (Effect e : effects)
+                if (!e.useOnOneself)
+                    player.useEffect(e);
+        } else {
+            for (Effect e : effects)
+                if (!e.useOnOneself)
+                    enemies.get(target - 1).useEffect(e);
         }
         updatePlayer();
         return used;
+    }
+    
+    public void run() {
+        
     }
 }

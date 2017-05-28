@@ -39,19 +39,19 @@ public abstract class GeneralEntity {
         this.attacks.add(attack);
     }
     
-    public void useEffect(Effect effect, double quant) {
-        switch (effect) {
+    public void useEffect(Effect effect) {
+        switch (effect.stat) {
             case HEALTH:
-                restoreHealth(quant);
+                health = FastMath.clamp(health + effect.quant, 0, maxHealth);
                 break;
             case ATTACK:
-                attackBuff = FastMath.clamp(attackBuff + quant,0,300);
+                attackBuff = FastMath.clamp(attackBuff + effect.quant,0,300);
                 break;
             case DEFENSE:
-                defenseBuff = FastMath.clamp(defenseBuff + quant,0,300);
+                defenseBuff = FastMath.clamp(defenseBuff + effect.quant,0,300);
                 break;
             case ACCURACY:
-                accuracy = FastMath.clamp(accuracy + quant,0,100);
+                accuracy = FastMath.clamp(accuracy + effect.quant,0,100);
                 break;
         }
     }
@@ -62,9 +62,5 @@ public abstract class GeneralEntity {
     
     protected boolean isHit() {
         return rand.nextInt() % 100 < accuracy;
-    }
-    
-    public void restoreHealth(double amount) {
-        health = FastMath.clamp(health + amount, 0, maxHealth);
     }
 }   
