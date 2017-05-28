@@ -13,11 +13,20 @@ public class Effect {
     enumEffect stat;
     double quant;
     boolean useOnOneself;
+    boolean onlyForBattle;
     
     public Effect(enumEffect stat, double quant, boolean useOnOneself) {
         this.stat = stat;
         this.quant = quant;
         this.useOnOneself = useOnOneself;
+        this.onlyForBattle = false;
+    }
+    
+    public Effect(enumEffect stat, double quant, boolean useOnOneself, boolean onlyForBattle) {
+        this.stat = stat;
+        this.quant = quant;
+        this.useOnOneself = useOnOneself;
+        this.onlyForBattle = onlyForBattle;
     }
     
     public Effect setQuant(double quant) {

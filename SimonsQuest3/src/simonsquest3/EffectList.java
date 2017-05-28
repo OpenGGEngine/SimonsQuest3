@@ -14,15 +14,20 @@ import simonsquest3.Effect.enumEffect;
  */
 public class EffectList extends ArrayList<Effect>{
     
-    public Effect get(enumEffect effect, boolean useOnOneself) {
+    public Effect get(enumEffect effect, boolean useOnOneself, boolean onlyForBattle) {
         for (Effect e : this) {
-            if (e.stat == effect && e.useOnOneself == useOnOneself)
+            if (e.stat == effect && e.useOnOneself == useOnOneself && e.onlyForBattle == onlyForBattle)
                 return e;
         }
         Effect e = new Effect(effect,0,useOnOneself);
         super.add(e);
         return e;
     }
+    
+    public Effect get(enumEffect effect, boolean useOnOneself) {
+        return get(effect, useOnOneself, false);
+    }
+    
     @Override
     public boolean add(Effect e) {
         if (e == null)

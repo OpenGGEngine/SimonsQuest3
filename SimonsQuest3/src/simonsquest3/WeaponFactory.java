@@ -35,7 +35,7 @@ public class WeaponFactory {
             case "negev":
                 ret.attackPower = 10;
                 ret.durability = 35;
-                ret.accuracy =  0;
+                ret.accuracy =  75;
                 ret.name = "Negev";
                 break;
             case "smokinggun":
@@ -63,9 +63,9 @@ public class WeaponFactory {
                 ret.name = "Diamond Sword";
                 break;
             case "halogun":
-                ret.attackPower = 0;
-                ret.durability = 0;
-                ret.accuracy = 100;
+                ret.attackPower = 25;
+                ret.durability = 20;
+                ret.accuracy = 70;
                 ret.name = "Halo Gun";
                 break;
             case "m4":
@@ -75,9 +75,9 @@ public class WeaponFactory {
                 ret.name = "M4A4";
                 break;
             case "smithwesson":
-                ret.attackPower = 0;
-                ret.durability = 0;
-                ret.accuracy = 100;
+                ret.attackPower = 30;
+                ret.durability = 10;
+                ret.accuracy = 65;
                 ret.name = "Smith Wesson";
                 break;
         }
@@ -89,7 +89,17 @@ public class WeaponFactory {
         ret.durability = -1;
         ret.accuracy = 100;
         switch (name) {
-            
+            case "wall":
+                ret.attackPower = 0;
+                ret.mpCost = 5;
+//                ret.addEffect();
+                ret.name = "Build A Wall";
+                break;
+            case "higherground":
+                ret.attackPower = 0;
+                ret.mpCost = 5;
+                ret.name = "Have the Higher Groun";
+                break;
         }
         return ret;
     }
