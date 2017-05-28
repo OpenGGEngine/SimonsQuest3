@@ -16,8 +16,8 @@ public class Enemy extends GeneralEntity implements Cloneable{
     String name;
     Model model;
     
-    public Enemy(String name, double health,double attack,double accuracy, double defense, Weapon... attacks) {
-        super(health,attack,defense,accuracy,attacks);
+    public Enemy(String name, double health,double attack,double accuracy,double defense,int mana, Attack... attacks) {
+        super(health,attack,defense,accuracy,mana,attacks);
         this.name = name;
     }
     
@@ -25,8 +25,9 @@ public class Enemy extends GeneralEntity implements Cloneable{
         this.model = m;
     }
     
-    public Weapon attack(double enemyHealth) {
-        Weapon attack = null;
+    public Attack attack(double enemyHealth) {
+        Attack attack = null;
+        
         if (attack != null) {
             Effect effect = attack.statusEffects.get(Effect.enumEffect.HEALTH,false);
             attack.statusEffects.add(effect.setQuant(effect.quant * (attackBuff/100)));
@@ -36,9 +37,9 @@ public class Enemy extends GeneralEntity implements Cloneable{
     
     @Override
     public Enemy clone(){
-        Enemy enemy = new Enemy(name, attackBuff,defenseBuff,accuracy,health);
+        Enemy enemy = new Enemy(name, attackBuff,defenseBuff,accuracy,health,mana);
         enemy.setModel(model);
-        for (Weapon attack : attacks) {
+        for (Attack attack : attacks) {
             enemy.addAttack(attack.clone());
         }
         return enemy;

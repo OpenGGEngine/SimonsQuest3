@@ -17,11 +17,9 @@ import simonsquest3.Effect.enumEffect;
 public class Player extends GeneralEntity implements Cloneable{
     public HashMap<Item, Integer> items;
     public int money = 100;
-    public int mana;
-    public int maxMana;
     
     public Player(double health,int mana) {
-        super(health,100,100,80);
+        super(health,100,100,80,mana);
         items = new HashMap<>();
         money = 100;
         this.mana = mana;
@@ -36,18 +34,8 @@ public class Player extends GeneralEntity implements Cloneable{
         }
     }
     
-    @Override
-    public void useEffect(Effect effect) {
-        super.useEffect(effect);
-        switch (effect.stat) {
-            case CHANGE_MP:
-                mana = FastMath.clamp(mana + (int)effect.quant, 0, maxMana);
-                break;
-        }
-    }
-    
-    public Map.Entry<Weapon,Integer> waitForChoice() {
-        Weapon ret = null;
+    public Map.Entry<Attack,Integer> waitForChoice() {
+        Attack ret = null;
         EffectList effects = new EffectList();
         int target = 1;
         //wait

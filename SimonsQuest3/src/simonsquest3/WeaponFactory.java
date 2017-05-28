@@ -10,8 +10,8 @@ package simonsquest3;
  * @author Ethan Mak
  */
 public class WeaponFactory {
-    public static Weapon generateWeapon(String name) {
-        Weapon ret = new Weapon(name);
+    public static Attack generateWeapon(String name) {
+        Attack ret = new Attack(name);
         ret.mpCost = 0;
         switch (name) {
             case "airhorn":
@@ -84,8 +84,8 @@ public class WeaponFactory {
         return ret;
     }
     
-    public static Weapon generateMeme(String name) {
-        Weapon ret = new Weapon(name);
+    public static Attack generateMeme(String name) {
+        Attack ret = new Attack(name);
         ret.durability = -1;
         ret.accuracy = 100;
         switch (name) {
@@ -104,8 +104,8 @@ public class WeaponFactory {
         return ret;
     }
     
-    public static Weapon generateAttack(String name) {
-        Weapon ret = new Weapon(name);
+    public static Attack generateAttack(String name) {
+        Attack ret = new Attack(name);
         ret.mpCost = 0;
         ret.durability = -1;
         switch (name) {

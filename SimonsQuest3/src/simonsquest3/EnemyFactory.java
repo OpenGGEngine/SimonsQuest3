@@ -16,7 +16,7 @@ import com.opengg.core.model.ModelLoader;
 public class EnemyFactory {
     public static int enemycount = 6;
     public static Enemy generateEnemy(String name) {
-        Enemy ret = new Enemy(name,0,100,100,100);
+        Enemy ret = new Enemy(name,0,100,100,100,10);
         switch (name) {
             case "beaver":
                 ret.health = 0;
