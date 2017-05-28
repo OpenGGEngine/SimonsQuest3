@@ -75,6 +75,7 @@ public class WorldCreator {
         
         simon = new SimonComponent();
         simon.use();
+        simon.playerphysics.getColliders().get(0).addSubscriber(SimonsQuest3.battlec);
         WorldEngine.getCurrent().attach(simon);
         
         arena = new WorldObject();

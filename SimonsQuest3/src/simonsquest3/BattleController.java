@@ -5,7 +5,7 @@
  */
 package simonsquest3;
 
-import com.opengg.core.math.Vector3f;
+import com.opengg.core.engine.WorldEngine;
 import com.opengg.core.world.collision.Collision;
 import com.opengg.core.world.components.physics.CollisionComponent;
 import com.opengg.core.world.components.triggers.Trigger;
@@ -41,10 +41,14 @@ public class BattleController implements Triggerable{
                     WorldCreator.addEnemyInRing(((WorldEnemy)temp.thiscollider.parent.parent).model.getModel(), 1);
                     WorldCreator.enableBattle();
                 }
-            }else if(temp.other.parent instanceof TownComponent){
-                GUIMaster.store.setEnabled(true);
+            }
+            
+            if(temp.other.parent instanceof TownComponent){
+                GUIMaster.town.setEnabled(true);
+                WorldEngine.getCurrent().setEnabled(false);
             }else if(temp.thiscollider.parent instanceof TownComponent){
-                GUIMaster.store.setEnabled(true);
+                GUIMaster.town.setEnabled(true);
+                WorldEngine.getCurrent().setEnabled(false);
             }
         }
     }
