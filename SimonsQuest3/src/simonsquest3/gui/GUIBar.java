@@ -21,11 +21,12 @@ public class GUIBar extends GUIRenderable{
     public Texture empty;
     public Texture full;
     public double fullnum = 100;
-    public double actualnum = 60;
-    public GUIBar(Texture empty,Texture full,Vector2f position,Vector2f size){
+    public double actualnum = 100;
+    public GUIBar(Texture empty,Texture full,Vector2f position,Vector2f size,int fullnum){
         super(ObjectCreator.createSquare(new Vector2f(), size,0 ),position);
         this.empty= empty;
         this.full = full;
+        this.fullnum = fullnum;
         
     }
     @Override
@@ -34,6 +35,7 @@ public class GUIBar extends GUIRenderable{
         setUniform("percent", (float)(actualnum/fullnum));
         empty.useTexture(0);
         full.useTexture(1);
+        System.out.println(this.getPosition().toString());
         super.render();
         ShaderController.useConfiguration("gui");
     }

@@ -21,6 +21,8 @@ import com.opengg.core.render.window.WindowOptions;
 import static com.opengg.core.render.window.WindowOptions.GLFW;
 import simonsquest3.gui.BattleMaster;
 import simonsquest3.gui.GUIMaster;
+import static simonsquest3.gui.GUIMaster.health;
+import static simonsquest3.gui.GUIMaster.mana;
 
 /**
  *
@@ -89,6 +91,8 @@ public class SimonsQuest3 extends GGApplication{
        battlec.update();
        BattleMaster.update();
        GUIMaster.update();
+       health.actualnum = SimonsQuest3.p.health;
+       mana.actualnum = SimonsQuest3.p.mana;
     }
     
 }

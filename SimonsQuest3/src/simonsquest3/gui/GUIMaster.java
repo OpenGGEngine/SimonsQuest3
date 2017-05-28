@@ -55,8 +55,8 @@ public class GUIMaster implements KeyboardListener {
     public static GUIText text = new GUIText(new Text("Black Market", new Vector2f(), 4f, 1f, false), font, new Vector2f(0.9f, 0));
     public static GUIText text1 = new GUIText(new Text("Money:" + 100, new Vector2f(), 2f, 1f, false), font, new Vector2f(0, -0.05f));
 
-    public static GUIBar mana = new GUIBar(Texture.get(Resource.getTexturePath("/gui/EmptyBar.png")), Texture.get(Resource.getTexturePath("/gui/BlueBar.png")), new Vector2f(0, -0.8f), new Vector2f(0.5f, 0.1f));
-    public static GUIBar health = new GUIBar(Texture.get(Resource.getTexturePath("/gui/EmptyBar.png")), Texture.get(Resource.getTexturePath("/gui/RedBar.png")), new Vector2f(0, -0.8f), new Vector2f(0.5f, 0.2f));
+    public static GUIBar mana = new GUIBar(Texture.get(Resource.getTexturePath("/gui/EmptyBar.png")), Texture.get(Resource.getTexturePath("/gui/BlueBar.png")), new Vector2f(-0.7f, 0.6f), new Vector2f(0.5f, 0.1f),100);
+    public static GUIBar health = new GUIBar(Texture.get(Resource.getTexturePath("/gui/EmptyBar.png")), Texture.get(Resource.getTexturePath("/gui/RedBar.png")), new Vector2f(-0.7f, 0.8f), new Vector2f(0.5f, 0.1f),100);
     public static boolean instore = false;
 
     public static void init() {
@@ -226,7 +226,7 @@ public class GUIMaster implements KeyboardListener {
              
             }
         }
-
+        
     }
 
 }
