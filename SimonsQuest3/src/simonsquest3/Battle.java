@@ -32,7 +32,7 @@ public class Battle {
         this.enemies.addAll(Arrays.asList(enemies));
     }
     
-    public Attack battleTurn() {
+    public boolean battleTurn() {
         Attack used;
         int target;
         switch (turn) {
@@ -47,7 +47,9 @@ public class Battle {
                 break;
         }
         if (used == null)
-            return used;
+            return false;
+        if (used.name.equals("default"))
+            return true;
         List<Effect> effects = used.use(turn == 0? 0 : 1, (turn == 0));
         if (turn > 0) {
             for (Effect e : effects)
@@ -59,11 +61,27 @@ public class Battle {
                     enemies.get(target - 1).useEffect(e);
         }
         updatePlayer();
-        return used;
+        return false;
     }
     
-    public void run() {
+    public void init() {
         
+    }
+    public void run() {
+        init();
+        boolean shouldStop = false;
+        while (true) {
+           shouldStop = shouldStop || player.health <= 0;
+           if (!shouldStop)
+                for (Enemy e : enemies) {
+                    shouldStop = e.health <= 0 && shouldStop;
+                }
+           if (shouldStop)
+               break;
+           if (battleTurn())
+               break;
+        }
+        close();
     }
     
     public void close() {

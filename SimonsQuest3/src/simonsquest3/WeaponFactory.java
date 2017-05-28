@@ -5,6 +5,8 @@
  */
 package simonsquest3;
 
+import simonsquest3.Effect.enumEffect;
+
 /**
  *
  * @author Ethan Mak
@@ -79,6 +81,9 @@ public class WeaponFactory {
                 ret.durability = 10;
                 ret.accuracy = 65;
                 ret.name = "Smith Wesson";
+                break;
+            case  "default":
+                ret.addEffect(new Effect(enumEffect.ESCAPE,0,true));
                 break;
         }
         return ret;

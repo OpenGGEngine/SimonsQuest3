@@ -39,6 +39,11 @@ public class Player extends GeneralEntity implements Cloneable{
         EffectList effects = new EffectList();
         int target = 1;
         //wait
+        
+        for(Effect effect: effects) {
+            if (effect.stat == enumEffect.ESCAPE)
+                return new HashMap.SimpleEntry<>(WeaponFactory.generateWeapon("default"),0);
+        }
         if (ret != null)
             if(isHit())
                 effects = ret.use(1);
