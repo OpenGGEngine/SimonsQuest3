@@ -42,7 +42,7 @@ public class Player extends GeneralEntity implements Cloneable{
         
         for(Effect effect: effects) {
             if (effect.stat == enumEffect.ESCAPE)
-                return new HashMap.SimpleEntry<>(WeaponFactory.generateWeapon("default"),0);
+                return new HashMap.SimpleEntry<>(AttackFactory.generateWeapon("default"),0);
         }
         if (ret != null)
             if(isHit())
@@ -66,6 +66,13 @@ public class Player extends GeneralEntity implements Cloneable{
     
     public Player clone() {
         Player p = new Player(health, mana);
+        p.accuracy = this.accuracy;
+        p.attackBuff = this.attackBuff;
+        p.attacks.addAll(attacks);
+        p.defenseBuff = this.defenseBuff;
+        p.maxHealth = this.maxHealth;
+        p.maxMana = this.maxMana;
+        p.money = this.money;
         return p;
     }
 }

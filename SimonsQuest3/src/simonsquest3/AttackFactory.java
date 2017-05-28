@@ -105,6 +105,12 @@ public class AttackFactory {
                 ret.mpCost = 5;
                 ret.name = "Have the Higher Groun";
                 break;
+            case  "production":
+                ret.name = "Sieze the Means of Production";
+                break;
+            case "sand":
+                ret.name = "Coarse Rough Sand";
+                break;
         }
         return ret;
     }

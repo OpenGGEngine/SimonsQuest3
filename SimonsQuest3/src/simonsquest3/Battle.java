@@ -17,6 +17,8 @@ import java.util.Map;
 public class Battle {
     Player player;
     List<Enemy> enemies;
+    List<Enemy> prelimEnemies;
+    Player prelimPlayer;
     int turn = 0;
     
     public Battle(Player player) {
@@ -65,8 +67,13 @@ public class Battle {
     }
     
     public void init() {
-        
+        prelimPlayer = player.clone();
+        prelimEnemies = new ArrayList<>();
+        for (Enemy e : enemies) {
+            prelimEnemies.add(e.clone());
+        }
     }
+    
     public void run() {
         init();
         boolean shouldStop = false;
@@ -85,6 +92,15 @@ public class Battle {
     }
     
     public void close() {
-        
+        player.accuracy = prelimPlayer.accuracy;
+        player.attackBuff = prelimPlayer.attackBuff;
+        player.defenseBuff = prelimPlayer.defenseBuff;
+        for (int i = 0; i < enemies.size(); i++) {
+            enemies.get(i).accuracy = prelimEnemies.get(i).accuracy;
+            enemies.get(i).attackBuff = prelimEnemies.get(i).attackBuff;
+            enemies.get(i).defenseBuff = prelimEnemies.get(i).defenseBuff;
+            enemies.get(i).health = prelimEnemies.get(i).health;
+            enemies.get(i).mana = prelimEnemies.get(i).mana;
+        }
     }
 }

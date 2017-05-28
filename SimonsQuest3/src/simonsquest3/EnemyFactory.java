@@ -22,7 +22,7 @@ public class EnemyFactory {
                 ret.health = 0;
                 ret.name = "Beaver";
                 ret.accuracy = 80;
-                ret.addAttack(WeaponFactory.generateAttack("bite"));
+                ret.addAttack(AttackFactory.generateAttack("bite"));
  
                 ret.setModel(ModelLoader.loadModel(Resource.getModelPath("beaver")));
                 break;
@@ -30,7 +30,7 @@ public class EnemyFactory {
                 ret.health = 0;
                 ret.name = "Justin Beaver";
                 ret.accuracy = 80;
-                ret.addAttack(WeaponFactory.generateAttack("bite"));
+                ret.addAttack(AttackFactory.generateAttack("bite"));
  
                 ret.setModel(ModelLoader.loadModel(Resource.getModelPath("justinbeaver")));
                 break;
