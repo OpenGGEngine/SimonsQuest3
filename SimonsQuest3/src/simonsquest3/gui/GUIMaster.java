@@ -29,7 +29,7 @@ import simonsquest3.SimonsQuest3;
  * @author Warren
  */
 public class GUIMaster implements KeyboardListener {
-    
+
     static float xonscreen = 0;
     static int storepointer = 0;
     public static GUIGroup town = new GUIGroup(new Vector2f());
@@ -123,7 +123,7 @@ public class GUIMaster implements KeyboardListener {
             store.addItem("magic", menustore);
             return 2;
         }
-         if (xonscreen < -2.55 && xonscreen > -3) {
+        if (xonscreen < -2.55 && xonscreen > -3) {
             text.setText("Hotel Mario");
             store.addItem("vendor", vendor2);
             store.addItem("magic", hotels);
@@ -133,9 +133,10 @@ public class GUIMaster implements KeyboardListener {
     }
 
     public static void update() {
-        if(!town.enabled)
+        if (!town.enabled) {
             return;
-        
+        }
+
         if (KeyboardController.isKeyPressed(Key.KEY_RIGHT)) {
             System.out.println(xonscreen);
             xonscreen -= 0.04f;
@@ -169,35 +170,41 @@ public class GUIMaster implements KeyboardListener {
                 Logger.getLogger(GUIMaster.class.getName()).log(Level.SEVERE, null, ex);
             }
             storepointer++;
-            
-                    
+
             store.getItem("pointer").setPositionOffset(new Vector2f(-1, 0.65f - (storepointer * 0.1f)));
 
         }
         if (KeyboardController.isKeyPressed(Key.KEY_ENTER)) {
-             try {
+            try {
                 Thread.sleep(100);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GUIMaster.class.getName()).log(Level.SEVERE, null, ex);
             }
             int townie = checkPosition();
             if (townie != -1) {
-                
+
                 if (!instore) {
                     simon.enabled = false;
                     town.addItem("townbackground", vendorback);
                     store.enabled = true;
                     instore = true;
                 } else {
-                    int i = StoreStuff.pricesstore.get(StoreStuff.faker.get(storepointer));
-                    System.out.println(SimonsQuest3.p.money);
-                    if (i <= SimonsQuest3.p.money) {
-                        SimonsQuest3.p.money -= i;
-                        
-                        SimonsQuest3.p.addItem(ItemFactory.generateItem(StoreStuff.faker.get(storepointer)));
-                        text1.setText("Money: " + SimonsQuest3.p.money + "$");
-                       
-                        
+                    if (townie == 3) {
+                        if (20 <= SimonsQuest3.p.money) {
+                            SimonsQuest3.p.money -= 20;
+                            SimonsQuest3.p.health =  SimonsQuest3.p.maxHealth;
+                            SimonsQuest3.p.mana =  SimonsQuest3.p.maxMana;
+                        }
+                    } else {
+                        int i = StoreStuff.pricesstore.get(StoreStuff.faker.get(storepointer));
+                        System.out.println(SimonsQuest3.p.money);
+                        if (i <= SimonsQuest3.p.money) {
+                            SimonsQuest3.p.money -= i;
+
+                            SimonsQuest3.p.addItem(ItemFactory.generateItem(StoreStuff.faker.get(storepointer)));
+                            text1.setText("Money: " + SimonsQuest3.p.money + "$");
+
+                        }
                     }
                 }
             }
