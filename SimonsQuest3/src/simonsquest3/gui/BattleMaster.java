@@ -15,6 +15,7 @@ import com.opengg.core.io.input.keyboard.KeyboardController;
 import com.opengg.core.math.Vector2f;
 import com.opengg.core.render.Text;
 import com.opengg.core.render.texture.Texture;
+import simonsquest3.Attack;
 import simonsquest3.Item;
 import simonsquest3.SimonsQuest3;
 import static simonsquest3.gui.GUIMaster.font;
@@ -30,6 +31,8 @@ public class BattleMaster {
      public static GUIGroup main = new GUIGroup(new Vector2f());
     public static GUIGroup selection = new GUIGroup(new Vector2f());
     public static GUIGroup items = new GUIGroup(new Vector2f());
+    public static GUIGroup weapons = new GUIGroup(new Vector2f());
+    public static GUIGroup memes = new GUIGroup(new Vector2f());
     public static GUITexture select = new GUITexture(Texture.get(Resource.getTexturePath("gui/menuselect.png")),new Vector2f(-1,-1),new Vector2f(0.5f,0.60f));
     public static GUITexture mainmenu = new GUITexture(Texture.get(Resource.getTexturePath("gui/bigmenu.png")),new Vector2f(-0.5f,-1),new Vector2f(1.5f,0.60f));
     public static GUITexture pointer = new GUITexture(Texture.get(Resource.getTexturePath("gui/arrow.png")),new Vector2f(-0.95f,-0.55f),new Vector2f(0.10f,0.10f));
@@ -45,9 +48,15 @@ public class BattleMaster {
         main.addItem("selecttext", selection);
         pointer.setLayer(0.5f);
         items.enabled = false;
+        weapons.enabled = false;
+        memes.enabled = false;
         main.addItem("pointer", pointer);
         main.addItem("items", items);
+        main.addItem("weapons", weapons);
+        main.addItem("memes", memes);
         regenItems();
+        regenWeapons();
+        regenMemes();
     }
     public static void regenItems(){
         int counter = 0;
@@ -56,6 +65,30 @@ public class BattleMaster {
                     )*0.35f),-1.45f-(0.2f * (counter/4)))));
             counter++;
         }
+    }
+    public static void regenWeapons(){
+        int counter = 0;
+        for(Attack i:SimonsQuest3.p.attacks){
+            if(!i.shitty) {
+                
+            weapons.addItem(i.name, new GUIText(new Text(i.name + ": "+ i.durability+"/"+i.maxdurability,new Vector2f(), 0.9f, 1f, false), font, new Vector2f(0.55f + ((counter%4
+                    )*0.40f),-1.45f-(0.2f * (counter/4)))));
+            counter++;
+            }
+        }
+        
+    }
+    public static void regenMemes(){
+        int counter = 0;
+        for(Attack i:SimonsQuest3.p.attacks){
+            if(i.shitty) {
+                
+            memes.addItem(i.name, new GUIText(new Text(i.name + ": "+ i.mpCost,new Vector2f(), 0.9f, 1f, false), font, new Vector2f(0.55f + ((counter%4
+                    )*0.40f),-1.45f-(0.2f * (counter/4)))));
+            counter++;
+            }
+        }
+        
     }
     public static void update(){
          if (KeyboardController.isKeyPressed(Key.KEY_UP)) {
@@ -78,13 +111,16 @@ public class BattleMaster {
                  pointer.enabled = false;
              switch(menupointer){
                  case 0:
+                     memes.enabled = true;
                      break;
                      case 1:
+                         weapons.enabled = true;
                      break;
                          case 2:
                              items.enabled = true;
                      break;
                              case 3:
+                                 
                                  
                      break;
              }
@@ -92,6 +128,8 @@ public class BattleMaster {
          }
          if (KeyboardController.isKeyPressed(Key.KEY_ESCAPE)) {
              items.enabled = false;
+              weapons.enabled = false;
+              memes.enabled = false;
              pointer.enabled = true;
              inmain = true;
          }

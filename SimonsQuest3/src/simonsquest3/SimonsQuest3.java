@@ -19,6 +19,7 @@ import com.opengg.core.render.shader.ShaderController;
 import com.opengg.core.render.window.WindowInfo;
 import com.opengg.core.render.window.WindowOptions;
 import static com.opengg.core.render.window.WindowOptions.GLFW;
+import simonsquest3.gui.BattleMaster;
 import simonsquest3.gui.GUIMaster;
 
 /**
@@ -57,7 +58,11 @@ public class SimonsQuest3 extends GGApplication{
         overworldday.shuffle();
         SoundtrackHandler.setSoundtrack(overworldday);
         p = new Player(100,100);
-        
+        p.addAttack(AttackFactory.generateWeapon("dsword"));
+        p.addAttack(AttackFactory.generateWeapon("awp"));
+        p.addAttack(AttackFactory.generateMeme("wall"));
+        p.addItem(ItemFactory.generateItem("mountaindew"));
+        BattleMaster.init();
         GGConsole.addListener(new SimonConsole());
         
         BindController.addBind(ControlType.KEYBOARD, "forward", KEY_W);
@@ -80,6 +85,7 @@ public class SimonsQuest3 extends GGApplication{
 
     @Override
     public void update() {
+        BattleMaster.update();
        GUIMaster.update();
     }
     

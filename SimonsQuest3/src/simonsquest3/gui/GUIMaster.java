@@ -35,6 +35,7 @@ public class GUIMaster implements KeyboardListener {
     public static GUIGroup town = new GUIGroup(new Vector2f());
     public static GUIItem simon = new GUITexture(Texture.get(Resource.getTexturePath("/gui/simon.png")), new Vector2f(-0.6f, -1f), new Vector2f(0.25f, 0.75f));
     public static GUIItem simonstatue = new GUITexture(Texture.get(Resource.getTexturePath("/gui/blackmarket.png")), new Vector2f(0, -0.4f), new Vector2f(0.55f, 0.75f));
+    public static GUIItem hotel = new GUITexture(Texture.get(Resource.getTexturePath("/gui/hotelmario.png")), new Vector2f(2f, -0.4f), new Vector2f(0.55f, 0.75f));
     public static GUIItem storeland = new GUITexture(Texture.get(Resource.getTexturePath("/gui/storeland.png")), new Vector2f(0.8f, -0.4f), new Vector2f(1f, 0.75f));
     public static GUIGroup store = new GUIGroup(new Vector2f());
     public static GUIGroup menustore = new GUIGroup(new Vector2f());
@@ -57,14 +58,16 @@ public class GUIMaster implements KeyboardListener {
     public static boolean instore = false;
 
     public static void init() {
+        StoreStuff.init();
         GUI.root.addItem("town", town);
         GUI.root.addItem("store", store);
         GUI.root.addItem("hud", hud);
-        //town.enabled = false;
+        town.enabled = false;
 
         town.addItem("townbackground", townback);
         town.addItem("simons", simonstatue);
         town.addItem("simon", simon);
+        town.addItem("hotel", hotel);
         store.setLayer(1.5f);
         store.addItem("vendor", vendor);
         town.getItem("townbackground").setLayer(-1.1f);
@@ -122,11 +125,13 @@ public class GUIMaster implements KeyboardListener {
             xonscreen -= 0.04f;
             town.getItem("simons").setPositionOffset(new Vector2f(xonscreen, -0.4f));
             town.getItem("store").setPositionOffset(new Vector2f(0.8f + xonscreen, -0.4f));
+            hotel.setPositionOffset(new Vector2f(1.6f + xonscreen, -0.4f));
         }
         if (KeyboardController.isKeyPressed(Key.KEY_LEFT)) {
             xonscreen += 0.04f;
             town.getItem("simons").setPositionOffset(new Vector2f(xonscreen, -0.4f));
             town.getItem("store").setPositionOffset(new Vector2f(0.8f + xonscreen, -0.4f));
+            hotel.setPositionOffset(new Vector2f(1.6f + xonscreen, -0.4f));
         }
         if (KeyboardController.isKeyPressed(Key.KEY_UP)) {
             try {
@@ -152,6 +157,11 @@ public class GUIMaster implements KeyboardListener {
 
         }
         if (KeyboardController.isKeyPressed(Key.KEY_ENTER)) {
+             try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GUIMaster.class.getName()).log(Level.SEVERE, null, ex);
+            }
             int townie = checkPosition();
             if (townie != -1) {
                 
