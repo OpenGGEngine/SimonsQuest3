@@ -9,11 +9,28 @@ package simonsquest3;
  *
  * @author Ethan Mak
  */
-public enum Effect {
-    CLEAR("clear"), ATTACK("attack"), DEFENSE("defense"), HEALTH("health"), ESCAPE("escape"), DAMAGE("damage"), CHANGE_MP("mp"), ACCURACY("accuracy"), MISSED("missed");
+public class Effect {
+    enumEffect stat;
+    double quant;
+    boolean useOnOneself;
     
-    String name;
-    private Effect(String name) {
-        this.name = name;
+    public Effect(enumEffect stat, double quant, boolean useOnOneself) {
+        this.stat = stat;
+        this.quant = quant;
+        this.useOnOneself = useOnOneself;
+    }
+    
+    public Effect setQuant(double quant) {
+        this.quant = quant;
+        return this;
+    }
+    
+    public enum enumEffect {
+        CLEAR("clear"), ATTACK("attack"), DEFENSE("defense"), HEALTH("health"), ESCAPE("escape"), CHANGE_MP("mp"), ACCURACY("accuracy"), MISSED("missed");
+
+        String name;
+        private enumEffect(String name) {
+            this.name = name;
+        }
     }
 }

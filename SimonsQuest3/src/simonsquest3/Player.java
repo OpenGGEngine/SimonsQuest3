@@ -8,6 +8,7 @@ package simonsquest3;
 import com.opengg.core.math.FastMath;
 import java.util.HashMap;
 import java.util.Map;
+import simonsquest3.Effect.enumEffect;
 
 /**
  *
@@ -35,22 +36,19 @@ public class Player extends GeneralEntity{
     }
     
     @Override
-    public void useEffect(Effect effect, double quant) {
-        super.useEffect(effect, quant);
-        switch (effect) {
+    public void useEffect(Effect effect) {
+        super.useEffect(effect);
+        switch (effect.stat) {
             case CHANGE_MP:
-                changeMana((int)quant);
+                mana = FastMath.clamp(mana + (int)effect.quant, 0, maxMana);
                 break;
         }
     }
     
-    public void changeMana(int amount) {
-        mana = FastMath.clamp(mana, 0, maxMana);
-    }
-    
-    public Weapon waitForChoice() {
+    public Map.Entry<Weapon,Integer> waitForChoice() {
         Weapon ret = null;
-        Map<Effect,Double> effects = new HashMap<>();
+        EffectList effects = new EffectList();
+        int target = 1;
         //wait
         if (ret != null)
             if(isHit())
@@ -58,16 +56,18 @@ public class Player extends GeneralEntity{
             else 
                 return null;
         
-        if (effects.get(Effect.MISSED) == -1)
+        if (effects.get(enumEffect.MISSED,false).quant == -1)
             return null;
-        for(Map.Entry<Effect,Double> effect: effects.entrySet()) {
-            useEffect(effect.getKey(), effect.getValue());
+        for(Effect effect: effects) {
+            if(effect.useOnOneself)
+                useEffect(effect);
         }
         if (ret != null) {
             ret = ret.clone();
-            ret.statusEffects.put(Effect.DAMAGE, ret.statusEffects.get(Effect.DAMAGE) * (attackBuff/100));
+            Effect e = ret.statusEffects.get(enumEffect.HEALTH, false);
+            ret.statusEffects.add(e.setQuant(e.quant * (attackBuff/100)));
         }
-        return ret;
+        return new HashMap.SimpleEntry<>(ret,target);
     }
 }
 

@@ -5,9 +5,12 @@
  */
 package simonsquest3;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import simonsquest3.Effect.enumEffect;
 
 /**
  *
@@ -16,7 +19,7 @@ import java.util.Random;
 public class Weapon implements Cloneable{
     int mpCost;
     double attackPower;
-    Map<Effect, Double> statusEffects;
+    EffectList statusEffects;
     double durability;
     int accuracy;
     String name;
@@ -28,7 +31,7 @@ public class Weapon implements Cloneable{
         this.attackPower = attackPower;
         this.durability = durability;
         this.accuracy = accuracy;
-        statusEffects = new HashMap<>();
+        statusEffects = new EffectList();
         rand = new Random();
     }
     
@@ -36,39 +39,39 @@ public class Weapon implements Cloneable{
         this(name, 0, 0, 0, 0);
     }
     
-    public Map<Effect, Double> use(double amount) {
+    public EffectList use(double amount) {
         return use(amount, false);
     }
     
-    public Map<Effect, Double> use(double amount, boolean skip) {
-        HashMap<Effect, Double> effects = new HashMap<>();
+    public EffectList use(double amount, boolean skip) {
+        EffectList effects = new EffectList();
         if (durability == -1) {
-            effects.putAll(statusEffects);
-            effects.put(Effect.DAMAGE, attackPower);
+            effects.addAll(statusEffects);
+            effects.add(new Effect(enumEffect.HEALTH, -attackPower,false));
             if (!skip)
-                effects.put(Effect.CHANGE_MP, (double)-mpCost);
+                effects.add(new Effect(enumEffect.CHANGE_MP, (double)-mpCost,true));
             return effects;
         }
         else if  (durability == 0 || amount > durability)
             return effects;
         durability -= amount;
-        if (rand.nextInt() % 100 < accuracy) {
-            effects.put(Effect.MISSED, (double)-1);
+        if (rand.nextInt() % 100 >= accuracy) {
+            effects.add(new Effect(enumEffect.MISSED, (double)-1, false));
             return effects;
         }
-        effects.putAll(statusEffects);
-        effects.put(Effect.DAMAGE, attackPower);
+        effects.addAll(statusEffects);
+        effects.add(new Effect(enumEffect.HEALTH, -attackPower, false));
         return effects;
     }
     
-    public void addEffect(Effect effect, double quant) {
-        statusEffects.put(effect, quant);
+    public void addEffect(Effect effect) {
+        statusEffects.add(effect);
     }
     
     @Override
     public Weapon clone() {
         Weapon ret = new Weapon(name,mpCost,attackPower,durability,accuracy);
-        ret.statusEffects.putAll(statusEffects);
+        ret.statusEffects.addAll(statusEffects);
         return ret;
     }
 }
