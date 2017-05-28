@@ -122,88 +122,98 @@ public class AttackFactory {
         switch (name) {
             case "bite":
                 ret.name = "Bite";
-                ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.attackPower = 15;
+                ret.accuracy = 70;
                 break;
             case "rear":
                 ret.name = "Rear Teeth";
-                ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.attackPower = 0;
+                ret.accuracy = 100;
+                ret.addEffect(new Effect(enumEffect.ATTACK,5,true));
+                ret.addEffect(new Effect(enumEffect.DEFENSE, -5, false));
                 break;
             case "dam":
                 ret.name = "Build Dam";
-                ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.attackPower = 0;
+                ret.accuracy = 85;
+                ret.addEffect(new Effect(enumEffect.DEFENSE,15, true));
                 break;
             case "sing":
                 ret.name = "Sing";
                 ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.accuracy = 82;
                 break;
             case "fans":
                 ret.name = "Use Fans";
-                ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.attackPower = 5;
+                ret.accuracy = 75;
+                ret.addEffect(new Effect(enumEffect.ATTACK,10, true));
                 break;
             case "csite":
                 ret.name = "Push C Site";
                 ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.accuracy = 100;
                 break;
             case "spinbot":
                 ret.name = "Use Spinbot";
-                ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.attackPower = 15;
+                ret.accuracy = 90;
+                ret.addEffect(new Effect(enumEffect.DEFENSE,-5, true));
                 break;
             case "p90":
                 ret.name = "P90 Rush";
-                ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.attackPower = 40;
+                ret.accuracy = 30;
                 break;
             case "shield":
                 ret.name = "Use Energy Shield";
-                ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.attackPower = 0;
+                ret.accuracy = 100;
+                ret.addEffect(new Effect(enumEffect.DEFENSE,15, true));
                 break;
             case "banshee":
                 ret.name = "Ride Banshee";
-                ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.attackPower = 30;
+                ret.accuracy = 50;
                 break;
             case "cortana":
                 ret.name = "Consult with Cortana";
-                ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.attackPower = 0;
+                ret.accuracy = 100;
+                ret.addEffect(new Effect(enumEffect.ATTACK,10, true));
                 break;
             case "sue":
                 ret.name = "Sue Companies";
-                ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.attackPower = 20;
+                ret.accuracy = 80;
                 break;
             case "jazz":
                 ret.name = "Like Jazz";
                 ret.attackPower = 10;
                 ret.accuracy = 0;
+                ret.addEffect(new Effect(enumEffect.DEFENSE,7, true));
+                ret.addEffect(new Effect(enumEffect.ATTACK,7, true));
                 break;
             case "sting":
                 ret.name = "Sting";
-                ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.attackPower = 30;
+                ret.accuracy = 50;
                 break;
             case "miss":
                 ret.name = "Miss Shot";
-                ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.attackPower = 80;
+                ret.accuracy = 3;
                 break;
             case "headbutt":
                 ret.name = "Headbutt";
-                ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.attackPower = 25;
+                ret.accuracy = 85;
                 break;
             case "order66":
                 ret.name = "Execute Order 66";
-                ret.attackPower = 10;
-                ret.accuracy = 0;
+                ret.attackPower = 60;
+                ret.accuracy = 60;
+                ret.addEffect(new Effect(enumEffect.HEALTH,-10,true));
                 break;
                 
         }
