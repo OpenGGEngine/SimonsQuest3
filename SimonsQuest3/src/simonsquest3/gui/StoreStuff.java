@@ -14,11 +14,14 @@ import java.util.HashMap;
  */
 public class StoreStuff {
     public static HashMap<String, Integer> pricesstore = new HashMap<>();
+    public static HashMap<String, Integer> blackmarket = new HashMap<>();
+    public static HashMap<String, Integer> hotel = new HashMap<>();
     public static ArrayList<String> faker = new ArrayList<>();
     public static void init(){
         pricesstore.put("medkit", 50);
         faker.add("medkit");
         pricesstore.put("mountaindew", 20);
         faker.add("mountaindew");
+        hotel.put("Yes I Want to Stay", 20);
     }
 }

@@ -139,15 +139,28 @@ public class WorldCreator {
             Vector3f pos = new Vector3f();
             do{
                 Vector3f npos = new Vector3f(FastMath.random(WORLDSIZE)-WORLDSIZE/2,0,FastMath.random(WORLDSIZE)-WORLDSIZE/2);
-                Vector3f normal = world.getNormalAt(npos);
                 if(world.getHeightAt(npos) > 250){
-                    System.out.println(normal);
                     pos = new Vector3f(npos.x, world.getHeightAt(npos), npos.z);
                     complete = true;
                 }
                 
             }while(!complete);
             TownComponent town = new TownComponent(pos);
+            WorldEngine.getCurrent().attach(town);
+        }
+        
+        for(int i = 0; i < 7; i++){
+            boolean complete = false;
+            Vector3f pos = new Vector3f();
+            do{
+                Vector3f npos = new Vector3f(FastMath.random(WORLDSIZE)-WORLDSIZE/2,0,FastMath.random(WORLDSIZE)-WORLDSIZE/2);
+                if(world.getHeightAt(npos) > 250){
+                    pos = new Vector3f(npos.x, world.getHeightAt(npos), npos.z);
+                    complete = true;
+                }
+                
+            }while(!complete);
+            BossLair town = new BossLair(EnemyFactory.generateEnemy("ct"), pos);
             WorldEngine.getCurrent().attach(town);
         }
         
