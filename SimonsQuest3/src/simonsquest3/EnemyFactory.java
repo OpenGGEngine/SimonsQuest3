@@ -20,7 +20,7 @@ public class EnemyFactory {
         Enemy ret = new Enemy(name,0,100,100,100,10,null,0);
         switch (name) {
             case "beaver":
-                ret.health = 0;
+                ret.health = 50;
                 ret.name = "Beaver";
                 ret.accuracy = 80;
                 ret.addAttack(AttackFactory.generateAttack("bite"));
@@ -30,7 +30,7 @@ public class EnemyFactory {
                 ret.moneydrop = FastMath.random(50);
                 break;
             case "justinbeaver":
-                ret.health = 0;
+                ret.health = 50;
                 ret.name = "Justin Beaver";
                 ret.accuracy = 80;
                 ret.addAttack(AttackFactory.generateAttack("bite"));
@@ -40,7 +40,7 @@ public class EnemyFactory {
                 ret.moneydrop = FastMath.random(50);
                 break;
             case "ct":
-                ret.health = 0;
+                ret.health = 50;
                 ret.name = "Counter Terrorist";
                 ret.accuracy = 80;
                 ret.addAttack(AttackFactory.generateAttack("csite"));
@@ -49,18 +49,8 @@ public class EnemyFactory {
                 ret.setModel(ModelLoader.loadModel(Resource.getModelPath("ct")));
                 ret.moneydrop = FastMath.random(50);
                 break;
-            case "halo":
-                ret.health = 0;
-                ret.name = "Master Chief";
-                ret.accuracy = 80;
-                ret.addAttack(AttackFactory.generateAttack("shield"));
-                ret.addAttack(AttackFactory.generateAttack("banshee"));
-                ret.addAttack(AttackFactory.generateAttack("cortana"));
-                ret.setModel(ModelLoader.loadModel(Resource.getModelPath("halo")));
-                ret.moneydrop = FastMath.random(50);
-                break;
             case "imposter":
-                ret.health = 0;
+                ret.health = 50;
                 ret.name = "Maya the Imposter";
                 ret.accuracy = 80;
                 ret.addAttack(AttackFactory.generateAttack("sue"));
@@ -70,7 +60,7 @@ public class EnemyFactory {
                 ret.moneydrop = FastMath.random(50);
                 break;
             case "stormtrooper":
-                ret.health = 0;
+                ret.health = 50;
                 ret.name = "Stormtrooper";
                 ret.accuracy = 80;
                 ret.addAttack(AttackFactory.generateAttack("miss"));
@@ -117,6 +107,16 @@ public class EnemyFactory {
                 ret.addAttack(AttackFactory.generateAttack("headbutt"));
                 ret.addAttack(AttackFactory.generateAttack("order66"));
                 ret.setModel(ModelLoader.loadModel(Resource.getModelPath("shrek")));
+                ret.moneydrop = 250;
+                break;
+             case "trump":
+                ret.health = 250;
+                ret.name = "Trump";
+                ret.accuracy = 80;
+                ret.addAttack(AttackFactory.generateAttack("miss"));
+                ret.addAttack(AttackFactory.generateAttack("headbutt"));
+                ret.addAttack(AttackFactory.generateAttack("order66"));
+                ret.setModel(ModelLoader.loadModel(Resource.getModelPath("trump")));
                 ret.moneydrop = 250;
                 break;
         }

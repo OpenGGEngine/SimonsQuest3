@@ -145,7 +145,6 @@ public class GUIMaster implements KeyboardListener {
         }
 
         if (KeyboardController.isKeyPressed(Key.KEY_RIGHT)) {
-            System.out.println(xonscreen);
             xonscreen -= 0.04f;
             town.getItem("simons").setPositionOffset(new Vector2f(xonscreen, -0.4f));
             town.getItem("store").setPositionOffset(new Vector2f(0.8f + xonscreen, -0.4f));

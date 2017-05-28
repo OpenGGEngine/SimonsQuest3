@@ -35,7 +35,6 @@ public class GUIBar extends GUIRenderable{
         setUniform("percent", (float)(actualnum/fullnum));
         empty.useTexture(0);
         full.useTexture(1);
-        System.out.println(this.getPosition().toString());
         super.render();
         ShaderController.useConfiguration("gui");
     }

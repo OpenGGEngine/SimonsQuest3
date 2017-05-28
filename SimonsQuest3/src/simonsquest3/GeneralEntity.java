@@ -67,7 +67,7 @@ public abstract class GeneralEntity {
     }
     
     public void damage(double amount) {
-        health = FastMath.clamp(health - amount/(defenseBuff/100), 0, maxHealth);
+        health = FastMath.clamp(health + amount/(defenseBuff/100.0), 0, maxHealth);
     }
     
     protected boolean isHit() {

@@ -13,9 +13,13 @@ import com.opengg.core.engine.GGConsole;
 import com.opengg.core.engine.OpenGG;
 import com.opengg.core.engine.RenderEngine;
 import com.opengg.core.engine.Resource;
+import com.opengg.core.gui.GUI;
+import com.opengg.core.gui.GUITexture;
 import com.opengg.core.io.ControlType;
 import static com.opengg.core.io.input.keyboard.Key.*;
+import com.opengg.core.math.Vector2f;
 import com.opengg.core.render.shader.ShaderController;
+import com.opengg.core.render.texture.Texture;
 import com.opengg.core.render.window.WindowInfo;
 import com.opengg.core.render.window.WindowOptions;
 import static com.opengg.core.render.window.WindowOptions.GLFW;
@@ -62,7 +66,8 @@ public class SimonsQuest3 extends GGApplication{
         p = new Player(100,100);
         p.addAttack(AttackFactory.generateWeapon("dsword"));
         p.addAttack(AttackFactory.generateWeapon("awp"));
-        p.addAttack(AttackFactory.generateMeme("wall"));
+        p.addItem(ItemFactory.generateItem("mountaindew"));
+        p.addItem(ItemFactory.generateItem("mountaindew"));
         p.addItem(ItemFactory.generateItem("mountaindew"));
         BattleMaster.init();
         BattleMaster.main.setEnabled(false);
@@ -93,6 +98,8 @@ public class SimonsQuest3 extends GGApplication{
        GUIMaster.update();
        health.actualnum = SimonsQuest3.p.health;
        mana.actualnum = SimonsQuest3.p.mana;
+       if(p.health <= 0)
+           GUI.root.addItem("died", new GUITexture(Texture.get(Resource.getTexturePath("died.jpg")),new Vector2f(-1,-1), new Vector2f(2,2)));
     }
     
 }

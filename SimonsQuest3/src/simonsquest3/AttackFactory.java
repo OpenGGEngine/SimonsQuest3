@@ -97,7 +97,7 @@ public class AttackFactory {
             case "wall":
                 ret.attackPower = 0;
                 ret.mpCost = 5;
-                ret.addEffect(new Effect(enumEffect.DEFENSE, 20, true));
+                ret.addEffect(new Effect(enumEffect.DEFENSE, 30, true));
                 ret.name = "Build A Wall";
                 break;
             case "higherground":

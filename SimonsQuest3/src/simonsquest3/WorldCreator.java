@@ -123,8 +123,6 @@ public class WorldCreator {
                 spawner = new EnemySpawner(EnemyFactory.generateEnemy("imposter"));
             if(i % EnemyFactory.enemycount == 4)
                 spawner = new EnemySpawner(EnemyFactory.generateEnemy("justinbeaver"));
-            if(i % EnemyFactory.enemycount == 5)
-                spawner = new EnemySpawner(EnemyFactory.generateEnemy("halo"));
             WorldEngine.getCurrent().attach(spawner);
             boolean validPos = false;
             do{
@@ -135,7 +133,7 @@ public class WorldCreator {
             spawner.spawnEnemy(3);
         }       
         
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 7; i++){
             boolean complete = false;
             Vector3f pos = new Vector3f();
             do{
@@ -170,6 +168,8 @@ public class WorldCreator {
                 town = new BossLair(EnemyFactory.generateEnemy("anakin"), pos);
             else if(i == 3)
                 town = new BossLair(EnemyFactory.generateEnemy("barry"), pos);
+            else if(i == 4)
+                town = new BossLair(EnemyFactory.generateEnemy("trump"), pos);
             else
                 town = new BossLair(EnemyFactory.generateEnemy("ct"), pos);
             WorldEngine.getCurrent().attach(town);

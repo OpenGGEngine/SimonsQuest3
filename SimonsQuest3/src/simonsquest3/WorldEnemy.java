@@ -5,6 +5,7 @@
  */
 package simonsquest3;
 
+import com.opengg.core.engine.WorldEngine;
 import com.opengg.core.math.Quaternionf;
 import com.opengg.core.math.Vector3f;
 import com.opengg.core.world.collision.AABB;
@@ -39,6 +40,11 @@ public class WorldEnemy extends Component{
     
     @Override
     public void update(float delta){
+        if(stats.health <= 0){
+            WorldEngine.markForRemoval(this);
+            model.setDrawable(null);
+            return;
+        }
         if(WorldCreator.simon.getPosition().subtract(getPosition()).length() > viewdist)
             return;
         Vector3f movedirection = WorldCreator.simon.getPosition().subtract(getPosition());

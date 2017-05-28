@@ -9,13 +9,12 @@ import com.opengg.core.math.FastMath;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import simonsquest3.Effect.enumEffect;
 import simonsquest3.gui.BattleMaster;
 
 /**
  *
- * @author Ethan Mak
+ * @author Ethan Mak and Max Koenig
  */
 public class Battle {
     Player player;
@@ -39,14 +38,12 @@ public class Battle {
     }
     
     public void update() {
-
         if(turn % 2 == 0){
             Attack attack = AttackFactory.generateAttack("dsword");
             if(!chosen){
                 return;
             }else{
                 int pointer = BattleMaster.menupointer;
-                System.out.println(pointer);
                 if(pointer == 0){
                     attack = BattleMaster.memeList.get(BattleMaster.menupointer2);
                 }else if(pointer == 1){
@@ -55,8 +52,6 @@ public class Battle {
                     attack = null;
                 }else{
                     close();
-                    WorldCreator.disableBattle();
-                    SimonsQuest3.battlec.curbattle = null;
                     return;
                 }
                 if(attack != null){
@@ -65,10 +60,26 @@ public class Battle {
                             for (Enemy en : enemies)
                                 en.useEffect(e);
                     }
+                    System.out.println(enemies.get(0).health);
                     for (Enemy en : enemies)
                                 en.useEffect(new Effect(enumEffect.HEALTH, -attack.attackPower, false));
+                    System.out.println(enemies.get(0).health);
+                    List<Enemy> temp = new ArrayList<>();
+                    for (Enemy en : enemies){
+                        if(en.health <= 0){
+                            temp.add(en);
+                            player.addAttack(en.drop);
+                            player.money += en.moneydrop;
+                            player.maxHealth += en.maxHealth/10f;
+                        }
+                    }
+                    for(Enemy temp2 : temp)
+                        enemies.remove(temp2);
                 }
+                if(enemies.isEmpty())
+                    close();
                 turn++;
+                chosen = false;
             }
         }else{
             for(Enemy e : enemies){
@@ -101,5 +112,7 @@ public class Battle {
             enemies.get(i).health = prelimEnemies.get(i).health;
             enemies.get(i).mana = prelimEnemies.get(i).mana;
         }
+        WorldCreator.disableBattle();
+        SimonsQuest3.battlec.curbattle = null;
     }
 }
