@@ -65,4 +65,8 @@ public class Battle {
     public void run() {
         
     }
+    
+    public void close() {
+        
+    }
 }

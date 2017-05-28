@@ -61,4 +61,8 @@ public class EnemyFactory {
         }
         return ret;
     }
+    
+    public static Enemy generateBoss() {
+        return null;
+    }
 }

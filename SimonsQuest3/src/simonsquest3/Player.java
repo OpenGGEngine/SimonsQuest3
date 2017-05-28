@@ -14,7 +14,7 @@ import simonsquest3.Effect.enumEffect;
  *
  * @author Ethan Mak
  */
-public class Player extends GeneralEntity{
+public class Player extends GeneralEntity implements Cloneable{
     public HashMap<Item, Integer> items;
     public int money = 100;
     public int mana;
@@ -69,6 +69,11 @@ public class Player extends GeneralEntity{
             ret.statusEffects.add(e.setQuant(e.quant * (attackBuff/100)));
         }
         return new HashMap.SimpleEntry<>(ret,target);
+    }
+    
+    public Player clone() {
+        Player p = new Player(health, mana);
+        return p;
     }
 }
 
