@@ -9,6 +9,7 @@ import com.opengg.core.audio.Soundtrack;
 import com.opengg.core.audio.SoundtrackHandler;
 import com.opengg.core.engine.BindController;
 import com.opengg.core.engine.GGApplication;
+import com.opengg.core.engine.GGConsole;
 import com.opengg.core.engine.OpenGG;
 import com.opengg.core.engine.RenderEngine;
 import com.opengg.core.engine.Resource;
@@ -26,6 +27,8 @@ import simonsquest3.gui.GUIMaster;
  */
 public class SimonsQuest3 extends GGApplication{
     GUIMaster m;
+    static Player p;
+    static BattleController battlec;
     /**
      * @param args the command line arguments
      */
@@ -42,7 +45,7 @@ public class SimonsQuest3 extends GGApplication{
 
     @Override
     public void setup() {
-        
+        battlec = new BattleController();
         WorldCreator.create();
         //m = new GUIMaster();
         //GUIMaster.init();
@@ -52,6 +55,10 @@ public class SimonsQuest3 extends GGApplication{
         overworldday.addSong(Resource.getSoundPath("intogalaxy.ogg"));
         overworldday.shuffle();
         SoundtrackHandler.setSoundtrack(overworldday);
+        p = new Player(100,100);
+        
+        GGConsole.addListener(new SimonConsole());
+        
         
         BindController.addBind(ControlType.KEYBOARD, "forward", KEY_W);
         BindController.addBind(ControlType.KEYBOARD, "backward", KEY_S);

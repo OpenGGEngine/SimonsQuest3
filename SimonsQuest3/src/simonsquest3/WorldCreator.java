@@ -21,6 +21,7 @@ import com.opengg.core.render.texture.Texture;
 import com.opengg.core.world.Camera;
 import com.opengg.core.world.Skybox;
 import com.opengg.core.world.Terrain;
+import com.opengg.core.world.components.FreeFlyComponent;
 import com.opengg.core.world.components.LightComponent;
 import com.opengg.core.world.components.ModelRenderComponent;
 import com.opengg.core.world.components.SunComponent;
@@ -34,19 +35,22 @@ import com.opengg.core.world.generators.DiamondSquare;
  * @author Javier
  */
 public class WorldCreator {
+    public static final int WORLDSIZE = 5000;
     static int enemySpawnCount = 120;
     static TerrainComponent world;
     static SimonComponent simon;
+    static FreeFlyComponent fly;
     static Camera arenaCam;
+    static WorldObject arena;
     public static void create(){
         ShaderController.loadShader("newterrainfrag", Resource.getShaderPath("newterrain.frag"), Program.FRAGMENT);
         ShaderController.use("mainvert", "newterrainfrag");
         ShaderController.saveCurrentConfiguration("terrain2");
         ShaderController.setTextureLocation("Ka", 1);
         
-        world = new TerrainComponent(Terrain.generateProcedural(new DiamondSquare(7,20,20,5.5f), 1500, 1500));
-        world.setScale(new Vector3f(9000,60,9000));
-        world.setPositionOffset(new Vector3f(-4500, 0,-4500));
+        world = new TerrainComponent(Terrain.generateProcedural(new DiamondSquare(7,20,20,5.5f), WORLDSIZE/5, WORLDSIZE/5));
+        world.setScale(new Vector3f(WORLDSIZE,60,WORLDSIZE));
+        world.setPositionOffset(new Vector3f(-(WORLDSIZE/2), 0,-(WORLDSIZE/2)));
         world.setGroundArray(ArrayTexture.get(Resource.getTexturePath("sand.jpg"), Resource.getTexturePath("grass.png"),Resource.getTexturePath("dirt.png"), Resource.getTexturePath("snow.png")));
         world.setBlotmap(world.getTerrain().getHeightmap());
         world.setShader("terrain2");
@@ -61,6 +65,8 @@ public class WorldCreator {
         water.setPositionOffset(new Vector3f(0,200,0));
         WorldEngine.getCurrent().setFloor(200);
         
+        fly = new FreeFlyComponent();
+        
         SunComponent sun = new SunComponent(Texture.get(Resource.getTexturePath("default.png")), 0, 0.1f);
         WorldEngine.getCurrent().attach(sun);
         
@@ -68,7 +74,7 @@ public class WorldCreator {
         simon.use();
         WorldEngine.getCurrent().attach(simon);
         
-        WorldObject arena = new WorldObject();
+        arena = new WorldObject();
         arena.setPositionOffset(new Vector3f(0,4000,-3000));
         ModelRenderComponent arenamodel = new ModelRenderComponent(ModelLoader.loadModel(Resource.getModelPath("arena")));
         arenamodel.setScale(new Vector3f(0.015f));
@@ -86,16 +92,26 @@ public class WorldCreator {
         arenaCam = new Camera();
         arenaCam.setPos(new Vector3f(0,-4002,2995));
         arenaCam.setRot(new Quaternionf(new Vector3f(10,0,0)));
-        RenderEngine.useCamera(arenaCam);
+        //RenderEngine.useCamera(arenaCam);
         
         for(int i = 0; i < enemySpawnCount; i++){
             EnemySpawner spawner = new EnemySpawner(EnemyFactory.generateEnemy("stormtrooper"));
-            if(enemySpawnCount / EnemyFactory.enemycount == 0)
+            if(i % EnemyFactory.enemycount == 0)
                 spawner = new EnemySpawner(EnemyFactory.generateEnemy("stormtrooper"));
+            if(i % EnemyFactory.enemycount == 1)
+                spawner = new EnemySpawner(EnemyFactory.generateEnemy("ct"));
+            if(i % EnemyFactory.enemycount == 2)
+                spawner = new EnemySpawner(EnemyFactory.generateEnemy("beaver"));
+            if(i % EnemyFactory.enemycount == 3)
+                spawner = new EnemySpawner(EnemyFactory.generateEnemy("imposter"));
+            if(i % EnemyFactory.enemycount == 4)
+                spawner = new EnemySpawner(EnemyFactory.generateEnemy("justinbeaver"));
+            if(i % EnemyFactory.enemycount == 5)
+                spawner = new EnemySpawner(EnemyFactory.generateEnemy("halo"));
             WorldEngine.getCurrent().attach(spawner);
             boolean validPos = false;
             do{
-                spawner.setPositionOffset(new Vector3f(FastMath.random(9000)-4500, -300, FastMath.random(9000)-4500));
+                spawner.setPositionOffset(new Vector3f(FastMath.random(WORLDSIZE)-WORLDSIZE/2, -300, FastMath.random(WORLDSIZE)-WORLDSIZE/2));
                 if(world.getHeightAt(spawner.getPosition()) > 250)
                     validPos = true;
             }while(!validPos);            
@@ -105,12 +121,12 @@ public class WorldCreator {
         WorldEngine.useWorld(WorldEngine.getCurrent());
     }
     
-    public void enableBattle(){
+    public static void enableBattle(){
         WorldEngine.getCurrent().setEnabled(false);
         RenderEngine.useCamera(arenaCam);
     }
     
-    public void disableBattle(){
+    public static void disableBattle(){
         WorldEngine.getCurrent().setEnabled(true);
         simon.use();
     }

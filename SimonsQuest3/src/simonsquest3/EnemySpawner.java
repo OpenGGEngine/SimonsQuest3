@@ -26,6 +26,11 @@ public class EnemySpawner extends Component{
             newenemies[i] = new WorldEnemy(enemy.clone());
             WorldEngine.getCurrent().attach(newenemies[i]);
             newenemies[i].setPositionOffset(getPosition().add(new Vector3f(FastMath.random(50),0,FastMath.random(50))));
+            newenemies[i].physics.getColliders().get(0).addSubscriber(SimonsQuest3.battlec);
         }
+    }
+    
+    public Enemy getEnemy(){
+        return enemy;
     }
 }
