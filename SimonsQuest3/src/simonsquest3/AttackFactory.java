@@ -123,7 +123,89 @@ public class AttackFactory {
             case "bite":
                 ret.name = "Bite";
                 ret.attackPower = 10;
+                ret.accuracy = 0;
                 break;
+            case "rear":
+                ret.name = "Rear Teeth";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "dam":
+                ret.name = "Build Dam";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "sing":
+                ret.name = "Sing";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "fans":
+                ret.name = "Use Fans";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "csite":
+                ret.name = "Push C Site";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "spinbot":
+                ret.name = "Use Spinbot";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "p90":
+                ret.name = "P90 Rush";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "shield":
+                ret.name = "Use Energy Shield";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "banshee":
+                ret.name = "Ride Banshee";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "cortana":
+                ret.name = "Consult with Cortana";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "sue":
+                ret.name = "Sue Companies";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "jazz":
+                ret.name = "Like Jazz";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "sting":
+                ret.name = "Sting";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "miss":
+                ret.name = "Miss Shot";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "headbutt":
+                ret.name = "Headbutt";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+            case "order66":
+                ret.name = "Execute Order 66";
+                ret.attackPower = 10;
+                ret.accuracy = 0;
+                break;
+                
         }
         return ret;
     }

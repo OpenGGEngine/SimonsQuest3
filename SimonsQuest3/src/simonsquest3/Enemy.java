@@ -1,6 +1,10 @@
 package simonsquest3;
 
 import com.opengg.core.model.Model;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import simonsquest3.Effect.enumEffect;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,12 +29,62 @@ public class Enemy extends GeneralEntity implements Cloneable{
         this.model = m;
     }
     
-    public Attack attack(double enemyHealth) {
+    public Attack attack(Player enemy) {
         Attack attack = null;
-        
+        double healthPercent = health/maxHealth;
+        double enemyHealthPercent = enemy.health/enemy.maxHealth;
+        HashMap<enumEffect,List<Attack>> attackEnemy = new HashMap<>();
+        HashMap<enumEffect,List<Attack>> selfEffects = new HashMap<>();
+        for(enumEffect ef : enumEffect.values()) {
+            attackEnemy.put(ef,new ArrayList<>());
+            selfEffects.put(ef,new ArrayList<>());
+        }
+        for (Attack a : attacks) {
+            if (a.attackPower > 0)
+                attackEnemy.get(enumEffect.HEALTH).add(a);
+            for (Effect e : a.statusEffects) {
+                if (e.useOnOneself)
+                    selfEffects.get(e.stat).add(a);
+                else
+                    attackEnemy.get(e.stat).add(a);
+            }
+        }
+        if (healthPercent < 0.10) {
+            attack = maxAttack(enumEffect.HEALTH,-1,attackEnemy);
+        }
+        else {
+            double val = (healthPercent*0.53) + (enemyHealthPercent * 0.27) + (defenseBuff/200 * 0.1) + (attackBuff/200 * 0.1);
+            if(val > 0.9) {
+                attack = maxAttack(enumEffect.HEALTH,-1,attackEnemy);
+            }
+            if (val > 0.8 && attack == null) {
+                attack = maxAttack(enumEffect.ATTACK,1,selfEffects);
+            }
+            if (val > 0.7 && attack == null) {
+                attack = maxAttack(enumEffect.DEFENSE,1,selfEffects);
+            }
+            if (val > 0.3 && attack == null) {
+                attack = maxAttack(enumEffect.HEALTH,-1,attackEnemy);
+            }
+            else if (attack == null) {
+                attack = maxAttack(enumEffect.HEALTH,1,selfEffects);
+            }
+        }
         if (attack != null) {
             Effect effect = attack.statusEffects.get(Effect.enumEffect.HEALTH,false);
             attack.statusEffects.add(effect.setQuant(effect.quant * (attackBuff/100)));
+        }
+        return attack;
+    }
+    
+    private Attack maxAttack(enumEffect ef, int mult, HashMap<enumEffect,List<Attack>> map) {
+        double maxDamage = Double.MIN_VALUE;
+        Attack attack = null;
+        for (Attack a : map.get(enumEffect.HEALTH)) {
+            if (a.attackPower*mult > maxDamage) {
+                maxDamage = a.attackPower;
+                attack = a;
+            }
         }
         return attack;
     }
