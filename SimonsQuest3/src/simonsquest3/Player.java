@@ -29,10 +29,11 @@ public class Player extends GeneralEntity{
     }
     
     public void addItem(Item item) {
-        if(items.get(item) == null)
+        if(items.get(item) == null){
             items.put(item, 1);
-        else
+        }else{
             items.put(item, items.get(item) + 1);
+        }
     }
     
     @Override

@@ -10,13 +10,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  *
  * @author Ethan Mak
  */
 public class Item {
-    String name;
+    public String name;
     EffectList effects;
     public Item(String name,Effect... allEffects) {
         this.name = name;
@@ -26,5 +27,13 @@ public class Item {
     
     public void addEffect(Effect effect) {
         effects.add(effect);
+    }
+    @Override
+    public int hashCode(){
+        return name.hashCode();
+    }
+
+    public boolean equals(Item obj) {
+        return obj.name.equals(this.name);
     }
 }
