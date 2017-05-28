@@ -19,7 +19,7 @@ import simonsquest3.gui.GUIMaster;
  * @author Javier
  */
 public class BattleController implements Triggerable{
-    Battle curbattle;
+    public Battle curbattle;
     
     @Override
     public void onTrigger(Trigger source, TriggerInfo info) {
@@ -33,6 +33,7 @@ public class BattleController implements Triggerable{
                     Battle b = new Battle(SimonsQuest3.p);
                     b.addEnemies(((WorldEnemy)temp.other.parent.parent).stats);
                     b.init();
+                    curbattle = b;
                     WorldCreator.addEnemyInRing(((WorldEnemy)temp.other.parent.parent).model.getModel(), 1);
                     WorldCreator.enableBattle();
                 }
@@ -41,6 +42,7 @@ public class BattleController implements Triggerable{
                     Battle b = new Battle(SimonsQuest3.p);
                     b.addEnemies(((WorldEnemy)temp.thiscollider.parent.parent).stats);
                     b.init();
+                    curbattle = b;
                     WorldCreator.addEnemyInRing(((WorldEnemy)temp.thiscollider.parent.parent).model.getModel(), 1);
                     WorldCreator.enableBattle();
                 }
@@ -58,12 +60,14 @@ public class BattleController implements Triggerable{
                 Battle b = new Battle(SimonsQuest3.p);
                 b.addEnemies(((BossLair)temp.other.parent).boss);
                 b.init();
+                curbattle = b;
                 WorldCreator.addEnemyInRing(((BossLair)temp.other.parent).boss.model, 2);
                 WorldCreator.enableBattle();
             }else if(temp.thiscollider.parent instanceof BossLair){
                 Battle b = new Battle(SimonsQuest3.p);
                 b.addEnemies(((BossLair)temp.thiscollider.parent).boss);
                 b.init();
+                curbattle = b;
                 WorldCreator.addEnemyInRing(((BossLair)temp.thiscollider.parent).boss.model, 2);
                 WorldCreator.enableBattle();
             }

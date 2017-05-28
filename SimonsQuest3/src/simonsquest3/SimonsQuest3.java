@@ -63,6 +63,7 @@ public class SimonsQuest3 extends GGApplication{
         p.addAttack(AttackFactory.generateMeme("wall"));
         p.addItem(ItemFactory.generateItem("mountaindew"));
         BattleMaster.init();
+        BattleMaster.main.setEnabled(false);
         GGConsole.addListener(new SimonConsole());
         
         BindController.addBind(ControlType.KEYBOARD, "forward", KEY_W);
@@ -85,7 +86,8 @@ public class SimonsQuest3 extends GGApplication{
 
     @Override
     public void update() {
-        BattleMaster.update();
+       battlec.update();
+       BattleMaster.update();
        GUIMaster.update();
     }
     

@@ -30,6 +30,7 @@ import com.opengg.core.world.components.TerrainComponent;
 import com.opengg.core.world.components.WaterComponent;
 import com.opengg.core.world.components.WorldObject;
 import com.opengg.core.world.generators.DiamondSquare;
+import simonsquest3.gui.BattleMaster;
 
 /**
  *
@@ -160,7 +161,17 @@ public class WorldCreator {
                 }
                 
             }while(!complete);
-            BossLair town = new BossLair(EnemyFactory.generateEnemy("ct"), pos);
+            BossLair town = null;
+            if(i == 0)
+                town = new BossLair(EnemyFactory.generateEnemy("shrek"), pos);
+            else if(i == 1)
+                town = new BossLair(EnemyFactory.generateEnemy("obiwan"), pos);
+            else if(i == 2)
+                town = new BossLair(EnemyFactory.generateEnemy("anakin"), pos);
+            else if(i == 3)
+                town = new BossLair(EnemyFactory.generateEnemy("barry"), pos);
+            else
+                town = new BossLair(EnemyFactory.generateEnemy("ct"), pos);
             WorldEngine.getCurrent().attach(town);
         }
         
@@ -186,11 +197,14 @@ public class WorldCreator {
     public static void enableBattle(){
         WorldEngine.getCurrent().setEnabled(false);
         RenderEngine.useCamera(arenaCam);
+        BattleMaster.main.setEnabled(true);
     }
     
     public static void disableBattle(){
         WorldEngine.getCurrent().setEnabled(true);
         simon.use();
+        BattleMaster.main.setEnabled(false);
+        simon.setPositionOffset(simon.getPositionOffset().add(new Vector3f(20,0,0)));
     }
 }
 

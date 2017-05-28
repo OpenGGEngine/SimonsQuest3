@@ -54,7 +54,7 @@ public class SimonComponent extends Component implements Actionable{
         playerphysics.mass = 60f;
         playerphysics.bounciness = 0;
         playerphysics.frictionCoefficient = 0.8f;
-        player = new ModelRenderComponent(ModelLoader.loadModel(Resource.getModelPath("shrek")));
+        player = new ModelRenderComponent(ModelLoader.loadModel(Resource.getModelPath("ct")));
         player.setScale(new Vector3f(2));
         player.setRotationOffset(new Quaternionf(new Vector3f(0,180,0)));
         

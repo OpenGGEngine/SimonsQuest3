@@ -19,10 +19,14 @@ import simonsquest3.Effect.enumEffect;
 public class Enemy extends GeneralEntity implements Cloneable{
     String name;
     Model model;
+    Attack drop;
+    int moneydrop;
     
-    public Enemy(String name, double health,double attack,double accuracy,double defense,int mana, Attack... attacks) {
+    public Enemy(String name, double health,double attack,double accuracy,double defense,int mana,Attack drop, int moneydrop, Attack... attacks) {
         super(health,attack,defense,accuracy,mana,attacks);
         this.name = name;
+        this.drop = drop;
+        this.moneydrop = moneydrop;
     }
     
     public void setModel(Model m){
@@ -98,7 +102,7 @@ public class Enemy extends GeneralEntity implements Cloneable{
     
     @Override
     public Enemy clone(){
-        Enemy enemy = new Enemy(name, attackBuff,defenseBuff,accuracy,health,mana);
+        Enemy enemy = new Enemy(name, attackBuff,defenseBuff,accuracy,health,mana, drop, moneydrop);
         enemy.setModel(model);
         for (Attack attack : attacks) {
             enemy.addAttack(attack.clone());

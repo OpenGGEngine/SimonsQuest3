@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import simonsquest3.Attack;
-import simonsquest3.BattleController;
 import simonsquest3.Item;
 import simonsquest3.SimonsQuest3;
 import static simonsquest3.gui.GUIMaster.font;
@@ -102,12 +101,19 @@ public class BattleMaster {
     }
 
     public static void update() {
+        if(!main.enabled)
+            return;
         if (KeyboardController.isKeyPressed(Key.KEY_UP)) {
             menupointer--;
             if (menupointer == -1) {
                 menupointer = 3;
             }
             pointer.setPositionOffset(new Vector2f(-0.95f, -0.55f - (menupointer * 0.10f)));
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(BattleMaster.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if (KeyboardController.isKeyPressed(Key.KEY_DOWN)) {
             menupointer++;
@@ -115,17 +121,32 @@ public class BattleMaster {
                 menupointer = 0;
             }
             pointer.setPositionOffset(new Vector2f(-0.95f, -0.55f - (menupointer * 0.10f)));
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(BattleMaster.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if (KeyboardController.isKeyPressed(Key.KEY_LEFT)) {
             if (memes.enabled | weapons.enabled) {
                 menupointer2--;
                  pointer.setPositionOffset(new Vector2f(-0.53f + ((menupointer2 % 4) * 0.35f), -0.5f - (0.2f * (menupointer2 / 4))));
             }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(BattleMaster.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if (KeyboardController.isKeyPressed(Key.KEY_RIGHT)) {
             if (memes.enabled | weapons.enabled) {
                 menupointer2++;
                  pointer.setPositionOffset(new Vector2f(-0.53f + ((menupointer2 % 4) * 0.35f), -0.5f - (0.2f * (menupointer2 / 4))));
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(BattleMaster.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         if (KeyboardController.isKeyPressed(Key.KEY_ENTER)) {
@@ -135,7 +156,10 @@ public class BattleMaster {
                 Logger.getLogger(BattleMaster.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (memes.enabled | weapons.enabled) {
-                SimonsQuest3.battlec.curbattle.chosen = true;
+                SimonsQuest3
+                        .battlec
+                        .curbattle
+                        .chosen = true;
                 items.enabled = false;
                 weapons.enabled = false;
                 memes.enabled = false;
@@ -156,7 +180,7 @@ public class BattleMaster {
                         items.enabled = true;
                         break;
                     case 3:
-
+                        SimonsQuest3.battlec.curbattle.chosen = true;
                         break;
                 }
             }

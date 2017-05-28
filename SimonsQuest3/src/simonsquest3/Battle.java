@@ -22,7 +22,7 @@ public class Battle {
     List<Enemy> prelimEnemies;
     Player prelimPlayer;
     int turn = 0;
-    boolean chosen = false;
+    public boolean chosen = false;
     
     public Battle(Player player) {
         this.player = player;
@@ -45,14 +45,19 @@ public class Battle {
                 return;
             }else{
                 int pointer = BattleMaster.menupointer;
+                System.out.println(pointer);
                 if(pointer == 0){
                     attack = BattleMaster.memeList.get(BattleMaster.menupointer2);
                 }else if(pointer == 1){
                     attack = BattleMaster.weaponList.get(BattleMaster.menupointer2);
-                }else{
+                }else if(pointer == 2){
                     attack = null;
+                }else{
+                    close();
+                    WorldCreator.disableBattle();
+                    SimonsQuest3.battlec.curbattle = null;
+                    return;
                 }
-                
                 if(attack != null){
                     for(Effect e : attack.statusEffects) {
                         if (!e.useOnOneself)

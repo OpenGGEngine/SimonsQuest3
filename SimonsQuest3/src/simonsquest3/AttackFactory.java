@@ -97,18 +97,23 @@ public class AttackFactory {
             case "wall":
                 ret.attackPower = 0;
                 ret.mpCost = 5;
-//                ret.addEffect();
+                ret.addEffect(new Effect(enumEffect.DEFENSE, 20, true));
                 ret.name = "Build A Wall";
                 break;
             case "higherground":
                 ret.attackPower = 0;
                 ret.mpCost = 5;
+                ret.addEffect(new Effect(enumEffect.ATTACK, 15, true));
+                ret.addEffect(new Effect(enumEffect.DEFENSE, 15, true));
                 ret.name = "Have the Higher Groun";
                 break;
             case  "production":
+                ret.addEffect(new Effect(enumEffect.ATTACK, 30, true));
                 ret.name = "Sieze the Means of Production";
                 break;
             case "sand":
+                ret.attackPower = 30;
+                ret.addEffect(new Effect(enumEffect.ACCURACY, -10, false));
                 ret.name = "Coarse Rough Sand";
                 break;
         }
