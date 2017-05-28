@@ -22,6 +22,7 @@ public class Attack implements Cloneable{
     public double attackPower;
     public EffectList statusEffects;
     public double durability;
+    public double maxdurability = -1;
     public int accuracy;
     public String name;
     Random rand;
