@@ -12,7 +12,6 @@ import com.opengg.core.gui.GUIText;
 import com.opengg.core.gui.GUITexture;
 import com.opengg.core.math.Vector2f;
 import com.opengg.core.render.Text;
-import com.opengg.core.render.texture.Texture;
 import simonsquest3.SimonsQuest3;
 import static simonsquest3.gui.GUIMaster.font;
 
@@ -23,9 +22,9 @@ import static simonsquest3.gui.GUIMaster.font;
 public class MainGUI {
     public static GUIGroup main = new GUIGroup(new Vector2f());
     public static GUIGroup selection = new GUIGroup(new Vector2f());
-    public static GUITexture select = new GUITexture(Texture.get(Resource.getTexturePath("gui/menuselect.png")),new Vector2f(-1,-1),new Vector2f(0.5f,2));
-    public static GUITexture mainmenu = new GUITexture(Texture.get(Resource.getTexturePath("gui/bigmenu.png")),new Vector2f(-0.5f,-1),new Vector2f(1.5f,2));
-    public static GUITexture pointer = new GUITexture(Texture.get(Resource.getTexturePath("gui/pointer.png")),new Vector2f(-1f,-1),new Vector2f(1f,1f));
+    public static GUITexture select = new GUITexture(Resource.getTexture("gui/menuselect.png"),new Vector2f(-1,-1),new Vector2f(0.5f,2));
+    public static GUITexture mainmenu = new GUITexture(Resource.getTexture("gui/bigmenu.png"),new Vector2f(-0.5f,-1),new Vector2f(1.5f,2));
+    public static GUITexture pointer = new GUITexture(Resource.getTexture("gui/pointer.png"),new Vector2f(-1f,-1),new Vector2f(1f,1f));
     
     public static void init(){
         GUI.root.addItem("main", main);

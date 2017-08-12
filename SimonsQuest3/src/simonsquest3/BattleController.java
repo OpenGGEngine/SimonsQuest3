@@ -28,49 +28,49 @@ public class BattleController implements Triggerable{
             if(data.isEmpty())
                 return;
             Collision temp = data.get(0);
-            if(temp.other.parent.parent instanceof WorldEnemy){
-                if(temp.thiscollider.parent.parent instanceof SimonComponent){
+            if(temp.other.getParent().getParent() instanceof WorldEnemy){
+                if(temp.thiscollider.getParent().getParent() instanceof SimonComponent){
                     Battle b = new Battle(SimonsQuest3.p);
-                    b.addEnemies(((WorldEnemy)temp.other.parent.parent).stats);
+                    b.addEnemies(((WorldEnemy)temp.other.getParent().getParent()).stats);
                     b.init();
                     curbattle = b;
-                    WorldCreator.addEnemyInRing(((WorldEnemy)temp.other.parent.parent).model.getModel(), 1);
+                    WorldCreator.addEnemyInRing(((WorldEnemy)temp.other.getParent().getParent()).model.getModel(), 1);
                     WorldCreator.enableBattle();
                 }
-            }else if(temp.other.parent.parent instanceof SimonComponent){
-                if(temp.thiscollider.parent.parent instanceof WorldEnemy){
+            }else if(temp.other.getParent().getParent() instanceof SimonComponent){
+                if(temp.thiscollider.getParent().getParent() instanceof WorldEnemy){
                     Battle b = new Battle(SimonsQuest3.p);
-                    b.addEnemies(((WorldEnemy)temp.thiscollider.parent.parent).stats);
+                    b.addEnemies(((WorldEnemy)temp.thiscollider.getParent().getParent()).stats);
                     b.init();
                     curbattle = b;
-                    WorldCreator.addEnemyInRing(((WorldEnemy)temp.thiscollider.parent.parent).model.getModel(), 1);
+                    WorldCreator.addEnemyInRing(((WorldEnemy)temp.thiscollider.getParent().getParent()).model.getModel(), 1);
                     WorldCreator.enableBattle();
                 }
             }
             
-            if(temp.other.parent instanceof TownComponent){
+            if(temp.other.getParent() instanceof TownComponent){
                 GUIMaster.town.setEnabled(true);
                 WorldEngine.getCurrent().setEnabled(false);
-            }else if(temp.thiscollider.parent instanceof TownComponent){
+            }else if(temp.thiscollider.getParent() instanceof TownComponent){
                 GUIMaster.town.setEnabled(true);
                 WorldEngine.getCurrent().setEnabled(false);
             }
             
-            if(temp.other.parent instanceof BossLair){
-                if(((BossLair)temp.other.parent).boss.health <= 0){return;};
+            if(temp.other.getParent() instanceof BossLair){
+                if(((BossLair)temp.other.getParent()).boss.health <= 0){return;};
                 Battle b = new Battle(SimonsQuest3.p);
-                b.addEnemies(((BossLair)temp.other.parent).boss);
+                b.addEnemies(((BossLair)temp.other.getParent()).boss);
                 b.init();
                 curbattle = b;
-                WorldCreator.addEnemyInRing(((BossLair)temp.other.parent).boss.model, 2);
+                WorldCreator.addEnemyInRing(((BossLair)temp.other.getParent()).boss.model, 2);
                 WorldCreator.enableBattle();
-            }else if(temp.thiscollider.parent instanceof BossLair){
-                if(((BossLair)temp.thiscollider.parent).boss.health <= 0){return;};
+            }else if(temp.thiscollider.getParent() instanceof BossLair){
+                if(((BossLair)temp.thiscollider.getParent()).boss.health <= 0){return;};
                 Battle b = new Battle(SimonsQuest3.p);
-                b.addEnemies(((BossLair)temp.thiscollider.parent).boss);
+                b.addEnemies(((BossLair)temp.thiscollider.getParent()).boss);
                 b.init();
                 curbattle = b;
-                WorldCreator.addEnemyInRing(((BossLair)temp.thiscollider.parent).boss.model, 2);
+                WorldCreator.addEnemyInRing(((BossLair)temp.thiscollider.getParent()).boss.model, 2);
                 WorldCreator.enableBattle();
             }
         }

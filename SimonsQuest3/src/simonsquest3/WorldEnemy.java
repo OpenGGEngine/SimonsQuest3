@@ -51,6 +51,6 @@ public class WorldEnemy extends Component{
         movedirection.y = 0.01f;
         movedirection.normalizeThis();
         setRotationOffset(new Quaternionf(movedirection));
-        this.pos = this.pos.addThis(movedirection.multiplyThis(4).multiplyThis(delta));
+        setPositionOffset(getPositionOffset().addThis(movedirection.multiplyThis(4).multiplyThis(delta)));
     }
 }

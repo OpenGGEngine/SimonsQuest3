@@ -14,10 +14,8 @@ import com.opengg.core.math.Vector3f;
 import com.opengg.core.model.Model;
 import com.opengg.core.model.ModelLoader;
 import com.opengg.core.render.light.Light;
-import com.opengg.core.render.shader.Program;
 import com.opengg.core.render.shader.ShaderController;
-import com.opengg.core.render.texture.ArrayTexture;
-import com.opengg.core.render.texture.Cubemap;
+import com.opengg.core.render.shader.ShaderProgram;
 import com.opengg.core.render.texture.Texture;
 import com.opengg.core.world.Camera;
 import com.opengg.core.world.Skybox;
@@ -47,7 +45,7 @@ public class WorldCreator {
     static ModelRenderComponent e1, e2, e3;
     static int day = 0;
     public static void create(){
-        ShaderController.loadShader("newterrainfrag", Resource.getShaderPath("newterrain.frag"), Program.FRAGMENT);
+        ShaderController.loadShader("newterrainfrag", Resource.getShaderPath("newterrain.frag"), ShaderProgram.FRAGMENT);
         ShaderController.use("mainvert", "newterrainfrag");
         ShaderController.saveCurrentConfiguration("terrain2");
         ShaderController.setTextureLocation("Ka", 1);
@@ -55,23 +53,22 @@ public class WorldCreator {
         world = new TerrainComponent(Terrain.generateProcedural(new DiamondSquare(7,20,20,5.5f), WORLDSIZE/5, WORLDSIZE/5));
         world.setScale(new Vector3f(WORLDSIZE,60,WORLDSIZE));
         world.setPositionOffset(new Vector3f(-(WORLDSIZE/2), 0,-(WORLDSIZE/2)));
-        world.setGroundArray(ArrayTexture.get(Resource.getTexturePath("sand.jpg"), Resource.getTexturePath("grass.png"),Resource.getTexturePath("dirt.png"), Resource.getTexturePath("snow.png")));
+        world.setGroundArray(Texture.getArrayTexture(Resource.getTexturePath("sand.jpg"), Resource.getTexturePath("grass.png"),Resource.getTexturePath("dirt.png"), Resource.getTexturePath("snow.png")));
         world.setBlotmap(world.getTerrain().getHeightmap());
         world.setShader("terrain2");
         world.setName("terrain");
         
         WorldEngine.getCurrent().attach(world);
-        world.enableRendering();
         world.enableCollider(); 
         
-        WaterComponent water = new WaterComponent(Texture.get(Resource.getTexturePath("water.png")), 1f, 300f);
+        WaterComponent water = new WaterComponent(Resource.getTexture("water.png"), 1f, 300f, 9000f);
         WorldEngine.getCurrent().attach(water);
         water.setPositionOffset(new Vector3f(0,200,0));
         WorldEngine.getCurrent().setFloor(200);
         
         fly = new FreeFlyComponent();
         
-        SunComponent sun = new SunComponent(Texture.get(Resource.getTexturePath("default.png")), 0, 0.2f);
+        SunComponent sun = new SunComponent(Resource.getTexture("default.png"), 0.2f);
         WorldEngine.getCurrent().attach(sun);
         
         simon = new SimonComponent();
@@ -109,7 +106,6 @@ public class WorldCreator {
         arenaCam = new Camera();
         arenaCam.setPos(new Vector3f(0,-4002,2995));
         arenaCam.setRot(new Quaternionf(new Vector3f(10,0,0)));
-        //RenderEngine.useCamera(arenaCam);
         
         for(int i = 0; i < enemySpawnCount; i++){
             EnemySpawner spawner = new EnemySpawner(EnemyFactory.generateEnemy("stormtrooper"));
@@ -175,7 +171,13 @@ public class WorldCreator {
             WorldEngine.getCurrent().attach(town);
         }
         
-        RenderEngine.setSkybox(new Skybox(Cubemap.get(Resource.getTexturePath("skybox\\bluecloud")), 4500f));
+        RenderEngine.setSkybox(new Skybox(Texture.getCubemap(
+                Resource.getTexturePath("skybox\\bluecloud_ft.jpg"),
+                Resource.getTexturePath("skybox\\bluecloud_bk.jpg"),
+                Resource.getTexturePath("skybox\\bluecloud_up.jpg"),
+                Resource.getTexturePath("skybox\\bluecloud_dn.jpg"),
+                Resource.getTexturePath("skybox\\bluecloud_rt.jpg"),
+                Resource.getTexturePath("skybox\\bluecloud_lf.jpg")), 4500f));
         WorldEngine.useWorld(WorldEngine.getCurrent());
     }
     

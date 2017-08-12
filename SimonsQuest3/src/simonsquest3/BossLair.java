@@ -28,7 +28,7 @@ public class BossLair extends Component{
         this.render = new ModelRenderComponent(ModelLoader.loadModel(Resource.getModelPath("lair")));
         render.setScale(new Vector3f(20));
         collider = new CollisionComponent(new AABB(new Vector3f(), 100,40,100), new CylinderCollider(40,90));
-        this.pos = pos;
+        setPositionOffset(pos);
         attach(collider);
         attach(render);
     }

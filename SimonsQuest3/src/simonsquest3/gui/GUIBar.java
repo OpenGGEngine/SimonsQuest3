@@ -6,7 +6,6 @@
 package simonsquest3.gui;
 
 import com.opengg.core.gui.GUIRenderable;
-import com.opengg.core.math.Matrix4f;
 import com.opengg.core.math.Vector2f;
 import com.opengg.core.render.objects.ObjectCreator;
 import com.opengg.core.render.shader.ShaderController;
@@ -29,13 +28,14 @@ public class GUIBar extends GUIRenderable{
         this.fullnum = fullnum;
         
     }
+    
     @Override
-    public void render(){
+    public void render(float x, float y){
+        super.render(x,y);
         ShaderController.useConfiguration("bar");
         setUniform("percent", (float)(actualnum/fullnum));
-        empty.useTexture(0);
-        full.useTexture(1);
-        super.render();
+        empty.use(0);
+        full.use(1);
         ShaderController.useConfiguration("gui");
     }
 }

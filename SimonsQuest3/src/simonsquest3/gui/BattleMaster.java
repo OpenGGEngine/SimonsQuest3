@@ -39,13 +39,13 @@ public class BattleMaster {
     public static GUIGroup items = new GUIGroup(new Vector2f());
     public static GUIGroup weapons = new GUIGroup(new Vector2f());
     public static GUIGroup memes = new GUIGroup(new Vector2f());
-    public static GUITexture select = new GUITexture(Texture.get(Resource.getTexturePath("gui/menuselect.png")), new Vector2f(-1, -1), new Vector2f(0.5f, 0.60f));
-    public static GUITexture mainmenu = new GUITexture(Texture.get(Resource.getTexturePath("gui/bigmenu.png")), new Vector2f(-0.5f, -1), new Vector2f(1.5f, 0.60f));
-    public static GUITexture pointer = new GUITexture(Texture.get(Resource.getTexturePath("gui/arrow.png")), new Vector2f(-0.95f, -0.55f), new Vector2f(0.05f, 0.05f));
+    public static GUITexture select = new GUITexture(Resource.getTexture("gui/menuselect.png"), new Vector2f(-1, -1), new Vector2f(0.5f, 0.60f));
+    public static GUITexture mainmenu = new GUITexture(Resource.getTexture("gui/bigmenu.png"), new Vector2f(-0.5f, -1), new Vector2f(1.5f, 0.60f));
+    public static GUITexture pointer = new GUITexture(Resource.getTexture("gui/arrow.png"), new Vector2f(-0.95f, -0.55f), new Vector2f(0.05f, 0.05f));
     public static List<Attack> memeList = new ArrayList<>();
     public static List<Attack> weaponList = new ArrayList<>();
     public static List<Item> itemList = new ArrayList<>();
-    public static GUIBar health = new GUIBar(Texture.get(Resource.getTexturePath("/gui/EmptyBar.png")), Texture.get(Resource.getTexturePath("/gui/RedBar.png")), new Vector2f(0.4f, 0.8f), new Vector2f(0.5f, 0.1f),100);
+    public static GUIBar health = new GUIBar(Resource.getTexture("/gui/EmptyBar.png"), Resource.getTexture("/gui/RedBar.png"), new Vector2f(0.4f, 0.8f), new Vector2f(0.5f, 0.1f),100);
 
     public static void init() {
         GUI.root.addItem("battle", main);

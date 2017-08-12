@@ -19,10 +19,8 @@ import com.opengg.core.io.ControlType;
 import static com.opengg.core.io.input.keyboard.Key.*;
 import com.opengg.core.math.Vector2f;
 import com.opengg.core.render.shader.ShaderController;
-import com.opengg.core.render.texture.Texture;
 import com.opengg.core.render.window.WindowInfo;
 import com.opengg.core.render.window.WindowOptions;
-import static com.opengg.core.render.window.WindowOptions.GLFW;
 import simonsquest3.gui.BattleMaster;
 import simonsquest3.gui.GUIMaster;
 import static simonsquest3.gui.GUIMaster.health;
@@ -45,7 +43,7 @@ public class SimonsQuest3 extends GGApplication{
         w.width = 1920;
         w.height = 1080;
         w.resizable = true;
-        w.type = GLFW;
+        w.type = "GLFW";
         w.vsync = true;
         OpenGG.initialize(new SimonsQuest3(), w);
     }
@@ -88,19 +86,18 @@ public class SimonsQuest3 extends GGApplication{
 
     @Override
     public void render() {
-        ShaderController.setPerspective(90, OpenGG.window.getRatio(), 1f, 10000f);
-        RenderEngine.draw();
+        ShaderController.setPerspective(90, OpenGG.getWindow().getRatio(), 1f, 10000f);
     }
 
     @Override
-    public void update() {
+    public void update(float delta) {
        battlec.update();
        BattleMaster.update();
        GUIMaster.update();
        health.actualnum = SimonsQuest3.p.health;
        mana.actualnum = SimonsQuest3.p.mana;
        if(p.health <= 0)
-           GUI.root.addItem("died", new GUITexture(Texture.get(Resource.getTexturePath("died.jpg")),new Vector2f(-1,-1), new Vector2f(2,2)));
+           GUI.root.addItem("died", new GUITexture(Resource.getTexture("died.jpg"),new Vector2f(-1,-1), new Vector2f(2,2)));
     }
     
 }
